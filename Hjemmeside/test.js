@@ -50,9 +50,9 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         console.log('FAILED...', error);
         });
 
+        */
+       
     //send form emailjs 
-    */
-    
     emailjs.sendForm('service_kesfnw1', 'template_h23bpoo', this)
         .then(() => {
         console.log('SUCCESS!');
@@ -60,3 +60,4 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         console.log('FAILED...', error);
         });
 });
+
