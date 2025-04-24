@@ -6,6 +6,47 @@
     <title>Testpage for makeupByGhadir</title>
     <link rel="stylesheet" href="min/style.min.css">
     <link rel="shortcut icon" href="img/testimage.png" type="image/x-icon">
+
+    <!-- Font test styles -->
+    <style>
+        .font-test p{
+            font-size: 20px;
+            height: 30px;
+        }
+        .font-test p:nth-child(2){
+            font-weight: 100;
+        }
+        .font-test p:nth-child(3){
+            font-weight: 200;
+        }
+        .font-test p:nth-child(4){
+            font-weight: 300;
+        }
+        .font-test p:nth-child(5){
+            font-weight: 400;
+        }
+        .font-test p:nth-child(6){
+            font-weight: 500;
+        }
+        .font-test p:nth-child(7){
+            font-weight: 600;
+        }
+        .font-test p:nth-child(8){
+            font-weight: 700;
+        }
+        .font-test p:nth-child(9){
+            font-weight: 800;
+        }
+        .font-test p:nth-child(10){
+            font-weight: 900;
+        }
+        .font-test p:nth-child(11){
+            font-weight: 1000;
+        }
+        .font-test p:nth-child(12){
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     
@@ -21,7 +62,42 @@
         <input type="email" name="email" id="email" required>
       
         <input type="submit" value="Send">
-      </form>
+    </form>
+
+    <br><br>
+
+    <div>Font test:</div>
+    <div style="display: flex; gap: 64px;">
+        <div class="font-test" style="font-family: 'Open Sans', sans-serif;">
+            <p>Open Sans standard</p>
+            <p>Open Sans 300</p>
+            <p>Open Sans 300</p>
+            <p>Open Sans 300</p>
+            <p>Open Sans 400 </p>
+            <p>Open Sans 500 </p>
+            <p>Open Sans 600</p>
+            <p>Open Sans 700</p>
+            <p>Open Sans 800</p>
+            <p>Open Sans 900</p>
+            <p>Open Sans 1000</p>
+            <p>Open Sans Italic</p>
+        </div>
+        <div class="font-test" style="font-family: 'Playfair', serif;">
+            <p>playfair standard</p>
+            <p>playfair 300</p>
+            <p>playfair 300</p>
+            <p>playfair 300</p>
+            <p>playfair 400 </p>
+            <p>playfair 500 </p>
+            <p>playfair 600</p>
+            <p>playfair 700</p>
+            <p>playfair 800</p>
+            <p>playfair 900</p>
+            <p>playfair 1000</p>
+            <p>playfair Italic</p>
+        </div>
+    </div>
+
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="test.js" async></script>
