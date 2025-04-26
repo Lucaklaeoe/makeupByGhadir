@@ -46,6 +46,10 @@ li, a{
     padding: 20px 0;
     gap: 20px;
 }
+.categories li{
+    cursor: pointer;
+}
+
 .galleri-images{
     --columns: 4;
     --colum-gap-size: 20px;
