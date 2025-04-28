@@ -18,7 +18,7 @@ html, body{
 section, .max-width{
     max-width: 1440px;
     margin: auto;
-    padding: 0 36px;
+    padding: 0 32px;
     position: relative;
 }
 p, div, li, a{

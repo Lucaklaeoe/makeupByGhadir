@@ -26,6 +26,7 @@ function makeMasonry() {
                 }
 
                 var category_name = category.textContent.replace(" ", '').toLowerCase();
+                document.querySelector('body').classList = category_name;
 
                 const active_category = document.querySelector('.categories li.active');
                 if (active_category == category) {
