@@ -3,7 +3,6 @@
 */
 /* Open Sans & Playfair */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
-
 *{
     margin: 0;
     border: 0;
@@ -24,18 +23,79 @@ section, .max-width{
 p, div, li, a{
     font-size: 14px;
 }
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, nav{
     font-family: "Playfair", serif;
+    letter-spacing: 0.5px;
 }
 li, a{
     list-style: none;
     text-decoration: none;
+}
+.logo{
+    width: 120px;
+}
+.logo-bg{
+    fill: #1a2663;
 }
 @media screen and (max-width: 768px) {
     section, .max-width{
         padding: 0 24px;
     }
 }
+:root{
+
+}
+
+/* Navbar */
+nav{
+    background-color: none;
+    position: fixed;
+    width: 100vw;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.navbar a, .navbar svg{
+    z-index: 5;
+}
+.navbar ul{
+    display: flex;
+    gap: 32px;
+}
+.navbar ul li a{
+    color: #1a2663;
+    font-weight: 800;
+    font-size: 24px;
+}
+.burger-menu{
+    display: none;
+    width: 46px;
+    height: 46px;
+}
+@media screen and (max-width: 768px) {
+    .burger-menu{
+        display: block;
+        --logo-transition: 0.1s;
+        transition: scale var(--logo-transition);
+    }
+    .navbar ul{
+        position: absolute;
+        flex-direction: column;
+        padding: 100px 24px 0 24px;
+        top: 0;
+        right: -100%;
+        width: 100vw;
+        height: 100vh;
+        background-color: #b2b8d4;
+        transition: right 0.5s ease-in-out;
+        margin-left: -24px;
+        z-index: 0;
+    }
+}
+
 
 /* Galleri */
 .categories{
