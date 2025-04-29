@@ -20,11 +20,20 @@ html, body{
     background-color: #e3e3e3;
     font-family: "Open Sans", system-ui, -apple-system, sans-serif;
 }
+main{
+    margin-top: 100px;
+}
 section, .max-width{
     max-width: 1440px;
     margin: auto;
     padding: 0 32px;
     position: relative;
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 56px 0;
 }
 p, div, li, a{
     font-size: 14px;
@@ -32,6 +41,10 @@ p, div, li, a{
 h1, h2, h3, h4, h5, h6, nav{
     font-family: "Tenor Sans", serif;
     letter-spacing: 0.7px;
+}
+h1{
+    font-size: 40px;
+    font-weight: 400;
 }
 li, a{
     list-style: none;
@@ -73,13 +86,13 @@ nav{
 }
 .navbar ul li a{
     color: #1a2663;
-    font-weight: 800;
-    font-size: 24px;
+    font-weight: 400;
+    font-size: 20px;
 }
 .burger-menu{
     display: none;
-    width: 46px;
-    height: 46px;
+    width: 32px;
+    height: 32px;
 }
 @media screen and (max-width: 768px) {
     .burger-menu{
