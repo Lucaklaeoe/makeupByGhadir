@@ -1,7 +1,6 @@
 const burger_menu = document.querySelector('.burger-menu');
 if(burger_menu){
     const burger_transition = getComputedStyle(burger_menu).getPropertyValue('--logo-transition').split('s')[0] * 1000;
-    console.log(burger_transition);
     burger_menu.addEventListener('click', () => {
         burger_menu.classList.toggle('isCrossed');
         burger_menu.style.scale = "0.6";
