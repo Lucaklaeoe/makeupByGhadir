@@ -29,6 +29,7 @@ input, select, option{
     border-radius: 8px;
     border: 1px solid #D9D9D9;
     cursor: pointer;
+    background: #fff;
 }
 main{
     margin-top: 100px;
@@ -166,7 +167,9 @@ nav{
 /* Booking */
 .booking-form{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 160px;
+    flex-wrap: wrap;
 }
 /* Booking - form1 */
 .first-form{
@@ -183,11 +186,38 @@ nav{
     flex-direction: column;
 }
 .selected-services select{
-    -moz-appearance:none;
-    -webkit-appearance:none;
-    appearance:none;
+    background-image: url("data:image/svg+xml;base64,IDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMjQgMjQnPjxwYXRoIGQ9J00xMiA1VjE5TTUgMTJIMTknIHN0cm9rZT0nYmxhY2snIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+PC9zdmc+Cg==");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 12px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
-
+.selected-services-list{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.selected-services-list div{
+    padding: 12px 16px;
+    min-width: 240px;
+    min-height: 40px;
+    height: fit-content;
+    border-radius: 8px;
+    border: 1px solid #D9D9D9;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+.selected-services-list div:first-child{
+    margin-top: 18px;
+}
+.selected-services-list div:last-child{
+    margin-bottom: 18px;
+}
 /* Booking - kaldender */
 .kaldender{
     display: flex;

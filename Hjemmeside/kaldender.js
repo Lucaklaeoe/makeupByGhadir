@@ -50,11 +50,25 @@ function renderWeek(date, setDatePicker = true) {
         document.getElementById('date' + index).textContent = day;
     })
 }
+function addService(service) {
+    const selectedServices = document.getElementById('selected_services_list');
+    const newService = document.createElement('div');
+    selectedServices.appendChild(newService);
+    
+    const value = service.split(' - ');
+    span1 = document.createElement('span');
+    span1.textContent = value[0];
+    newService.appendChild(span1);
+    span2 = document.createElement('span');
+    span2.textContent = value[1];
+    newService.appendChild(span2);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     let currentDate = new Date();
     const datePicker = document.getElementById('date_picker');
     datePicker.setAttribute('min', currentDate.toISOString().split('T')[0]);
+    const servicePicker = document.getElementById('add_services');
 
     renderWeek(currentDate);
 
@@ -73,5 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     datePicker.addEventListener('click', () => {
         datePicker.showPicker()
+    })
+
+    servicePicker.addEventListener('change', () => {
+        const selectedService = servicePicker.value;
+        addService(selectedService);
+        servicePicker.value = 'default';
     })
 })
