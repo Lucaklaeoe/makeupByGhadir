@@ -61,6 +61,10 @@ li, a{
     list-style: none;
     text-decoration: none;
 }
+/* Remove standard logo for kaldender */
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
 .logo{
     width: 120px;
 }
@@ -180,6 +184,12 @@ nav{
 .date-picker{
     display: flex;
     flex-direction: column;
+}
+#date_picker{
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Chevron down'%3E%3Cpath id='Icon' d='M4.67188 6.70654L8.67188 10.7065L12.6719 6.70654' stroke='%231E1E1E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E%0A");;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 12px) 12px;
+    background-size: 20px;
 }
 .selected-services{
     display: flex;
