@@ -39,9 +39,10 @@ function renderWeek(date, setDatePicker = true) {
     const datePicker = document.getElementById('date_picker');
 
     if(setDatePicker) {
-        const oneDayAhead = new Date(date) ;
+        const oneDayAhead = new Date(date);
         oneDayAhead.setDate(oneDayAhead.getDate() + 1);
-        datePicker.value = oneDayAhead.toISOString().split('T')[0];
+        oneDayAhead.setHours(13, 0, 0, 0);
+        datePicker.value = oneDayAhead.toISOString().slice(0, 16);
     }
 
     document.getElementById('week').textContent = "Uge " + getWeekNumber(date);
@@ -67,7 +68,7 @@ function addService(service) {
 document.addEventListener('DOMContentLoaded', () => {
     let currentDate = new Date();
     const datePicker = document.getElementById('date_picker');
-    datePicker.setAttribute('min', currentDate.toISOString().split('T')[0]);
+    datePicker.setAttribute('min', currentDate.toISOString().slice(0, 16));
     const servicePicker = document.getElementById('add_services');
 
     renderWeek(currentDate);
