@@ -238,12 +238,15 @@ nav{
 .week-selector{
     display: flex;
     justify-content: center;
+    gap: 16px;
+    padding: 4px 0;
 }
 .arrow{
     width: 20px;
     height: 20px;
     fill: #18181B;
     cursor: pointer;
+    background: none;
 }
 
 .day-selector{
