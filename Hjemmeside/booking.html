@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking - Find en ledig tid</title>
     <link rel="stylesheet" href="min/style.min.css">
-    
+    <!-- DateTime pickers css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="min/datePicker.min.css">
 </head>
 <body>
     <nav>
@@ -25,7 +27,6 @@
             </ul>
         </section>
     </nav>
-
     <main>
         <header>
             <h1>Find en ledig tid</h1>
@@ -34,15 +35,15 @@
         <section class="booking-form">
             <div class="first-form">
                 <div class="date-picker">
-                    <label for="date_picker">Dato & tid</label>
-                    <input type="datetime-local" name="date_picker" id="date_picker">
+                    <label for="datepicker">Dato & tid</label>
+                    <input type="text" id="datepicker" class="fields" placeholder="Vælg dato & tid">
                 </div>
                 <div class="selected-services">
                     <label for="add_services">Valgte services:</label>
                     <div class="selected-services-list" id="selected_services_list">
 
                     </div>
-                    <select name="add_services" id="add_services">
+                    <select name="add_services" id="add_services" class="fields">
                         <option value="default" >Vælg service</option>
                         <option value="Brudpakke 1 - 90 min" >Brudpakke 1</option>
                         <option value="Brudpakke 2 - 180 min">Brudpakke 2</option>
@@ -51,7 +52,7 @@
                     </select>
                 </div>
 
-                <input type="submit" value="Send">
+                <input type="submit" value="Send" class="fields">
             </div>
             <div class="kaldender">
                 <div class="week-selector">
@@ -67,7 +68,6 @@
                 <div class="day-selector">
                     <div class="column time">
                         <div><p>Tid</p></div>
-
                         <div><p>08:00</p></div>
                         <div><p>09:00</p></div>
                         <div><p>10:00</p></div>
@@ -132,5 +132,8 @@
 
     <script src="kaldender.js"></script>
     <script src="min/script.min.js"></script>
+    <!-- DateTime pickers flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/da.js"></script>
 </body>
 </html>

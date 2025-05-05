@@ -36,13 +36,23 @@ function getWeekDates(date = new Date()) {
 }
 
 function renderWeek(date, setDatePicker = true) {
-    const datePicker = document.getElementById('date_picker');
+    const datePicker = document.getElementById('datepicker');
 
     if(setDatePicker) {
         const oneDayAhead = new Date(date);
         oneDayAhead.setDate(oneDayAhead.getDate() + 1);
         oneDayAhead.setHours(13, 0, 0, 0);
-        datePicker.value = oneDayAhead.toISOString().slice(0, 16);
+        const fp = flatpickr(datePicker, {
+            locale: "da",
+            enableTime: true,
+            dateFormat: "d-m-Y H:i",
+            time_24hr: true,
+            minDate: "today",
+            minTime: "08:00",
+            maxTime: "17:00",
+            weekNumbers: true,
+        });
+        fp.setDate(oneDayAhead);
     }
 
     document.getElementById('week').textContent = "Uge " + getWeekNumber(date);
@@ -67,8 +77,7 @@ function addService(service) {
 
 document.addEventListener('DOMContentLoaded', () => {
     let currentDate = new Date();
-    const datePicker = document.getElementById('date_picker');
-    datePicker.setAttribute('min', currentDate.toISOString().slice(0, 16));
+    const datePicker = document.getElementById('datepicker');
     const servicePicker = document.getElementById('add_services');
 
     renderWeek(currentDate);
@@ -82,13 +91,10 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWeek(currentDate);
     });
     datePicker.addEventListener('change', () => {
-        const selectedDate = new Date(datePicker.value);
+        const selectedDate = new Date(stringToDateObject(datePicker.value));
         currentDate = selectedDate;
         renderWeek(currentDate, false);
     });
-    datePicker.addEventListener('click', () => {
-        datePicker.showPicker()
-    })
 
     servicePicker.addEventListener('change', () => {
         const selectedService = servicePicker.value;
@@ -96,3 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
         servicePicker.value = 'default';
     })
 })
+
+function stringToDateObject(dateStr) {
+    const [datePart, timePart] = dateStr.split(' ');
+    const [day, month, year] = datePart.split('-');
+    const [hour, minute] = timePart.split(':');
+    return new Date(year, month - 1, day, hour, minute);
+}
