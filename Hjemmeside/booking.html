@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="min/style.min.css">
     <!-- DateTime pickers css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="min/datePicker.min.css">
+    <link rel="stylesheet" href="min/datepicker.min.css">
 </head>
 <body>
     <nav>
@@ -52,7 +52,7 @@
                     </select>
                 </div>
 
-                <input type="submit" value="Send" class="fields">
+                <input id="go_to_booking" type="submit" value="Book tid" class="fields">
             </div>
             <div class="kaldender">
                 <div class="week-selector">
@@ -67,7 +67,7 @@
 
                 <div class="day-selector">
                     <div class="column time">
-                        <div><p>Tid</p></div>
+                        <div><p></p></div>
                         <div><p>08:00</p></div>
                         <div><p>09:00</p></div>
                         <div><p>10:00</p></div>
@@ -82,43 +82,176 @@
                     <div class="column monday">
                         <div><p>Mandag</p><p id="date0">21</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column tuesday">
                         <div><p>Tirsdag</p><p id="date1">22</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column wednesday">
                         <div><p>Onsdag</p><p id="date2">23</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column thursday">
                         <div><p>Torsdag</p><p id="date3">24</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column friday">
                         <div><p>Fredag</p><p id="date4">25</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column saturday">
                         <div><p>Lørdag</p><p id="date5">26</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                     <div class="column sunday">
                         <div><p>Søndag</p><p id="date6">27</p></div>
                         <div class="showen-time">
-
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
+                            <div class="halv-hour-mark"></div>
                         </div>
                     </div>
                 </div>
