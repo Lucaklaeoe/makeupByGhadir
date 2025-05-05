@@ -185,7 +185,7 @@ nav{
     display: flex;
     flex-direction: column;
 }
-#date_picker{
+#datepicker{
     background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg %3E%3Cpath d='M4.67188 6.70654L8.67188 10.7065L12.6719 6.70654' stroke='%231E1E1E' stroke-width='1.6' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E%0A");;
     background-repeat: no-repeat;
     background-position: calc(100% - 12px) 12px;
