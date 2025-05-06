@@ -18,12 +18,13 @@
 html, body{
     overflow-x: hidden;
     background-color: #e3e3e3;
-    font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-standard);
 }
 .fields{
-    font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+    font-family: var(--font-standard);
     padding: 12px 16px;
-    min-width: 325px;
+    min-width: var(--fields-min-width);
+    width: fit-content;
     height: 50px;
     border-radius: 8px;
     border: 1px solid #D9D9D9;
@@ -49,7 +50,7 @@ p, div, li, a{
     font-size: 14px;
 }
 h1, h2, h3, h4, h5, h6, nav{
-    font-family: "Tenor Sans", serif;
+    font-family: var(--font-overskrift);
     letter-spacing: 0.7px;
 }
 h1{
@@ -79,6 +80,14 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     /* Icons */
     --plus: url("data:image/svg+xml;base64,IDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMjQgMjQnPjxwYXRoIGQ9J00xMiA1VjE5TTUgMTJIMTknIHN0cm9rZT0nYmxhY2snIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+PC9zdmc+Cg==");
     --arrow-down: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg %3E%3Cpath d='M4.67188 6.70654L8.67188 10.7065L12.6719 6.70654' stroke='%231E1E1E' stroke-width='1.6' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E%0A");
+
+    /* Fonts */
+    --font-standard: "Open Sans", system-ui, -apple-system, sans-serif;
+    --font-overskrift: "Tenor Sans", serif;
+
+    /* Fields - form width */
+    --fields-min-width: 325px;
+    --fields-max-width: 500px;
 }
 
 /* Navbar */
@@ -324,4 +333,75 @@ nav{
     border-left: 3px solid #00BE1D !important;
     background: #00BE1D40 !important;
     color: #fff;
+}
+
+/* Final booking form */
+.booking-form-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+}
+.booking-form-2 div{
+    display: flex;
+    flex-direction: column;
+}
+.booking-form-2 div label{
+    margin-bottom: 8px;
+}
+
+div.adresse-writer, div.adresse-writer2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    --adresse-writergap: 8px;
+    gap: var(--adresse-writergap);
+    min-width: var(--fields-min-width);
+    max-width: var(--fields-max-width);
+    position: relative;
+    margin-bottom: 16px;
+}
+div.adresse-writer:last-child{
+    margin-bottom: 0;
+}
+.adresse-writer input, .adresse-writer2 input{
+    min-width: unset;
+}
+.adresse-writer label, .adresse-writer ul{
+    width: 100%;
+}
+.adresse-writer ul{
+    position: absolute;
+    top: 80px;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    border-radius: 8px;
+    height: fit-content;
+    background-color: #fff;
+    box-shadow: 1px 2px 5px 2px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    width: fit-content;
+}
+.adresse-writer ul li{
+    padding: 8px;
+    cursor: pointer;
+}
+.adresse-writer ul li:hover{
+    background-color: #f6f6f6;
+}
+.adresse-writer input:nth-child(2), .adresse-writer2 input:nth-child(1){
+    width: calc(75% - (var(--adresse-writergap) / 2));
+}
+.adresse-writer input:nth-child(3), .adresse-writer2 input:nth-child(2){
+    width: calc(25% - (var(--adresse-writergap) / 2));
+}
+.adresse-writer input:nth-child(5), .adresse-writer2 input:nth-child(3){
+    width: calc(50% - var(--adresse-writergap) / 2);
+}
+.adresse-writer input:nth-child(6), .adresse-writer2 input:nth-child(4){
+    width: calc(50% - var(--adresse-writergap) / 2);
 }

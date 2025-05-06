@@ -119,10 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     const go_to_booking = document.getElementById('go_to_booking');
-    go_to_booking.addEventListener('click', () => {
-        console.log(getSelectedServices());
-        //save to localstorage
-        //localStorage.setItem('selectedServices', JSON.stringify(getSelectedServices()));
+    go_to_booking.addEventListener('click', (event) => {
+        event.preventDefault();
+        if(validateBooking()){
+            localStorage.setItem('selectedservices', JSON.stringify(getSelectedServices()));
+            window.location = "booking2.html";
+        }
+        else{
+            alert("Denne tid eller noget af denne tid er allerede booket");
+        }
     })
 })
 
@@ -188,4 +193,8 @@ function getSelectedServices(){
     });
     selectedServices['totalTime'] = TotalTimeOfYourBooking;
     return selectedServices;
+}
+
+function validateBooking(){
+    return true;
 }
