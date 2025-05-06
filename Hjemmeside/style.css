@@ -20,12 +20,11 @@ html, body{
     background-color: #e3e3e3;
     font-family: "Open Sans", system-ui, -apple-system, sans-serif;
 }
-input, select, option{
+.fields{
     font-family: "Open Sans", system-ui, -apple-system, sans-serif;
     padding: 12px 16px;
-    min-width: 240px;
-    min-height: 40px;
-    height: fit-content;
+    min-width: 325px;
+    height: 50px;
     border-radius: 8px;
     border: 1px solid #D9D9D9;
     cursor: pointer;
@@ -77,7 +76,9 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     }
 }
 :root{
-
+    /* Icons */
+    --plus: url("data:image/svg+xml;base64,IDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMjQgMjQnPjxwYXRoIGQ9J00xMiA1VjE5TTUgMTJIMTknIHN0cm9rZT0nYmxhY2snIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+PC9zdmc+Cg==");
+    --arrow-down: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg %3E%3Cpath d='M4.67188 6.70654L8.67188 10.7065L12.6719 6.70654' stroke='%231E1E1E' stroke-width='1.6' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E%0A");
 }
 
 /* Navbar */
@@ -85,6 +86,7 @@ nav{
     background-color: none;
     position: fixed;
     width: 100vw;
+    z-index: 10;
 }
 .navbar{
     display: flex;
@@ -126,7 +128,7 @@ nav{
         background-color: #b2b8d4;
         transition: right 0.5s ease-in-out;
         margin-left: -24px;
-        z-index: 0;
+        z-index: 1;
     }
 }
 
@@ -185,10 +187,17 @@ nav{
     display: flex;
     flex-direction: column;
 }
-#date_picker{
-    background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Chevron down'%3E%3Cpath id='Icon' d='M4.67188 6.70654L8.67188 10.7065L12.6719 6.70654' stroke='%231E1E1E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E%0A");;
+.date-picker label, .selected-services label{
+    margin-bottom: 8px;
+}
+.selected-services{
+    padding-bottom: 32px;
+    border-bottom: 1px solid black;
+}
+#datepicker{
+    background-image: var(--arrow-down);
     background-repeat: no-repeat;
-    background-position: calc(100% - 12px) 12px;
+    background-position: calc(100% - 12px) 15px;
     background-size: 20px;
 }
 .selected-services{
@@ -196,7 +205,7 @@ nav{
     flex-direction: column;
 }
 .selected-services select{
-    background-image: url("data:image/svg+xml;base64,IDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMjQgMjQnPjxwYXRoIGQ9J00xMiA1VjE5TTUgMTJIMTknIHN0cm9rZT0nYmxhY2snIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJy8+PC9zdmc+Cg==");
+    background-image: var(--plus);
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
@@ -213,17 +222,22 @@ nav{
 .selected-services-list div{
     padding: 12px 16px;
     min-width: 240px;
-    min-height: 40px;
-    height: fit-content;
+    height: 50px;
     border-radius: 8px;
     border: 1px solid #D9D9D9;
     background: #fff;
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    gap: 16px;
 }
-.selected-services-list div:first-child{
-    margin-top: 18px;
+.selected-services-list div span:first-child{
+    margin-right: auto;
+}
+.selected-services-list div span:last-child{
+    margin-top: 4px;
+    cursor: pointer;
+    fill: #D9D9D9;
 }
 .selected-services-list div:last-child{
     margin-bottom: 18px;
@@ -238,32 +252,76 @@ nav{
 .week-selector{
     display: flex;
     justify-content: center;
+    gap: 16px;
+    padding: 4px 0;
 }
 .arrow{
     width: 20px;
     height: 20px;
     fill: #18181B;
     cursor: pointer;
+    background: none;
+}
+.arrow-disabled{
+    fill: #818181;
+    cursor: default;
 }
 
 .day-selector{
     display: flex;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
 }
-
 .day-selector .column div{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 40px;
-    border: 1px solid #333;
+    width: 75px;
+    border: 1px solid #F6F6F6;
     padding: 8px;
+}
+.day-selector .column div p:first-child{
+    color: #717171;
+}
+.day-selector .column:first-child div{
+    border: none;
+    color: #71717A;
+    padding: 0 12px 0 0;
 }
 .day-selector .column div:first-child{
     display: flex;
     flex-direction: column;
     height: 50px;
-    align-items: flex-start;
+    align-items: center;
 }
 .day-selector .column .showen-time{
     height: calc(100% - 50px);
+    padding: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+}
+.day-selector .column .showen-time .halv-hour-mark{
+    border-top: 0.5px solid #F6F6F6;
+    border-bottom: 0.5px solid #F6F6F6;
+    height: 20px;
+    padding: 0;
+}
+.saturday, .sunday{
+    background-color: #fefbfb;
+}
+.day-selector .column .showen-time .booking-time{
+    border: none;
+    border-left: 3px solid #767272;
+    background: #75757540;
+    position: absolute;
+    padding-left: 0;
+    border-radius: 6px;
+}
+.your-booking{
+    border-left: 3px solid #00BE1D !important;
+    background: #00BE1D40 !important;
+    color: #fff;
 }
