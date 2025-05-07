@@ -31,39 +31,39 @@
 
         <section>
             <form action="Make booking" class="booking-form-2">
-                <input type="text" class="fields" name="Fulde navn" placeholder="Fulde navn" autocomplete="name">
+                <input type="text" class="fields" id="fullname" name="Fulde navn" placeholder="Fulde navn" autocomplete="name" required>
 
                 <div>
                     <div class="adresse-writer">
                         <label for="Adresse">Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" name="Adresse" id="autocomplete-adresse" placeholder="Adresse" autocomplete="street-address"> 
-                        <input type="text" class="fields houseNumber" name="Husnummer" placeholder="Husnummer" autocomplete="address-line2">
+                        <input type="text" class="fields check_if_autocompleted" name="Adresse" id="autocomplete-adresse" placeholder="Adresse" autocomplete="street-address" required> 
+                        <input type="text" class="fields houseNumber" name="Husnummer" id="autocomplete-house-number" placeholder="Husnummer" autocomplete="address-line2" required>
                         <ul id="autocomplete-suggestions"></ul>
-                        <input type="text" class="fields" name="postal-code" id="autocomplete-postal-code" placeholder="Postnummer" autocomplete="postal-code">
-                        <input type="text" class="fields" name="By" id="autocomplete-by" placeholder="By" autocomplete="address-level2">
+                        <input type="text" class="fields" name="Postal-code" id="autocomplete-postal-code" placeholder="Postnummer" autocomplete="postal-code" required>
+                        <input type="text" class="fields" name="By" id="autocomplete-by" placeholder="By" autocomplete="address-level2" required>
                     </div>
                     <div class="adresse-writer2">
                         <label for="Adresse">Udkørlses-Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" name="Udkørlses-Adresse" placeholder="Udkørlses-Adresse"> 
-                        <input type="text" class="fields houseNumber" name="Udkørlses-Husnummer" placeholder="Udkørlses-Husnummer">
-                        <input type="text" class="fields" name="Udkørlses-postal-code" placeholder="Udkørlses-Postnummer">
-                        <input type="text" class="fields" name="By" placeholder="Udkørlses-By" autocomplete="address-level2">
+                        <input type="text" class="fields check_if_autocompleted" id="ud-adress" name="Udkørlses-Adresse" placeholder="Adresse"> 
+                        <input type="text" class="fields houseNumber" id="ud-husnummer" name="Udkørlses-Husnummer" placeholder="Husnummer">
+                        <input type="text" class="fields" id="ud-postal-code" name="Udkørlses-postal-code" placeholder="Postnummer">
+                        <input type="text" class="fields" id="ud-by" name="By" placeholder="By" autocomplete="address-level2">
                     </div>
                 </div>
 
                 <div>
                     <label for="email">Kontaktinformation:</label>
-                    <input type="email" class="fields" name="email" placeholder="E-mail" autocomplete="email">
-                    <input type="text" class="fields" name="Telefon nummer" placeholder="Telefon nummer" autocomplete="tel">
+                    <input type="email" class="fields" id="email" name="email" placeholder="E-mail" autocomplete="email" required>
+                    <input type="text" class="fields" id="tlf" name="Telefon nummer" placeholder="Telefon nummer" autocomplete="tel" required>
                 </div>
 
                 <div>
                     <label for="Kommentare">Kommentare:</label>
-                    <textarea name="Kommentare" class="fields" placeholder="Kommentare"></textarea>
+                    <textarea name="Kommentare" class="fields" placeholder="Har du allergier, en hårtype jeg skal tage hensyn til eller andet."></textarea>
                 </div>
 
-                <div>
-                    <input type="checkbox" name="sammentygge" id="sammentygge">
+                <div class="checkbox">
+                    <input type="checkbox" name="sammentygge" id="sammentygge" required>
                     <label for="sammentygge">Jeg giver samtykke til at Ghadir må bruge mit kort til uendelig biografbesøg</label>
                 </div>
 
@@ -77,6 +77,6 @@
     </main>
     <script src="min/script.min.js"></script>
     <script src="min/adresseAutoComplete.min.js"></script>
-    <script src="makeBookings.js"></script>
+    <script src="makeBookings.js" async></script>
 </body>
 </html>
