@@ -39,7 +39,7 @@ async function signIn(email = "anonymous@example.com", password = "Guest1234") {
 async function makeRequestBooking() {
     const {access_token} = await signIn();
 
-
+    if(!fillFormAndCheck()) return;
     
     const response = await fetch(`${supabaseUrl}/rest/v1/requestBooking`, {
         method: 'POST',
@@ -50,14 +50,7 @@ async function makeRequestBooking() {
           'Prefer': 'return=representation'
         },
         body: JSON.stringify([{
-          email: "anonymous@example.com",
-          fulde_navn: "test",
-          tlf: 12345678,
-          adress: "testvej 1",
-          start_time: "2023-01-01 12:00:00",
-          duration: 150,
-          location_for_work: "testvej 2",
-          message: "testtesttest"
+            ...BookingInfo
         }])
     });
 
@@ -70,12 +63,15 @@ async function makeRequestBooking() {
   }
 }
 
-function isFormFilled(){
+function fillFormAndCheck(){
     const requiredFields = document.querySelectorAll('[required]');
     BookingInfo = {};
     requiredFields.forEach(field => {
-        if(field.value == '') {
+        if(field.value.trim() == '' || field.value == null || field.value == undefined) {
             field.classList.add('not-filled');
+            field.addEventListener('input', () => {
+                field.classList.remove('not-filled');
+            })
         }
         else if(field.classList.contains('not-filled')) {
             field.classList.remove('not-filled');
@@ -84,43 +80,62 @@ function isFormFilled(){
 
     if(document.querySelector('.not-filled')) return false;
 
-    const fulde_navn = document.getElementById("fullname").value;
+    const selectedServices = JSON.parse(localStorage.getItem('selectedservices'));
+    if(!selectedServices){
+        alert('Du mangler at vælge en service');
+        window.location = 'booking.html';
+        return false;
+    }
+
     const email = document.getElementById("email").value;
+    const fulde_navn = document.getElementById("fullname").value;
     const tlf = document.getElementById("tlf").value;
-    const start_time = document.getElementById("start_time").value;
-    const duration = document.getElementById("duration").value;
-    const message = document.getElementById("message").value || "";
+    const start_time = selectedServices.datetime;
+    const duration = selectedServices.totalTime;
+
+    const adress = document.getElementById("autocomplete_adresse").value;
+    const houseNumber = document.getElementById("autocomplete_house_number").value;
+    const postalcode = document.getElementById("autocomplete_postal_code").value;
+    const by = document.getElementById("autocomplete_by").value;
     
-    const adress = document.getElementById("autocomplete-adresse").value;
-    const houseNumber = document.getElementById("autocomplete-house-number").value;
-    const postalcode = document.getElementById("autocomplete-postal-code").value;
-    const by = document.getElementById("autocomplete-by").value;
+    const udAdress = document.getElementById("ud_adress").value || "";
+    const udHouseNumber = document.getElementById("ud_husnummer").value || "";
+    const udPostalcode = document.getElementById("ud_postal_code").value || "";
+    const udBy = document.getElementById("ud_by").value || "";
 
-    const location_for_work = document.getElementById("location_for_work").value;
-
+    const message = document.getElementById("message").value || "";
+    const services = selectedServices.services;
+    
     BookingInfo = {
-        email: email,
-        fulde_navn: fulde_navn,
-        tlf: tlf,
-        adress: `${adress} ${houseNumber}`,
-        start_time: start_time,
-        duration: duration,
-        adress: `${adress} ${houseNumber}, ${postalcode} ${by}`,
-        location_for_work: "",
-        message: message,
+        "email": email,
+        "fulde_navn": fulde_navn,
+        "tlf": tlf,
+        "start_time": start_time,
+        "duration": duration,
+        "adress": `${adress} ${houseNumber}, ${postalcode} ${by}`,
+        "location_for_work": `${udAdress} ${udHouseNumber}, ${udPostalcode} ${udBy}`,
+        "message": message,
+        "services": services,
     }
     return true;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const make_booking = document.getElementById('make_booking');
+    make_booking.addEventListener('click', (event) => {
+        event.preventDefault();
+        makeRequestBooking();
+    })
+})
+
 /*
-email
-fulde_navn 
-tlf
-adress
-start_time
-duration
-location_for_work
-message
-
-
+    email
+    fulde_navn 
+    tlf
+    adress
+    start_time
+    duration
+    location_for_work
+    message
+    services
 */

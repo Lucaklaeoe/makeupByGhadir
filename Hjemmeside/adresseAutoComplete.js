@@ -1,7 +1,7 @@
-const input = document.getElementById('autocomplete-adresse');
-const suggestionsList = document.getElementById('autocomplete-suggestions');
-const autocompletePostalCode = document.getElementById('autocomplete-postal-code');
-const autocompleteBy = document.getElementById('autocomplete-by');
+const input = document.getElementById('autocomplete_adresse');
+const suggestionsList = document.getElementById('autocomplete_suggestions');
+const autocompletePostalCode = document.getElementById('autocomplete_postal_code');
+const autocompleteBy = document.getElementById('autocomplete_by');
 const apiKey = '4185f197618f4737856f9e0180d5dcc0';
 
 input.addEventListener('input', async () => {
@@ -12,7 +12,6 @@ input.addEventListener('input', async () => {
 
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
 
   suggestionsList.innerHTML = '';
 
@@ -36,6 +35,13 @@ input.addEventListener('input', async () => {
         document.querySelectorAll('.houseNumber')[index].value = input.value.split(' ')[1];
         input.value = input.value.split(' ')[0];
       }
+    });
+  })
+  document.querySelectorAll('.check_if_adress_autocompleted').forEach(input => {
+    input.addEventListener('blur', () => {
+      const adress = document.getElementById('autocomplete_adresse');
+      document.getElementById('autocomplete_house_number').value = adress.value.split(' ')[1];
+      adress.value = adress.value.split(' ')[0];
     });
   })
 });

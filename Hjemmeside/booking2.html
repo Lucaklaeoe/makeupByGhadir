@@ -31,23 +31,23 @@
 
         <section>
             <form action="Make booking" class="booking-form-2">
-                <input type="text" class="fields" id="fullname" name="Fulde navn" placeholder="Fulde navn" autocomplete="name" required>
+                <input type="text" class="fields check_if_adress_autocompleted" id="fullname" name="Fulde navn" placeholder="Fulde navn" autocomplete="name" required>
 
                 <div>
                     <div class="adresse-writer">
                         <label for="Adresse">Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" name="Adresse" id="autocomplete-adresse" placeholder="Adresse" autocomplete="street-address" required> 
-                        <input type="text" class="fields houseNumber" name="Husnummer" id="autocomplete-house-number" placeholder="Husnummer" autocomplete="address-line2" required>
-                        <ul id="autocomplete-suggestions"></ul>
-                        <input type="text" class="fields" name="Postal-code" id="autocomplete-postal-code" placeholder="Postnummer" autocomplete="postal-code" required>
-                        <input type="text" class="fields" name="By" id="autocomplete-by" placeholder="By" autocomplete="address-level2" required>
+                        <input type="text" class="fields check_if_autocompleted" name="Adresse" id="autocomplete_adresse" placeholder="Adresse" autocomplete="street-address" required> 
+                        <input type="text" class="fields houseNumber" name="Husnummer" id="autocomplete_house_number" placeholder="Husnummer" autocomplete="address-line2" required>
+                        <ul id="autocomplete_suggestions"></ul>
+                        <input type="text" class="fields" name="Postal-code" id="autocomplete_postal_code" placeholder="Postnummer" autocomplete="postal-code" required>
+                        <input type="text" class="fields" name="By" id="autocomplete_by" placeholder="By" autocomplete="address-level2" required>
                     </div>
                     <div class="adresse-writer2">
                         <label for="Adresse">Udkørlses-Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" id="ud-adress" name="Udkørlses-Adresse" placeholder="Adresse"> 
-                        <input type="text" class="fields houseNumber" id="ud-husnummer" name="Udkørlses-Husnummer" placeholder="Husnummer">
-                        <input type="text" class="fields" id="ud-postal-code" name="Udkørlses-postal-code" placeholder="Postnummer">
-                        <input type="text" class="fields" id="ud-by" name="By" placeholder="By" autocomplete="address-level2">
+                        <input type="text" class="fields check_if_autocompleted" id="ud_adress" name="Udkørlses-Adresse" placeholder="Adresse"> 
+                        <input type="text" class="fields houseNumber" id="ud_husnummer" name="Udkørlses-Husnummer" placeholder="Husnummer">
+                        <input type="text" class="fields" id="ud_postal_code" name="Udkørlses-postal-code" placeholder="Postnummer">
+                        <input type="text" class="fields" id="ud_by" name="By" placeholder="By" autocomplete="address-level2">
                     </div>
                 </div>
 
@@ -59,7 +59,7 @@
 
                 <div>
                     <label for="Kommentare">Kommentare:</label>
-                    <textarea name="Kommentare" class="fields" placeholder="Har du allergier, en hårtype jeg skal tage hensyn til eller andet."></textarea>
+                    <textarea name="Kommentare" class="fields" id="message" placeholder="Har du allergier, en hårtype jeg skal tage hensyn til eller andet."></textarea>
                 </div>
 
                 <div class="checkbox">
@@ -67,8 +67,8 @@
                     <label for="sammentygge">Jeg giver samtykke til at Ghadir må bruge mit kort til uendelig biografbesøg</label>
                 </div>
 
-                <div>
-                    <input type="submit" class="fields" value="Send">
+                <div class="actions">
+                    <input type="submit" id="make_booking" class="fields" value="Send">
                     <button type="button" class="fields">Annuller</button>
                 </div>
 
@@ -77,6 +77,6 @@
     </main>
     <script src="min/script.min.js"></script>
     <script src="min/adresseAutoComplete.min.js"></script>
-    <script src="makeBookings.js" async></script>
+    <script src="makeBookings.js"></script>
 </body>
 </html>

@@ -20,15 +20,16 @@ html, body{
     background-color: #e3e3e3;
     font-family: var(--font-standard);
 }
+label{
+    margin-bottom: 8px;
+}
 .fields{
     font-family: var(--font-standard);
     padding: 12px 16px;
-    min-width: var(--fields-min-width);
     width: fit-content;
     height: 50px;
-    border-radius: 8px;
+    border-radius: var(--radius-normal-box);
     border: 1px solid #D9D9D9;
-    cursor: pointer;
     background: #fff;
 }
 main{
@@ -71,6 +72,13 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .logo-bg{
     fill: #1a2663;
 }
+.not-filled{
+    border: 1px solid #ff0000 !important;
+    color: #ff0000 !important;
+}
+.not-filled::placeholder{
+    color: #ff0000 !important;
+}
 @media screen and (max-width: 768px) {
     section, .max-width{
         padding: 0 24px;
@@ -86,8 +94,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     --font-overskrift: "Tenor Sans", serif;
 
     /* Fields - form width */
-    --fields-min-width: 325px;
-    --fields-max-width: 500px;
+    --fields-max-width: 450px;
+
+    /* Box-radius */
+    --radius-normal-box: 8px;
 }
 
 /* Navbar */
@@ -179,42 +189,50 @@ nav{
 }
 
 
-/* Booking */
-.booking-form{
+/* Booking - form1 */
+.booking-form1{
     display: flex;
     justify-content: center;
     gap: 160px;
     flex-wrap: wrap;
 }
-/* Booking - form1 */
 .first-form{
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 24px;
+    width: 100%;
+    max-width: var(--fields-max-width);
 }
 .date-picker{
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    position: relative;
+    gap: 8px;
 }
-.date-picker label, .selected-services label{
-    margin-bottom: 8px;
+.date-picker div{
+    width: 50%;
 }
-.selected-services{
-    padding-bottom: 32px;
-    border-bottom: 1px solid black;
+.date-picker div input{
+    margin-top: 8px;
+    width: 100%;
 }
-#datepicker{
+#datepicker, #timepicker{
     background-image: var(--arrow-down);
     background-repeat: no-repeat;
     background-position: calc(100% - 12px) 15px;
     background-size: 20px;
 }
+
 .selected-services{
+    padding-bottom: 24px;
+    border-bottom: 1px solid black;
     display: flex;
     flex-direction: column;
 }
 .selected-services select{
     background-image: var(--plus);
+    width: 100%;
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
@@ -222,35 +240,70 @@ nav{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    cursor: pointer;
 }
 .selected-services-list{
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
-.selected-services-list div{
-    padding: 12px 16px;
-    min-width: 240px;
-    height: 50px;
-    border-radius: 8px;
+.selected-services-list .serviceitem:last-child{
+    margin-bottom: 8px;
+}
+
+/* Service booking lav om senere*/
+.selected-services-list .serviceitem{
+    padding: 8px 16px;
+    width: 100%;
+    height: fit-content;
+    border-radius: var(--radius-normal-box);
     border: 1px solid #D9D9D9;
     background: #fff;
     display: flex;
+    flex-direction: column;
+}
+.serviceitem svg{
+    margin-left: 8px;
+    margin-top: 6px;
+    cursor: pointer;
+    fill: #D9D9D9;
+}
+.serviceitem div{
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+}
+.serviceitem .service-top{
+    padding: 8px 0;
+    margin-bottom: 4px;
+    border-bottom: solid 1px #D9D9D9;
+}
+.serviceitem .service-bottom{
+    margin-right: 28px;
+}
+.serviceitem .service-bottom span{
+    color: #D9D9D9;
+    font-size: 10px;
+}
+.serviceitem .service-bottom .duration{
+    font-size: 12px;
+}
+.serviceitem div .genneral-info{
+    flex-direction: column;
+    align-items: flex-start;
 }
 .selected-services-list div span:first-child{
     margin-right: auto;
 }
-.selected-services-list div span:last-child{
-    margin-top: 4px;
-    cursor: pointer;
-    fill: #D9D9D9;
+#go_to_booking{
+    width: 200px;
+    margin: 0 auto;
+    color: #fff;
+    background: #ffB36D;
 }
-.selected-services-list div:last-child{
-    margin-bottom: 18px;
-}
+/* Service booking */
+
 /* Booking - kaldender */
 .kaldender{
     display: flex;
@@ -279,7 +332,7 @@ nav{
 .day-selector{
     display: flex;
     background: #fff;
-    border-radius: 6px;
+    border-radius: var(--radius-normal-box);
     overflow: hidden;
 }
 .day-selector .column div{
@@ -342,11 +395,27 @@ nav{
     align-items: center;
     flex-direction: column;
     gap: 24px;
+    max-width: var(--fields-max-width);
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+.booking-form-2 input, .booking-form-2 textarea, .booking-form-2 button{
+    width: 100%;
+}
+.booking-form-2 textarea{
+    min-height: 100px;
+    max-width: var(--fields-max-width);
+    min-width: 100%;
 }
 .booking-form-2 div{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+}
+.booking-form-2 div.actions{
+    width: 200px;
 }
 .booking-form-2 .checkbox{
     display: flex;
@@ -357,8 +426,8 @@ nav{
 .booking-form-2 .checkbox label{
     margin: 0;
 }
-.booking-form-2 div label{
-    margin-bottom: 8px;
+.booking-form-2 .checkbox input{
+    width: fit-content;
 }
 
 div.adresse-writer, div.adresse-writer2{
@@ -367,7 +436,6 @@ div.adresse-writer, div.adresse-writer2{
     flex-wrap: wrap;
     --adresse-writergap: 8px;
     gap: var(--adresse-writergap);
-    min-width: var(--fields-min-width);
     max-width: var(--fields-max-width);
     position: relative;
 }

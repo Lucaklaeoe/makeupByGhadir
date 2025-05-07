@@ -32,11 +32,17 @@
             <h1>Find en ledig tid</h1>
         </header>
 
-        <section class="booking-form">
+        <section class="booking-form1">
             <div class="first-form">
                 <div class="date-picker">
-                    <label for="datepicker">Dato & tid</label>
-                    <input type="text" id="datepicker" class="fields" placeholder="Vælg dato & tid">
+                    <div>
+                        <label for="datepicker">Dato</label>
+                        <input type="text" name="datepicker" id="datepicker" class="fields" placeholder="Dato">
+                    </div>
+                    <div>
+                        <label for="timepicker">Klokkeslet</label>
+                        <input type="text" name="timepicker" id="timepicker" class="fields" placeholder="Klokkeslæt">
+                    </div>
                 </div>
                 <div class="selected-services">
                     <label for="add_services">Valgte services:</label>
@@ -45,10 +51,6 @@
                     </div>
                     <select name="add_services" id="add_services" class="fields">
                         <option value="default" >Vælg service</option>
-                        <option value="Brudpakke 1 - 90 min" >Brudpakke 1</option>
-                        <option value="Brudpakke 2 - 180 min">Brudpakke 2</option>
-                        <option value="Aften makeup - 90 min">Aften makeup</option>
-                        <option value="Halloween makeup - 110 min">Halloween makeup</option>
                     </select>
                 </div>
 

@@ -1,3 +1,6 @@
+const datePicker = document.getElementById('datepicker');
+const timePicker = document.getElementById('timepicker');
+
 function getWeekNumber(date = new Date()) {
     //86.400.000 ms = 1 dag
     date.setHours(0, 0, 0, 0);
@@ -11,7 +14,6 @@ function getWeekNumber(date = new Date()) {
     // Beregner uge nummer + 1 da uger ikke starter på 0
     return diff_in_days / 7 + 1;
 }
-
 function getWeekDates(date = new Date()) {
     date.setHours(0, 0, 0, 0);
     // ISO: Mandag = 0, Søndag = 6
@@ -29,23 +31,28 @@ function getWeekDates(date = new Date()) {
 }
 
 function renderWeek(date, setDatePicker = true) {
-    const datePicker = document.getElementById('datepicker');
 
     if(setDatePicker) {
         const oneDayAhead = new Date(date);
         oneDayAhead.setDate(oneDayAhead.getDate() + 1);
         oneDayAhead.setHours(13, 0, 0, 0);
-        const fp = flatpickr(datePicker, {
+        const fpdate = flatpickr(datePicker, {
+            locale: "da",
+            dateFormat: "d-m-Y",
+            weekNumbers: true,
+            minDate: "today",
+        });
+        fpdate.setDate(oneDayAhead);
+        const fpTime = flatpickr(timePicker, {
             locale: "da",
             enableTime: true,
-            dateFormat: "d-m-Y H:i",
+            noCalendar: true,
+            dateFormat: "H:i",
             time_24hr: true,
-            minDate: "today",
             minTime: "08:00",
             maxTime: "17:00",
-            weekNumbers: true,
         });
-        fp.setDate(oneDayAhead);
+        fpTime.setDate(oneDayAhead);
     }
 
     const yourTime = document.querySelector('.your-booking');
@@ -62,26 +69,30 @@ function renderWeek(date, setDatePicker = true) {
 function addService(service) {
     const selectedServices = document.getElementById('selected_services_list');
     const newService = document.createElement('div');
+    newService.classList.add('serviceitem');
     selectedServices.appendChild(newService);
-    
-    const value = service.split(' - ');
-    span1 = document.createElement('span');
-    span1.classList.add('service');
-    span1.textContent = value[0];
-    newService.appendChild(span1);
-    span2 = document.createElement('span');
-    span2.classList.add('time');
-    span2.textContent = value[1];
-    newService.appendChild(span2);
-    span3 = document.createElement('span');
-    span3.innerHTML = '<svg width="17" height="17" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg"><path d="M5.33887 14.7065C4.9722 14.7065 4.65831 14.576 4.3972 14.3149C4.13609 14.0538 4.00553 13.7399 4.00553 13.3732V4.70654H3.33887V3.37321H6.6722V2.70654H10.6722V3.37321H14.0055V4.70654H13.3389V13.3732C13.3389 13.7399 13.2083 14.0538 12.9472 14.3149C12.6861 14.576 12.3722 14.7065 12.0055 14.7065H5.33887ZM12.0055 4.70654H5.33887V13.3732H12.0055V4.70654ZM6.6722 12.0399H8.00553V6.03988H6.6722V12.0399ZM9.33887 12.0399H10.6722V6.03988H9.33887V12.0399Z"/></svg>';
-    span3.addEventListener('click', () => {
-        newService.remove();
-        addYourTimeKaldender(-Number(value[1].split(' ')[0]));
-    })
-    newService.appendChild(span3);
 
-    addYourTimeKaldender(Number(value[1].split(' ')[0]));
+    const service_label = service.split('%')[0];
+    const service_duration = Number(service.split('%')[1]);
+    const service_price = service.split('%')[2];
+    const service_price_formated = Number(service_price).toLocaleString('de-DE');
+    const service_andtal_personer = Number(service.split('%')[3]);
+    const service_andtal_personer_formated = service_andtal_personer <= 1 ? service_andtal_personer + ' person' : service_andtal_personer + ' personer';
+    const service_inkl = service.split('%')[4];
+
+    const icon = document.createElement('span');
+    icon.innerHTML = '<svg width="20" height="20" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg"><path d="M5.33887 14.7065C4.9722 14.7065 4.65831 14.576 4.3972 14.3149C4.13609 14.0538 4.00553 13.7399 4.00553 13.3732V4.70654H3.33887V3.37321H6.6722V2.70654H10.6722V3.37321H14.0055V4.70654H13.3389V13.3732C13.3389 13.7399 13.2083 14.0538 12.9472 14.3149C12.6861 14.576 12.3722 14.7065 12.0055 14.7065H5.33887ZM12.0055 4.70654H5.33887V13.3732H12.0055V4.70654ZM6.6722 12.0399H8.00553V6.03988H6.6722V12.0399ZM9.33887 12.0399H10.6722V6.03988H9.33887V12.0399Z"/></svg>';
+    icon.addEventListener('click', () => {
+        newService.remove();
+        addYourTimeKaldender(-service_duration);
+    })
+    
+    newService.innerHTML = '<div class="service-top"><span class="service">' + service_label + '</span><span class="price">' + service_price_formated + ' Kr.</span></div><div class="service-bottom"><div class="genneral-info"><span>Servicen gælder ' + service_andtal_personer_formated + '</span><span>Inkl. ' + service_inkl + '</span></div> <div><span class="duration">' + service_duration + ' min</span></div></div>';
+
+    const serviceTop = newService.querySelector('.service-top');
+    serviceTop.appendChild(icon);
+
+    addYourTimeKaldender(service_duration);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -89,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
     prevArrow.classList.add('arrow-disabled');
     const nextArrow = document.getElementById('next_week');
     let currentDate = new Date();
-    const datePicker = document.getElementById('datepicker');
     const servicePicker = document.getElementById('add_services');
 
     renderWeek(currentDate);
+    renderServiceOptions();
     nextArrow.addEventListener('click', () => {
         if(prevArrow.classList.contains('arrow-disabled')) prevArrow.classList.remove('arrow-disabled');
         currentDate.setDate(currentDate.getDate() + 7);
@@ -106,8 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         renderWeek(currentDate);
     });
+    timePicker.addEventListener('change', () => {
+        const selectedDate = new Date(stringToDateObject(datePicker.value + " " + timePicker.value));
+        currentDate = selectedDate;
+        renderWeek(currentDate, false);
+    })
     datePicker.addEventListener('change', () => {
-        const selectedDate = new Date(stringToDateObject(datePicker.value));
+        const selectedDate = new Date(stringToDateObject(datePicker.value + " " + timePicker.value));
         currentDate = selectedDate;
         renderWeek(currentDate, false);
     });
@@ -140,14 +156,13 @@ function stringToDateObject(dateStr) {
 
 var TotalTimeOfYourBooking = 0;
 function addYourTimeKaldender(time){
-    const datePicker = document.getElementById('datepicker');
     TotalTimeOfYourBooking += time;
-    const dateName = stringToDateObject(datePicker.value).toLocaleDateString("en-US", { weekday: "long" });
+    const dateName = stringToDateObject(datePicker.value + " " + timePicker.value).toLocaleDateString("en-US", { weekday: "long" });
     const yourTime = document.querySelector('.your-booking');
     if(yourTime){
         yourTime.remove();
     }
-    addTimeToKaldender(dateName.toLocaleLowerCase(), datePicker.value.split(' ')[1], TotalTimeOfYourBooking, true);
+    addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking, true);
 }
 
 /**
@@ -179,22 +194,41 @@ function addTimeToKaldender(day, strattime, lenght, yourBokking = false){
 function getSelectedServices(){
     const selectedServices = {};
 
-    selectedServices['datetime'] = document.getElementById('datepicker').value;
+    selectedServices['datetime'] = datePicker.value + ' ' + timePicker.value;
+    var totalPrice = 0;
 
     selectedServices['services'] = [];
-    document.querySelectorAll('#selected_services_list div').forEach((service, index) => {
+    document.querySelectorAll('#selected_services_list .serviceitem').forEach((service, index) => {
         const name = service.querySelector('.service').textContent;
-        const time = Number(service.querySelector('.time').textContent.split(' ')[0]);
+        const time = Number(service.querySelector('.duration').textContent.split(' ')[0]);
+        const price = Number(service.querySelector('.price').textContent.replace('.', '').split(' ')[0]);
         const serviceObject = {};
         serviceObject['service' + index] = name;
         serviceObject['tid' + index] = time;
+        serviceObject['pris' + index] = price;
+        totalPrice += price;
 
         selectedServices['services'].push(serviceObject);
     });
     selectedServices['totalTime'] = TotalTimeOfYourBooking;
+    selectedServices['totalPrice'] = totalPrice;
     return selectedServices;
 }
 
 function validateBooking(){
     return true;
+}
+
+function renderServiceOptions(){
+    const selector = document.getElementById("add_services");
+    const services = fetch('pakker.json').then(response => response.json());
+
+    services.then((data) => {
+        data.forEach(service => {
+            const option = document.createElement('option');
+            option.value = service.label + '%' + service.duration + '%' + service.price + '%' + service.andtal_personer + '%' + service.inkl;
+            option.textContent = service.label;
+            selector.appendChild(option);
+        });
+    });
 }
