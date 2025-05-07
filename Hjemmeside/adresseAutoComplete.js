@@ -7,28 +7,35 @@ const apiKey = '4185f197618f4737856f9e0180d5dcc0';
 input.addEventListener('input', async () => {
   const query = input.value;
   if (query.length < 5) return;
-  const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(query)}&lang=da&filter=countrycode:dk&limit=5&types=house&apiKey=${apiKey}`;
+  const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=en&limit=5&type=street&filter=countrycode:auto&format=json&apiKey=${apiKey}`;
+
 
   const res = await fetch(url);
   const data = await res.json();
   console.log(data);
 
-  // Clear old suggestions
   suggestionsList.innerHTML = '';
 
-  // Show new suggestions
-  data.features.forEach(place => {
+  data.results.forEach(place => {
     const li = document.createElement('li');
-    li.textContent = place.properties.formatted;
+    li.textContent = place.formatted;
     li.addEventListener('click', () => {
-      input.value = place.properties.formatted;
+      input.value = place.address_line1;
       suggestionsList.innerHTML = '';
-      autocompletePostalCode.value = place.properties.postcode;
-      autocompleteBy.value = place.properties.country;
+      autocompletePostalCode.value = place.postcode;
+      autocompleteBy.value = place.country;
     });
     suggestionsList.appendChild(li);
   });
   window.addEventListener('click', () => {
     suggestionsList.innerHTML = '';
   });
+  document.querySelectorAll('.check_if_autocompleted').forEach((input, index) => {
+    input.addEventListener('blur', () => {
+      if(input.value.includes(" ")) {
+        document.querySelectorAll('.houseNumber')[index].value = input.value.split(' ')[1];
+        input.value = input.value.split(' ')[0];
+      }
+    });
+  })
 });

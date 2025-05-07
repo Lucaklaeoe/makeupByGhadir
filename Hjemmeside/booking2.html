@@ -36,17 +36,18 @@
                 <div>
                     <div class="adresse-writer">
                         <label for="Adresse">Adresser:</label>
-                        <input type="text" class="fields" name="Adresse" id="autocomplete-adresse" placeholder="Adresse" autocomplete="street-address"> 
-                        <input type="text" class="fields" name="Husnummer" placeholder="Husnummer" autocomplete="address-line2">
+                        <input type="text" class="fields check_if_autocompleted" name="Adresse" id="autocomplete-adresse" placeholder="Adresse" autocomplete="street-address"> 
+                        <input type="text" class="fields houseNumber" name="Husnummer" placeholder="Husnummer" autocomplete="address-line2">
                         <ul id="autocomplete-suggestions"></ul>
                         <input type="text" class="fields" name="postal-code" id="autocomplete-postal-code" placeholder="Postnummer" autocomplete="postal-code">
                         <input type="text" class="fields" name="By" id="autocomplete-by" placeholder="By" autocomplete="address-level2">
                     </div>
                     <div class="adresse-writer2">
-                        <input type="text" class="fields" name="Udkørlses-Adresse" placeholder="Udkørlses-Adresse"> 
-                        <input type="text" class="fields" name="Udkørlses-Husnummer" placeholder="Udkørlses-Husnummer">
+                        <label for="Adresse">Udkørlses-Adresser:</label>
+                        <input type="text" class="fields check_if_autocompleted" name="Udkørlses-Adresse" placeholder="Udkørlses-Adresse"> 
+                        <input type="text" class="fields houseNumber" name="Udkørlses-Husnummer" placeholder="Udkørlses-Husnummer">
                         <input type="text" class="fields" name="Udkørlses-postal-code" placeholder="Udkørlses-Postnummer">
-                        <input type="text" class="fields" name="UdkørlsesBy" placeholder="Udkørlses-By">
+                        <input type="text" class="fields" name="By" placeholder="Udkørlses-By" autocomplete="address-level2">
                     </div>
                 </div>
 
