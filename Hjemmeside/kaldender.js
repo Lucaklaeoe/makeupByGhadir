@@ -60,6 +60,12 @@ function renderWeek(date, setDatePicker = true) {
         addYourTimeKaldender(0)
     }
 
+    if(document.getElementById('week').textContent.replace('Uge ', '') != getWeekNumber(date)) {
+        document.querySelectorAll('.booking-time').forEach(time => {
+            time.remove();
+        })
+        insertAllreadyBookedBookings(date);
+    }
     document.getElementById('week').textContent = "Uge " + getWeekNumber(date);
     
     getWeekDates(date).forEach((day, index) => {
@@ -71,7 +77,7 @@ function addService(service) {
     const newService = document.createElement('div');
     newService.classList.add('serviceitem');
     selectedServices.appendChild(newService);
-
+ 
     const service_label = service.split('%')[0];
     const service_duration = Number(service.split('%')[1]);
     const service_price = service.split('%')[2];
@@ -137,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const go_to_booking = document.getElementById('go_to_booking');
     go_to_booking.addEventListener('click', (event) => {
         event.preventDefault();
-        if(validateBooking()){
+        if(validateBooking(currentDate)){
             localStorage.setItem('selectedservices', JSON.stringify(getSelectedServices()));
             window.location = "booking2.html";
         }
@@ -193,8 +199,7 @@ function addTimeToKaldender(day, strattime, lenght, yourBokking = false){
 
 function getSelectedServices(){
     const selectedServices = {};
-
-    selectedServices['datetime'] = datePicker.value + ' ' + timePicker.value;
+    selectedServices['datetime'] = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString();
     var totalPrice = 0;
 
     selectedServices['services'] = [];
@@ -215,9 +220,43 @@ function getSelectedServices(){
     return selectedServices;
 }
 
+//DOES NOT WORK RIGHT NOW
+var supabaseData = [];
 function validateBooking(){
-    return true;
+    if(!supabaseData) return true;
+    console.log(supabaseData);
+        // duration: 270
+        // start_time: "2025-05-09T11:00:00"
+
+    function Time1IsHighers(time1, time2){
+        time1 = time1.split(':');
+        time2 = time2.split(':');
+        if(Number(time1[0]) > Number(time2[0])) return true;
+        if(Number(time1[1]) > Number(time2[1]) && Number(time1[0]) == Number(time2[0])) return true;
+        return false;
+    }
+
+    var somethingIsBooked = false;
+    supabaseData.forEach(element => {
+        const date = element.start_time.split('T')[0];
+        const starttime = element.start_time.split('T')[1].slice(0, -3);
+        const minutes = element.duration % 60;
+        const hours = Math.floor(element.duration / 60) + Math.floor((Number(starttime.split(':')[1]) + minutes) / 60);
+        const endtime = (Number(starttime.split(':')[0]) + hours) + ':' + ((Number(starttime.split(':')[1]) + minutes) % 60);
+        const yourEndtime = (Number(timePicker.value.split(':')[0]) + TotalTimeOfYourBooking / 60) + ':' + ((Number(timePicker.value.split(':')[1]) + TotalTimeOfYourBooking) % 60);
+
+        if(date == stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString().split('T')[0]){
+            console.log("yes")
+            //console.log(Time1IsHighers(timePicker.value, yourEndtime), Time1IsHighers(starttime, yourEndtime));
+            if(!Time1IsHighers(timePicker.value, yourEndtime) || !Time1IsHighers(starttime, yourEndtime)){
+                somethingIsBooked = true;
+            };
+        }
+    });
+    return !somethingIsBooked;
 }
+//DOES NOT WORK RIGHT NOW
+
 
 function renderServiceOptions(){
     const selector = document.getElementById("add_services");
@@ -231,4 +270,72 @@ function renderServiceOptions(){
             selector.appendChild(option);
         });
     });
+}
+
+async function insertAllreadyBookedBookings(currentDate) {
+    supabaseData = [];
+    function getNextSunday(date = new Date()) {
+        const daysUntilSunday = (7 - date.getDay()) % 7;
+        date.setDate(date.getDate() + daysUntilSunday);
+        date.setHours(23, 59, 59, 999);
+        return date.toISOString();
+    }
+    
+    function getPreviousMonday(date = new Date()) {
+        const day = date.getDay();
+        const daysSinceMonday = (day + 6) % 7;
+        date.setDate(date.getDate() - daysSinceMonday + 1);
+        date.setHours(0, 0, 0, 0);
+        return date.toISOString();
+    }
+
+    const {access_token} = await signIn();    
+    const requestBookingResponse = await fetch(`${supabaseUrl}/rest/v1/requestBooking?start_time=gte.${getPreviousMonday(currentDate)}&start_time=lte.${getNextSunday(currentDate)}&select=start_time,duration`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${access_token}`,
+          'Prefer': 'return=representation'
+        },
+    });
+
+    const requestBookingData = await requestBookingResponse.json();
+
+    if (requestBookingResponse.ok) {
+        requestBookingData.forEach((item) => {
+            const day = new Date(item.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
+            const start_time = item.start_time.split('T')[1].slice(0, -3);
+            const duration = item.duration;
+            supabaseData
+            supabaseData.push(item);
+            addTimeToKaldender(day, start_time, duration);
+        })
+    } else {
+        console.error('Fetch failed:', requestBookingData);
+    }
+
+    const acceptedBookingResponse = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking?start_time=gte.${getPreviousMonday(currentDate)}&start_time=lte.${getNextSunday(currentDate)}&select=start_time,duration`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${access_token}`,
+          'Prefer': 'return=representation'
+        },
+    });
+
+    const acceptedBookingData = await acceptedBookingResponse.json();
+
+    if (acceptedBookingResponse.ok) {
+        acceptedBookingData.forEach((item) => {
+            const day = new Date(item.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
+            const start_time = item.start_time.split('T')[1].slice(0, -3);
+            const duration = item.duration;
+            supabaseData.push(item);
+            addTimeToKaldender(day, start_time, duration);
+        })
+    } else {
+        console.error('Fetch failed:', acceptedBookingData);
+    }
 }
