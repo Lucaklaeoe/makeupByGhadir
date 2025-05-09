@@ -33,7 +33,9 @@ function getWeekDates(date = new Date()) {
 function renderWeek(date, setDatePicker = true) {
 
     if(setDatePicker) {
-        const oneDayAhead = new Date(date);
+        const oneDayAhead = new Date(date) <= new Date() ? new Date() : new Date(date);
+        //failsafe if it's sunday and tries to get monday from next week
+        if(oneDayAhead.toLocaleString('en', { weekday: 'long' }).toLowerCase() == 'sunday') oneDayAhead.setDate(oneDayAhead.getDate() - 1);
         oneDayAhead.setDate(oneDayAhead.getDate() + 1);
         oneDayAhead.setHours(13, 0, 0, 0);
         const fpdate = flatpickr(datePicker, {
@@ -42,7 +44,7 @@ function renderWeek(date, setDatePicker = true) {
             weekNumbers: true,
             minDate: "today",
         });
-        fpdate.setDate(oneDayAhead);
+        fpdate.setDate(oneDayAhead, true);
         const fpTime = flatpickr(timePicker, {
             locale: "da",
             enableTime: true,
@@ -52,16 +54,17 @@ function renderWeek(date, setDatePicker = true) {
             minTime: "08:00",
             maxTime: "17:00",
         });
-        fpTime.setDate(oneDayAhead);
+        fpTime.setDate(oneDayAhead, true);
     }
 
     const yourTime = document.querySelector('.your-booking');
     if(yourTime){
         addYourTimeKaldender(0)
     }
-
+    
     if(document.getElementById('week').textContent.replace('Uge ', '') != getWeekNumber(date)) {
         document.querySelectorAll('.booking-time').forEach(time => {
+            if(time.classList.contains('your-booking')) return;
             time.remove();
         })
         insertAllreadyBookedBookings(date);
@@ -143,12 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const go_to_booking = document.getElementById('go_to_booking');
     go_to_booking.addEventListener('click', (event) => {
         event.preventDefault();
-        if(validateBooking(currentDate)){
+        if(validateBooking()){
             localStorage.setItem('selectedservices', JSON.stringify(getSelectedServices()));
             window.location = "booking2.html";
-        }
-        else{
-            alert("Denne tid eller noget af denne tid er allerede booket");
         }
     })
 })
@@ -220,42 +220,51 @@ function getSelectedServices(){
     return selectedServices;
 }
 
-//DOES NOT WORK RIGHT NOW
 var supabaseData = [];
-function validateBooking(){
-    if(!supabaseData) return true;
-    console.log(supabaseData);
-        // duration: 270
-        // start_time: "2025-05-09T11:00:00"
+function validateBooking() {
+    if (!supabaseData) return true;
 
-    function Time1IsHighers(time1, time2){
-        time1 = time1.split(':');
-        time2 = time2.split(':');
-        if(Number(time1[0]) > Number(time2[0])) return true;
-        if(Number(time1[1]) > Number(time2[1]) && Number(time1[0]) == Number(time2[0])) return true;
-        return false;
+    function timeToMinutes(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        return hours * 60 + minutes;
     }
 
-    var somethingIsBooked = false;
-    supabaseData.forEach(element => {
-        const date = element.start_time.split('T')[0];
-        const starttime = element.start_time.split('T')[1].slice(0, -3);
-        const minutes = element.duration % 60;
-        const hours = Math.floor(element.duration / 60) + Math.floor((Number(starttime.split(':')[1]) + minutes) / 60);
-        const endtime = (Number(starttime.split(':')[0]) + hours) + ':' + ((Number(starttime.split(':')[1]) + minutes) % 60);
-        const yourEndtime = (Number(timePicker.value.split(':')[0]) + TotalTimeOfYourBooking / 60) + ':' + ((Number(timePicker.value.split(':')[1]) + TotalTimeOfYourBooking) % 60);
+    function doTimesOverlap(start1, end1, start2, end2) {
+        return start1 < end2 && start2 < end1;
+    }
 
-        if(date == stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString().split('T')[0]){
-            console.log("yes")
-            //console.log(Time1IsHighers(timePicker.value, yourEndtime), Time1IsHighers(starttime, yourEndtime));
-            if(!Time1IsHighers(timePicker.value, yourEndtime) || !Time1IsHighers(starttime, yourEndtime)){
-                somethingIsBooked = true;
-            };
+    const selectedDate = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString().split('T')[0];
+    const yourStartMinutes = timeToMinutes(timePicker.value);
+    const yourEndMinutes = yourStartMinutes + TotalTimeOfYourBooking;
+    if(yourEndMinutes >= ((17 * 60) + 1)) {
+        alert('Din tid er ude for kaldender');
+        return false;
+    }
+    if(TotalTimeOfYourBooking <= 0){
+        alert('Vælg venligst en service');
+        return false;
+    }
+    let somethingIsBooked = false;
+
+    supabaseData.forEach(element => {
+        const bookingDate = element.start_time.split('T')[0];
+        if (bookingDate !== selectedDate) return;
+
+        const startTime = element.start_time.split('T')[1].slice(0, 5);
+        const bookingStartMinutes = timeToMinutes(startTime);
+        const bookingEndMinutes = bookingStartMinutes + element.duration;
+
+        // CurrentBooking in minutes , CurrentBooking in minutes + duration --- Booking in minutes, Booking in minutes + duration
+        if (doTimesOverlap(yourStartMinutes, yourEndMinutes, bookingStartMinutes, bookingEndMinutes)) {
+            somethingIsBooked = true;
+            alert('Denne tid eller noget af denne tid er allerede booket');
         }
     });
+
+    //return true if 
     return !somethingIsBooked;
 }
-//DOES NOT WORK RIGHT NOW
+
 
 
 function renderServiceOptions(){

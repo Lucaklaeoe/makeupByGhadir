@@ -8,8 +8,6 @@ input.addEventListener('input', async () => {
   const query = input.value;
   if (query.length < 5) return;
   const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=en&limit=5&type=street&filter=countrycode:auto&format=json&apiKey=${apiKey}`;
-
-
   const res = await fetch(url);
   const data = await res.json();
 
