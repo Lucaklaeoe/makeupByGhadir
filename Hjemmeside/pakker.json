@@ -1,31 +1,95 @@
 [
+   
     {
-      "label": "Brudpakke 1",
+      "label": "Aften makeup",
+      "duration": 70,
+      "price": 1100,
+      "andtal_personer": 1,
+      "inkl": "makeup"
+    },
+      {
+      "label": "Konfirmations makeup",
+      "duration": 70,
+      "price": 1100,
+      "andtal_personer": 1,
+      "inkl": "makeup"
+    },
+      {
+      "label": "Event makeup ",
       "duration": 90,
-      "price": 500,
+      "price": 1200,
       "andtal_personer": 1,
       "inkl": "makeup"
     },
     {
-      "label": "Brudpakke 2",
-      "duration": 180,
-      "price": 1000,
-      "andtal_personer": 1,
-      "inkl": "makeup, hår"
-    },
-    {
-      "label": "Aften makeup",
-      "duration": 90,
-      "price": 250,
-      "andtal_personer": 1,
-      "inkl": "makeup, hår og prøvestyling"
-    },
-    {
       "label": "Halloween makeup",
-      "duration": 110,
+      "duration": 90,
+      "price": 1300,
+      "andtal_personer": 1,
+      "inkl": "makeup"
+    },
+    {
+      "label": "Håropsætning",
+      "duration": 70,
+      "price": 900,
+      "andtal_personer": 1,
+      "inkl": "håropsætning"
+    },
+    {
+      "label": "Påsætning af extentions",
+      "duration": 0,
+      "price": 100,
+      "andtal_personer": 1,
+      "inkl": ""
+    },
+      {
+      "label": "Brudemakeup",
+      "duration": 90,
       "price": 2000,
       "andtal_personer": 1,
-      "inkl": "makeup, cool photoshoot"
+      "inkl": "makeup"
+    },
+      {
+      "label": "Brudehårstyling",
+      "duration": 90,
+      "price": 2000,
+      "andtal_personer": 1,
+      "inkl": "håropsætning"
+    },
+      {
+      "label": "Prøvemakeup",
+      "duration": 90,
+      "price": 1800,
+      "andtal_personer": 1,
+      "inkl": "prøvemakeup"
+    },
+      {
+      "label": "Prøvehårstyling 1",
+      "duration": 90,
+      "price": 1800,
+      "andtal_personer": 1,
+      "inkl": "prøvehårstyling"
+    },
+      {
+      "label": "Brudepakke 1",
+      "duration": 90,
+      "price": 7600,
+      "andtal_personer": 1,
+      "inkl": "makeup, håropsætning, prøvemakeup, prøvehårstyling"
+    },
+      {
+      "label": "Brudepakke 2",
+      "duration": 90,
+      "price": 7600,
+      "andtal_personer": 1,
+      "inkl": "makeup, håropsætning"
+    },
+    {
+      "label": "Udkørsel",
+      "duration": 0,
+      "price": 700,
+      "andtal_personer": 1,
+      "inkl": "gælder hele Sjælland"
     }
   ]
   
