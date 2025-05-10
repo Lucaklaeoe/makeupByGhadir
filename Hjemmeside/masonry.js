@@ -2,7 +2,7 @@ const column_heights = {};
 function makeMasonry() {
     if(document.querySelector('.galleri-images')){
         const masonry = document.querySelector('.galleri-images');
-        const columns = getComputedStyle(masonry).getPropertyValue('--columns');
+        const columns = getComputedStyle(masonry).getPropertyValue('--columns') || 3;
         const images = masonry.querySelectorAll('img');
         //console.log(images);
         for (let i = 0; i < columns; i++) {
