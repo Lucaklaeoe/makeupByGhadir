@@ -26,50 +26,54 @@
     </nav>
     <main>
         <header>
-            <h1>Giv os dine oplysninger!</h1>
+            <h1>Kontakt oplysninger</h1>
+            <p>Sidste trin: Udfyld formularen, så jeg kan bekræfte din booking og kontakte dig.</p>
         </header>
 
         <section>
             <form action="Make booking" class="booking-form-2">
-                <input type="text" class="fields check_if_adress_autocompleted" id="fullname" name="Fulde navn" placeholder="Fulde navn" autocomplete="name" required>
+                <div>
+                    <label for="Fulde navn">Dit fulde navn</label>
+                    <input type="text" class="fields check_if_adress_autocompleted" id="fullname" name="Fulde navn" placeholder="Fulde navn *" autocomplete="name" required>
+                </div>
 
                 <div>
                     <div class="adresse-writer">
-                        <label for="Adresse">Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" name="street-name" id="autocomplete_adresse" placeholder="Adresse" autocomplete="street-address" required> 
-                        <input type="text" class="fields houseNumber" name="house-number" id="autocomplete_house_number" placeholder="Husnummer" autocomplete="address-line2" required>
+                        <label for="Adresse">Din adresse</label>
+                        <input type="text" class="fields check_if_autocompleted" name="street-name" id="autocomplete_adresse" placeholder="Vejnavn *" autocomplete="street-address" required> 
+                        <input type="text" class="fields houseNumber" name="house-number" id="autocomplete_house_number" placeholder="Nr. *" autocomplete="address-line2" required>
                         <ul id="autocomplete_suggestions"></ul>
-                        <input type="text" class="fields" name="Postal-code" id="autocomplete_postal_code" placeholder="Postnummer" autocomplete="postal-code" required>
-                        <input type="text" class="fields" name="By" id="autocomplete_by" placeholder="By" autocomplete="address-level2" required>
+                        <input type="text" class="fields" name="Postal-code" id="autocomplete_postal_code" placeholder="Postnummer *" autocomplete="postal-code" required>
+                        <input type="text" class="fields" name="By" id="autocomplete_by" placeholder="By *" autocomplete="address-level2" required>
                     </div>
                     <div class="adresse-writer2">
-                        <label for="Adresse">Udkørlses-Adresser:</label>
-                        <input type="text" class="fields check_if_autocompleted" id="ud_adress" name="Udkørlses-street-name" placeholder="Adresse" autocomplete="street-address"> 
-                        <input type="text" class="fields houseNumber" id="ud_husnummer" name="Udkørlses-house-number" placeholder="Husnummer" autocomplete="address-line2">
+                        <label for="Adresse">Adresse til udkørsel</label>
+                        <input type="text" class="fields check_if_autocompleted" id="ud_adress" name="Udkørlses-street-name" placeholder="Vejnavn" autocomplete="street-address"> 
+                        <input type="text" class="fields houseNumber" id="ud_husnummer" name="Udkørlses-house-number" placeholder="Nr." autocomplete="address-line2">
                         <input type="text" class="fields" id="ud_postal_code" name="Udkørlses-postal-code" placeholder="Postnummer" autocomplete="postal-code">
                         <input type="text" class="fields" id="ud_by" name="By" placeholder="By" autocomplete="address-level2">
                     </div>
                 </div>
 
                 <div>
-                    <label for="email">Kontaktinformation:</label>
-                    <input type="email" class="fields" id="email" name="email" placeholder="E-mail" autocomplete="email" required>
-                    <input type="number" class="fields" id="tlf" name="Telefon nummer" placeholder="Telefon nummer" autocomplete="tel" required>
+                    <label for="email">Kontakt</label>
+                    <input type="email" class="fields" id="email" name="email" placeholder="E-mail *" autocomplete="email" required>
+                    <input type="number" class="fields" id="tlf" name="Telefon nummer" placeholder="Telefon nummer *" autocomplete="tel" required>
                 </div>
 
                 <div>
-                    <label for="Kommentare">Kommentare:</label>
+                    <label for="Kommentare">Kommentare</label>
                     <textarea name="Kommentare" class="fields" id="message" placeholder="Har du allergier, en hårtype jeg skal tage hensyn til eller andet."></textarea>
                 </div>
 
                 <div class="checkbox">
                     <input type="checkbox" name="sammentygge" id="sammentygge" required>
-                    <label for="sammentygge">Jeg giver samtykke til at Ghadir må bruge mit kort til uendelig biografbesøg</label>
+                    <label for="sammentygge">Jeg giver samtykke til, at mine indtastede oplysninger må behandles og gemmes i overensstemmelse med gældende databeskyttelseslovgivning *</label>
                 </div>
 
                 <div class="actions">
-                    <input type="submit" id="make_booking" class="fields" value="Send">
-                    <button type="button" class="fields">Annuller</button>
+                    <input type="submit" id="make_booking" class="fields primary-button disabled" value="Indsend">
+                    <button type="button" class="fields secundary-button">Annuller</button>
                 </div>
 
             </form>
@@ -77,7 +81,7 @@
     </main>
     
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script src="min/adresseAutoComplete.min.js"></script>
+    <script src="javascript/min/adresseAutoComplete.min.js"></script>
     <script src="javascript/min/script.min.js"></script>
     <script src="javascript/min/signInSupabase.min.js"></script>
     <script src="javascript/min/makeBookings.min.js"></script>

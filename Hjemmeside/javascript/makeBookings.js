@@ -1,5 +1,37 @@
 var BookingInfo = {};
 
+document.addEventListener('DOMContentLoaded', () => {
+    const requiredFields = document.querySelectorAll('[required]');
+    requiredFields.forEach(field => {
+        field.addEventListener('blur', (event) => {
+            event.preventDefault();
+            if(formIsFilled()){
+                const submitButton = document.getElementById("make_booking");
+                submitButton.classList.remove('disabled');
+            }
+            else {
+                const submitButton = document.getElementById("make_booking");
+                if(submitButton.classList.contains('disabled')) return;
+                submitButton.classList.add('disabled');
+            }
+        })
+    })
+
+    const sammentygge = document.getElementById("sammentygge");
+    sammentygge.addEventListener('change', (event) => {
+        event.preventDefault();
+        if(formIsFilled()){
+            const submitButton = document.getElementById("make_booking");
+            submitButton.classList.remove('disabled');
+        }
+        else {
+            const submitButton = document.getElementById("make_booking");
+            if(submitButton.classList.contains('disabled')) return;
+            submitButton.classList.add('disabled');
+        }
+    })
+})
+
 async function makeRequestBooking() {
     const {access_token} = await signIn();
 
@@ -29,9 +61,22 @@ async function makeRequestBooking() {
   }
 }
 
-function fillFormAndCheck(){
+function formIsFilled() {
     const requiredFields = document.querySelectorAll('[required]');
+    var return_this = true;
+    requiredFields.forEach(field => {
+        if(field.value.trim() == '' || field.value == null || field.value == undefined) {
+            return_this = false;
+        }
+    });
+    const sammentygge = document.getElementById("sammentygge");
+    if(!sammentygge.checked) return_this = false;
+    return return_this;
+}
+
+function fillFormAndCheck(giveMessage = true) {
     BookingInfo = {};
+    const requiredFields = document.querySelectorAll('[required]');
     requiredFields.forEach(field => {
         if(field.value.trim() == '' || field.value == null || field.value == undefined) {
             field.classList.add('not-filled');
@@ -44,13 +89,15 @@ function fillFormAndCheck(){
         }
     });
 
+    const sammentygge = document.getElementById("sammentygge");
+    if(!sammentygge.checked) return false;
+
     if(document.querySelector('.not-filled')) return false;
 
     const selectedServices = JSON.parse(localStorage.getItem('selectedservices'));
-    console.log(selectedServices);
 
     if(!selectedServices){
-        alert('Du mangler at vælge en service');
+        if(giveMessage) alert('Du mangler at vælge en service');
         window.location = 'booking.html';
         return false;
     }

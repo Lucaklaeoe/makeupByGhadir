@@ -75,6 +75,18 @@ function renderWeek(date, setDatePicker = true) {
     getWeekDates(date).forEach((day, index) => {
         document.getElementById('date' + index).textContent = day;
     })
+
+    if(validateBooking(false)){
+        const submitButton = document.querySelectorAll(".go_to_booking");
+        submitButton.forEach(submitButton => submitButton.classList.remove('disabled'));
+    }
+    else {
+        const submitButton = document.querySelectorAll(".go_to_booking");
+        submitButton.forEach(submitButton => {
+            if(submitButton.classList.contains('disabled')) return;
+            submitButton.classList.add('disabled');
+        });
+    }
 }
 function addService(service) {
     const selectedServices = document.getElementById('selected_services_list');
@@ -171,7 +183,12 @@ function addYourTimeKaldender(time){
     if(yourTime){
         yourTime.remove();
     }
-    addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking + GhadirPause, true);
+    if(TotalTimeOfYourBooking <= 0){
+        addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking, true);
+    }
+    else{
+        addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking + GhadirPause, true);
+    }
 }
 
 /**
@@ -197,6 +214,17 @@ function addTimeToKaldender(day, strattime, lenght, yourBokking = false){
     time.style.height = (lenght / 60) * sizeRatio + 'px';
     if(lenght > 0){
         column.appendChild(time);
+    }
+    if(validateBooking(false)){
+        const submitButton = document.querySelectorAll(".go_to_booking");
+        submitButton.forEach(submitButton => submitButton.classList.remove('disabled'));
+    }
+    else {
+        const submitButton = document.querySelectorAll(".go_to_booking");
+        submitButton.forEach(submitButton => {
+            if(submitButton.classList.contains('disabled')) return;
+            submitButton.classList.add('disabled');
+        });
     }
 }
 
@@ -224,7 +252,7 @@ function getSelectedServices(){
 }
 
 var supabaseData = [];
-function validateBooking() {
+function validateBooking(giveMessage = true) {
     if (!supabaseData) return true;
 
     function timeToMinutes(timeStr) {
@@ -240,11 +268,11 @@ function validateBooking() {
     const yourStartMinutes = timeToMinutes(timePicker.value);
     const yourEndMinutes = yourStartMinutes + TotalTimeOfYourBooking;
     if(yourEndMinutes >= ((17 * 60) + 1)) {
-        alert('Din tid er ude for kaldender');
+        if(giveMessage) alert('Din tid er ude for kaldender');
         return false;
     }
     if(TotalTimeOfYourBooking <= 0){
-        alert('Vælg venligst en service');
+        if(giveMessage) alert('Vælg venligst en service');
         return false;
     }
     let somethingIsBooked = false;
@@ -260,7 +288,7 @@ function validateBooking() {
         // CurrentBooking in minutes , CurrentBooking in minutes + duration --- Booking in minutes, Booking in minutes + duration
         if (doTimesOverlap(yourStartMinutes, yourEndMinutes, bookingStartMinutes, bookingEndMinutes)) {
             somethingIsBooked = true;
-            alert('Denne tid eller noget af denne tid er allerede booket');
+            if(giveMessage) alert('Denne tid eller noget af denne tid er allerede booket');
         }
     });
 
@@ -277,7 +305,7 @@ function renderServiceOptions(){
     services.then((data) => {
         data.forEach(service => {
             const option = document.createElement('option');
-            option.value = service.label + '%' + service.duration + '%' + service.price + '%' + service.andtal_personer + '%' + service.inkl;
+            option.value = service.label + '%' + service.duration + '%' + service.price + '%' + service.antal_personer + '%' + service.inkl;
             option.textContent = service.label;
             selector.appendChild(option);
         });
