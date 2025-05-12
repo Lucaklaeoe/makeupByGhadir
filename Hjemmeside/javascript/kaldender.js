@@ -1,5 +1,6 @@
 const datePicker = document.getElementById('datepicker');
 const timePicker = document.getElementById('timepicker');
+const GhadirPause = 30;
 
 function getWeekNumber(date = new Date()) {
     //86.400.000 ms = 1 dag
@@ -143,14 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
         servicePicker.value = 'default';
     })
 
-    const go_to_booking = document.getElementById('go_to_booking');
-    go_to_booking.addEventListener('click', (event) => {
-        event.preventDefault();
-        if(validateBooking()){
-            localStorage.setItem('selectedservices', JSON.stringify(getSelectedServices()));
-            window.location = "booking2.html";
-        }
-    })
+    const go_to_booking = document.querySelectorAll('.go_to_booking');
+    go_to_booking.forEach(bookingbotton => {
+        bookingbotton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if(validateBooking()){
+                localStorage.setItem('selectedservices', JSON.stringify(getSelectedServices()));
+                window.location = "booking2.html";
+            }
+        })
+    });
 })
 
 function stringToDateObject(dateStr) {
@@ -168,7 +171,7 @@ function addYourTimeKaldender(time){
     if(yourTime){
         yourTime.remove();
     }
-    addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking, true);
+    addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking + GhadirPause, true);
 }
 
 /**
@@ -215,7 +218,7 @@ function getSelectedServices(){
 
         selectedServices['services'].push(serviceObject);
     });
-    selectedServices['totalTime'] = TotalTimeOfYourBooking;
+    selectedServices['totalTime'] = TotalTimeOfYourBooking + GhadirPause;
     selectedServices['totalPrice'] = totalPrice;
     return selectedServices;
 }

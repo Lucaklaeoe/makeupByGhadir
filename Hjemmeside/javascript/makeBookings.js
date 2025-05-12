@@ -21,9 +21,11 @@ async function makeRequestBooking() {
     const data = await response.json();
 
     if (response.ok) {
-        console.log('Row inserted:', data);
+        //console.log('Row inserted:', data);
+        window.location = 'bookingConfirmed.html';
+        sendMail();
     } else {
-        console.error('Insert failed:', data);
+        alert('Noget gik galt, prøv igen');
   }
 }
 
@@ -94,14 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-/*
-    email
-    fulde_navn 
-    tlf
-    adress
-    start_time
-    duration
-    location_for_work
-    message
-    services
-*/
+function sendMail(){
+    emailjs.init("8on1XAeHXO55DA6Tp");
+    const email_info = {
+        name: document.getElementById("fullname").value,
+        email: document.getElementById("email").value
+    };
+    emailjs.send('service_kesfnw1', 'template_h23bpoo', email_info)
+        .then(() => {
+        console.log('SUCCESS!');
+        }, (error) => {
+        console.log('FAILED...', error);
+    });
+}

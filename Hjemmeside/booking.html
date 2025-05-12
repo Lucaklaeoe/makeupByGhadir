@@ -30,6 +30,7 @@
     <main>
         <header>
             <h1>Find en ledig tid</h1>
+            <p>Find en tid der passer dig.</p>
         </header>
 
         <section class="booking-form1">
@@ -54,7 +55,7 @@
                     </select>
                 </div>
 
-                <input id="go_to_booking" type="submit" value="Book tid" class="fields">
+                <input type="submit" value="Book tid" class="fields go_to_booking desktop-only">
             </div>
             <div class="kaldender">
                 <div class="week-selector">
@@ -258,16 +259,22 @@
                     </div>
                 </div>
             </div>
+            <div class="first-form">
+                <input type="submit" value="Book tid" class="fields go_to_booking mobile-only">
+            </div>
         </section>
-
 
     </main>
 
+    <footer style="height: 100px;">
+
+    </footer>
+
     <!-- <input id="myDateInput" type="date" placeholder="Select a date"> -->
 
-    <script src="kaldender.js"></script>
-    <script src="min/script.min.js"></script>
-    <script src="min/signInSupabase.min.js"></script>
+    <script src="javascript/min/kaldender.min.js"></script>
+    <script src="javascript/min/script.min.js"></script>
+    <script src="javascript/min/signInSupabase.min.js"></script>
     <!-- DateTime pickers flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/da.js"></script>

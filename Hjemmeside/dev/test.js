@@ -48,7 +48,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
         console.log('SUCCESS!');
         }, (error) => {
         console.log('FAILED...', error);
-        });
+    });
 
         */
        

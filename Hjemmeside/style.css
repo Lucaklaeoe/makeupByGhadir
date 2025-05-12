@@ -18,6 +18,7 @@
 html, body{
     overflow-x: hidden;
     background-color: #e3e3e3;
+    background-color: #e3e3e3;
     font-family: var(--font-standard);
 }
 label{
@@ -45,7 +46,12 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 56px 0;
+    flex-direction: column;
+    padding: 56px 32px;
+    gap: 16px;
+}
+header p{
+    font-size: 16px;
 }
 p, div, li, a{
     font-size: 14px;
@@ -79,10 +85,35 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 .not-filled::placeholder{
     color: #ff0000 !important;
 }
+button, .button{
+    cursor: pointer;
+}
+.max-height{
+    height: calc(100vh - var(--header-height));
+}
+.mobile-only{
+    display: none;
+}
 @media screen and (max-width: 768px) {
     section, .max-width{
         padding: 0 24px;
     }
+    header{
+        padding: 32px 24px;
+    }
+    header h1, header p{
+        text-align: left;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1280px) {
+    .mobile-only{
+        display: block;
+    }
+    .desktop-only{
+        display: none;
+    }
+    
 }
 :root{
     /* Icons */
@@ -98,6 +129,9 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
 
     /* Box-radius */
     --radius-normal-box: 8px;
+
+    /* Header */
+    --header-height: 100px;
 }
 
 /* Navbar */
@@ -111,7 +145,8 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: var(--header-height);
+    background: linear-gradient(180deg,rgba(227, 227, 227, 0.8) 60%, rgba(227, 227, 227, 0) 100%);
 }
 .navbar a, .navbar svg{
     z-index: 5;
@@ -193,7 +228,7 @@ nav{
 .booking-form1{
     display: flex;
     justify-content: center;
-    gap: 160px;
+    gap: 24px 160px;
     flex-wrap: wrap;
 }
 .first-form{
@@ -251,7 +286,6 @@ nav{
     margin-bottom: 8px;
 }
 
-/* Service booking lav om senere*/
 .selected-services-list .serviceitem{
     padding: 8px 16px;
     width: 100%;
@@ -264,9 +298,9 @@ nav{
 }
 .serviceitem svg{
     margin-left: 8px;
-    margin-top: 6px;
+    margin-top: 5px;
     cursor: pointer;
-    fill: #D9D9D9;
+    fill: #767272;
 }
 .serviceitem div{
     display: flex;
@@ -283,7 +317,7 @@ nav{
     margin-right: 28px;
 }
 .serviceitem .service-bottom span{
-    color: #D9D9D9;
+    color: #767272;
     font-size: 10px;
 }
 .serviceitem .service-bottom .duration{
@@ -296,11 +330,12 @@ nav{
 .selected-services-list div span:first-child{
     margin-right: auto;
 }
-#go_to_booking{
+.go_to_booking{
     width: 200px;
     margin: 0 auto;
     color: #fff;
     background: #ffB36D;
+    cursor: pointer;
 }
 /* Service booking */
 
@@ -309,6 +344,8 @@ nav{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: fit-content;
+    overflow: hidden;
 }
 
 .week-selector{
@@ -333,7 +370,13 @@ nav{
     display: flex;
     background: #fff;
     border-radius: var(--radius-normal-box);
-    overflow: hidden;
+    overflow-x: visible;
+    width: 100%;
+}
+@media screen and (max-width: 768px){
+    .day-selector{
+        overflow-x: scroll;
+    }
 }
 .day-selector .column div{
     display: flex;

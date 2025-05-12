@@ -11,6 +11,7 @@ input.addEventListener('input', async () => {
   const res = await fetch(url);
   const data = await res.json();
 
+  console.log(data);
   suggestionsList.innerHTML = '';
 
   data.results.forEach(place => {
@@ -20,26 +21,11 @@ input.addEventListener('input', async () => {
       input.value = place.address_line1;
       suggestionsList.innerHTML = '';
       autocompletePostalCode.value = place.postcode;
-      autocompleteBy.value = place.country;
+      autocompleteBy.value = place.city;
     });
     suggestionsList.appendChild(li);
   });
   window.addEventListener('click', () => {
     suggestionsList.innerHTML = '';
   });
-  document.querySelectorAll('.check_if_autocompleted').forEach((input, index) => {
-    input.addEventListener('blur', () => {
-      if(input.value.includes(" ")) {
-        document.querySelectorAll('.houseNumber')[index].value = input.value.split(' ')[1];
-        input.value = input.value.split(' ')[0];
-      }
-    });
-  })
-  document.querySelectorAll('.check_if_adress_autocompleted').forEach(input => {
-    input.addEventListener('blur', () => {
-      const adress = document.getElementById('autocomplete_adresse');
-      document.getElementById('autocomplete_house_number').value = adress.value.split(' ')[1];
-      adress.value = adress.value.split(' ')[0];
-    });
-  })
 });
