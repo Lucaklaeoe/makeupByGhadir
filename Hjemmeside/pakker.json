@@ -18,21 +18,21 @@
       "duration": 90,
       "price": 1200,
       "andtal_personer": 1,
-      "inkl": "makeup"
+      "inkl": "makeup, prisen er vejledende"
     },
     {
       "label": "Halloween makeup",
       "duration": 90,
       "price": 1300,
       "andtal_personer": 1,
-      "inkl": "makeup"
+      "inkl": "makeup, prisen er vejledende"
     },
     {
       "label": "Håropsætning",
       "duration": 70,
       "price": 900,
       "andtal_personer": 1,
-      "inkl": "håropsætning"
+      "inkl": "håropsætning, prisen er vejledende"
     },
     {
       "label": "Påsætning af extentions",
@@ -85,10 +85,10 @@
     },
     {
       "label": "Udkørsel",
-      "duration": 0,
+      "duration": 90,
       "price": 700,
       "andtal_personer": 1,
-      "inkl": "gælder hele Sjælland"
+      "inkl": "gælder hele Sjælland, prisen er vejledende"
     }
   ]
   
