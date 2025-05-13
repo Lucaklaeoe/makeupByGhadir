@@ -14,7 +14,7 @@
       "inkl": "makeup"
     },
       {
-      "label": "Event makeup ",
+      "label": "Event makeup",
       "duration": 90,
       "price": 1200,
       "antal_personer": 1,
@@ -36,7 +36,7 @@
     },
     {
       "label": "Påsætning af extentions",
-      "duration": 0,
+      "duration": 15,
       "price": 100,
       "antal_personer": 1,
       "inkl": ""

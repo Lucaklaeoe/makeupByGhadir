@@ -2,10 +2,8 @@ var BookingInfo = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     const requiredFields = document.querySelectorAll('[required]');
-    requiredFields.forEach(field => {
-        field.addEventListener('blur', (event) => {
-            event.preventDefault();
-            if(formIsFilled()){
+    function activateSubmitButton(){
+        if(formIsFilled()){
                 const submitButton = document.getElementById("make_booking");
                 submitButton.classList.remove('disabled');
             }
@@ -14,43 +12,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(submitButton.classList.contains('disabled')) return;
                 submitButton.classList.add('disabled');
             }
+    }
+    requiredFields.forEach(field => {
+        field.addEventListener('blur', (event) => {
+            event.preventDefault();
+            activateSubmitButton()
         })
     })
 
     const sammentygge = document.getElementById("sammentygge");
     sammentygge.addEventListener('change', (event) => {
         event.preventDefault();
-        if(formIsFilled()){
-            const submitButton = document.getElementById("make_booking");
-            submitButton.classList.remove('disabled');
-        }
-        else {
-            const submitButton = document.getElementById("make_booking");
-            if(submitButton.classList.contains('disabled')) return;
-            submitButton.classList.add('disabled');
-        }
+        activateSubmitButton()
     })
 })
 
 async function makeRequestBooking() {
-    const {access_token} = await signIn();
+    const {access_token, logged_in_via} = await signIn();
 
     if(!fillFormAndCheck()) return;
-    
-    const response = await fetch(`${supabaseUrl}/rest/v1/requestBooking`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': supabaseKey,
-          'Authorization': `Bearer ${access_token}`,
-          'Prefer': 'return=representation'
-        },
-        body: JSON.stringify([{
-            ...BookingInfo
-        }])
-    });
 
-    const data = await response.json();
+    var response;
+    
+    if(logged_in_via == "anonymous@example.com") {
+        response = await fetch(`${supabaseUrl}/rest/v1/requestBooking`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': supabaseKey,
+              'Authorization': `Bearer ${access_token}`,
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify([{
+                ...BookingInfo
+            }])
+        });
+    }
+    else{
+        response = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': supabaseKey,
+              'Authorization': `Bearer ${access_token}`,
+              'Prefer': 'return=representation'
+            },
+            body: JSON.stringify([{
+                ...BookingInfo
+            }])
+        });
+    }
+
+    //const data = await response.json();
 
     if (response.ok) {
         //console.log('Row inserted:', data);

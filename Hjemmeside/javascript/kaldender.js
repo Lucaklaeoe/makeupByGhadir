@@ -2,37 +2,11 @@ const datePicker = document.getElementById('datepicker');
 const timePicker = document.getElementById('timepicker');
 const GhadirPause = 30;
 
-function getWeekNumber(date = new Date()) {
-    //86.400.000 ms = 1 dag
-    date.setHours(0, 0, 0, 0);
-    //Finder den nuværrende torsdag
-    //ISO standarden starter året på en torsdag
-    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    //Finder den første torsdag i det aktuelle år
-    const week1 = new Date(date.getFullYear(), 0, 4);
-    // Beregner antal dage siden mandagen i den første ISO-uge    
-    const diff_in_days = Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7));
-    // Beregner uge nummer + 1 da uger ikke starter på 0
-    return diff_in_days / 7 + 1;
-}
-function getWeekDates(date = new Date()) {
-    date.setHours(0, 0, 0, 0);
-    // ISO: Mandag = 0, Søndag = 6
-    const isoDay = (date.getDay() + 6) % 7;
-    // Gå tilbage til mandag
-    date.setDate(date.getDate() - isoDay);
-    // Saml alle 7 dage
-    const weekDates = [];
-    for (let i = 0; i < 7; i++) {
-        const d = new Date(date);
-        d.setDate(date.getDate() + i);
-        weekDates.push(d.getDate() + ". " + d.toLocaleString('default', { month: 'short' }));    
-    }
-    return weekDates;
-}
+//Dont change ---
+var TotalTimeOfYourBooking = 0;
+var supabaseData = [];
 
 function renderWeek(date, setDatePicker = true) {
-
     if(setDatePicker) {
         const oneDayAhead = new Date(date) <= new Date() ? new Date() : new Date(date);
         //failsafe if it's sunday and tries to get monday from next week
@@ -54,6 +28,7 @@ function renderWeek(date, setDatePicker = true) {
             time_24hr: true,
             minTime: "08:00",
             maxTime: "17:00",
+            minuteIncrement: 10,
         });
         fpTime.setDate(oneDayAhead, true);
     }
@@ -168,14 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })
 
-function stringToDateObject(dateStr) {
-    const [datePart, timePart] = dateStr.split(' ');
-    const [day, month, year] = datePart.split('-');
-    const [hour, minute] = timePart.split(':');
-    return new Date(year, month - 1, day, hour, minute);
-}
-
-var TotalTimeOfYourBooking = 0;
 function addYourTimeKaldender(time){
     TotalTimeOfYourBooking += time;
     const dateName = stringToDateObject(datePicker.value + " " + timePicker.value).toLocaleDateString("en-US", { weekday: "long" });
@@ -191,57 +158,20 @@ function addYourTimeKaldender(time){
     }
 }
 
-/**
- * Adds a booking time to the given day in the calendar
- * @param {String} day - The day of the week (monday, tuesday, etc.)
- * @param {String} strattime - The start time of the booking in the format HH:MM
- * @param {Number} lenght - The length of the booking in minutes
- * @param {Bool} lenght - The length of the booking in minutes
- */
-function addTimeToKaldender(day, strattime, lenght, yourBokking = false){
-    const column = document.querySelector('.' + day + ' .showen-time');
-    const columnHeight = column.getBoundingClientRect().height;
-    //height of one hour
-    const sizeRatio = columnHeight / 10;
-
-    const time = document.createElement('div');
-    time.classList.add('booking-time');
-    if(yourBokking){
-        time.classList.add('your-booking');
-        time.textContent = "Din tid";
-    }
-    time.style.top = ((strattime.split(':')[0] - 8) + (strattime.split(':')[1] / 60)) * sizeRatio + 'px';
-    time.style.height = (lenght / 60) * sizeRatio + 'px';
-    if(lenght > 0){
-        column.appendChild(time);
-    }
-    if(validateBooking(false)){
-        const submitButton = document.querySelectorAll(".go_to_booking");
-        submitButton.forEach(submitButton => submitButton.classList.remove('disabled'));
-    }
-    else {
-        const submitButton = document.querySelectorAll(".go_to_booking");
-        submitButton.forEach(submitButton => {
-            if(submitButton.classList.contains('disabled')) return;
-            submitButton.classList.add('disabled');
-        });
-    }
-}
-
 function getSelectedServices(){
     const selectedServices = {};
     selectedServices['datetime'] = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString();
     var totalPrice = 0;
 
     selectedServices['services'] = [];
-    document.querySelectorAll('#selected_services_list .serviceitem').forEach((service, index) => {
+    document.querySelectorAll('#selected_services_list .serviceitem').forEach(service => {
         const name = service.querySelector('.service').textContent;
         const time = Number(service.querySelector('.duration').textContent.split(' ')[0]);
         const price = Number(service.querySelector('.price').textContent.replace('.', '').split(' ')[0]);
         const serviceObject = {};
-        serviceObject['service' + index] = name;
-        serviceObject['tid' + index] = time;
-        serviceObject['pris' + index] = price;
+        serviceObject['service'] = name;
+        serviceObject['tid'] = time;
+        serviceObject['pris'] = price;
         totalPrice += price;
 
         selectedServices['services'].push(serviceObject);
@@ -251,7 +181,6 @@ function getSelectedServices(){
     return selectedServices;
 }
 
-var supabaseData = [];
 function validateBooking(giveMessage = true) {
     if (!supabaseData) return true;
 
@@ -289,13 +218,13 @@ function validateBooking(giveMessage = true) {
         if (doTimesOverlap(yourStartMinutes, yourEndMinutes, bookingStartMinutes, bookingEndMinutes)) {
             somethingIsBooked = true;
             if(giveMessage) alert('Denne tid eller noget af denne tid er allerede booket');
+            console.log("hi")
         }
     });
 
     //return true if 
     return !somethingIsBooked;
 }
-
 
 
 function renderServiceOptions(){

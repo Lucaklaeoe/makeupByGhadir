@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking - Find en ledig tid</title>
+    <title>By Ghadir Admin</title>
     <link rel="stylesheet" href="min/style.min.css">
-    <!-- DateTime pickers css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="min/datepicker.min.css">
 </head>
 <body>
     <nav>
@@ -29,34 +26,25 @@
     </nav>
     <main>
         <header>
-            <h1>Find en ledig tid</h1>
-            <p>Find en tid der passer dig.</p>
+            <h1>Booking anmodninger</h1>
         </header>
 
-        <section class="booking-form1">
-            <div class="first-form">
-                <div class="date-picker">
-                    <div>
-                        <label for="datepicker">Dato</label>
-                        <input type="text" name="datepicker" id="datepicker" class="fields" placeholder="Dato">
-                    </div>
-                    <div>
-                        <label for="timepicker">Klokkeslet</label>
-                        <input type="text" name="timepicker" id="timepicker" class="fields" placeholder="Klokkeslæt">
-                    </div>
-                </div>
-                <div class="selected-services">
-                    <label for="add_services">Valgte services:</label>
-                    <div class="selected-services-list" id="selected_services_list">
+        <section class="admin-form">
+            <div>
+                <ul class="tabs">
+                    <li>Anmodninger</li>
+                    <li>Godkendte</li>
+                    <li>Opret</li>
+                </ul>
 
-                    </div>
-                    <select name="add_services" id="add_services" class="fields">
-                        <option value="default" >Vælg service</option>
-                    </select>
-                </div>
+                <div id="requested">
 
-                <input type="submit" value="Book tid" class="fields go_to_booking disabled primary-button desktop-only">
+                </div>
+                <div id="accepteret">
+                    
+                </div>
             </div>
+            
             <div class="kaldender">
                 <div class="week-selector">
                     <button class="prev-week arrow" id="prev_week">
@@ -259,9 +247,6 @@
                     </div>
                 </div>
             </div>
-            <div class="first-form">
-                <input type="submit" value="Book tid" class="fields go_to_booking disabled primary-button mobile-only">
-            </div>
         </section>
 
     </main>
@@ -270,11 +255,8 @@
 
     </footer>
 
-    <!-- DateTime pickers flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/da.js"></script>
     <script src="javascript/min/workers.min.js"></script>
-    <script src="javascript/min/kaldender.min.js"></script>
+    <script src="javascript/adminKaldender.js"></script>
     <script src="javascript/min/script.min.js"></script>
     <script src="javascript/min/signInSupabase.min.js"></script>
 </body>
