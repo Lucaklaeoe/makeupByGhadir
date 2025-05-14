@@ -134,55 +134,102 @@ function dateToString(date, time = false) {
     else{
         const hours = date.getHours().toString().padStart(2, '0');
         const minutes = date.getMinutes().toString().padStart(2, '0');
-        return `kl. ${hours}:${minutes}`
+        return `${hours}:${minutes}`
     }
+}
+
+function toEndTime(time, duration){
+    const timeSplit = time.split(':');
+    const hours = Number(timeSplit[0]) + Math.floor(duration / 60);
+    const minutes = Number(timeSplit[1]) + (duration % 60);
+    if(minutes == 0) return `${hours}:00`;
+    return `${hours}:${minutes}`
+}
+
+function location_for_work(address){
+    if(address == null || address.trim() == "," || address.trim() == "" || address == undefined) return "Ikke udfyldt";
+    return address;
 }
 
 function insertBookingInfo(item, requested = true){
     const appendIn = requested ? document.getElementById('requested') : document.getElementById('accepteret');
     const id = requested ? "R" + item.id : "A" + item.id;
     const booking = `
-    <div class="booking-item">
+    <div class="booking-item" id="${id}">
         <div class="booking-header">
             <span>
                 <p class="id">ID ${id}</p>
-                <p>${dateToString(item.start_time)}</p>
-                <p>${dateToString(item.start_time)}</p>
+                <p class="make-bigger">${dateToString(item.start_time, false)}</p>
+                <p class="make-bigger">Kl. ${dateToString(item.start_time, true)} - ${toEndTime(dateToString(item.start_time, true), item.duration)}</p>
             </span>
             <span class="reject-accept">
                 <div class="reject">    
-                    <img src="svg/Kryds.svg" alt="rejectBooking">
+                    <img src="svg/kryds.svg" alt="rejectBooking">
                 </div>
                 <div class="accept">
-                    <img src="svg/Tjeck.svg" alt="acceptBooking">
+                    <img src="svg/tjeck.svg" alt="acceptBooking">
                 </div>
             </span>
         </div>
         <div class="booking-body">
-            <span>
-                <div>
-                    <p>${serviceNameAndCounts(item.services)}</p>
-                    <p>${item.message}</p>
+            <div class="booking-info">
+                <div class="services">
+                    <p class="service">${serviceNameAndCounts(item.services)}</p>
+                    <p class="message">${item.message}</p>
                 </div>
                 <div>
                     <p>Adresse:</p>
                     <p>${item.adress}</p>
                 </div>
-            </span>
-            <span>
-                <p>${item.name}</p>
-                <div>
+            </div>
+            <div class="booking-contact">
+                <p class="name">${item.fulde_navn}</p>
+                <div class="location">
                     <p>Udkørsel:</p>
-                    <p>${item.location_for_work}</p>
+                    <p>${location_for_work(item.location_for_work)}</p>
                 </div>
                 <div>
                     <p>Kontakt:</p>
-                    <p>${item.tlf}</p>
+                    <p>tlf. nr. ${item.tlf}</p>
                     <p>${item.email}</p>
                 </div>
-            </span>
+            </div>
+        </div>
+        <div class="arrow">
+            <img src="svg/arrow-down.svg" alt="acceptBooking">
         </div>
     </div>`
 
     appendIn.innerHTML += booking;
+
+    function calculateheight(id){
+        const item = document.getElementById(id);
+        const body = item.querySelector(".booking-body");
+        const bodyHeight = body.getBoundingClientRect().height;
+
+        const services = item.querySelector(".service");
+        const servicesHeight = services.getBoundingClientRect().height;
+
+        const name = item.querySelector(".name");
+        const nameHeight = name.getBoundingClientRect().height;
+        const location = item.querySelector(".location");
+        const locationHeight = location.getBoundingClientRect().height;
+
+        const height = Math.round(servicesHeight > nameHeight + locationHeight + 16 ? servicesHeight : nameHeight + locationHeight + 16);
+
+        const arrow = item.querySelector(".arrow");
+
+        arrow.addEventListener("click", () => {
+            if(body.style.height == Math.round(height) + "px"){
+                body.style.height = bodyHeight + "px";
+                arrow.style.transform = "rotate(180deg)";
+            }
+            else{
+                body.style.height = height + "px";
+                arrow.style.transform = "rotate(0deg)";
+            }
+        })
+        body.style.height = height + "px";
+    }
+    calculateheight(id);
 }

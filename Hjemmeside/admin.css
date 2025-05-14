@@ -1,3 +1,7 @@
+:root{
+    --openCloseSpeed: 0.5s;
+}
+
 .admin-form{
     display: flex;
     justify-content: center;
@@ -36,6 +40,10 @@
     gap: 16px;
     overflow: hidden;
 }
+.admin-liste p{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 
 .admin-liste .booking-item{
     border: solid 1px var(--dark-noir);
@@ -52,7 +60,9 @@
     gap: 24px;
     align-items: center;
 }
-
+.booking-header .make-bigger{
+    font-size: 16px;
+}
 .booking-header span{
     display: flex;
     gap: 16px;
@@ -85,4 +95,44 @@
 .reject-accept img{
     width: 16px;
     height: 16px;
+}
+
+
+.booking-body{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    transition: height var(--openCloseSpeed);
+}
+.booking-body .booking-info{
+    padding-right: 32px;
+    border-right: 1px solid var(--steely-grey);
+    width: 50%;
+}
+.booking-body .booking-contact{
+    padding-left: 32px;
+    width: 50%;
+}
+.booking-body .message{
+    margin-top: 8px;
+    border: 1px solid var(--dark-noir);
+    border-radius: var(--radius-normal-box);
+    padding: 12px
+}
+
+.booking-body .services{
+    margin-bottom: 48px;
+}
+.booking-body .name{
+    margin-bottom: 16px;
+}
+.booking-body .location{
+    margin-bottom: 32px;
+}
+
+.booking-item .arrow{
+    transition: transform var(--openCloseSpeed);
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
