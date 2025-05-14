@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function makeRequestBooking() {
     const {access_token, logged_in_via} = await signIn();
+    console.log(access_token);
 
     if(!fillFormAndCheck()) return;
 

@@ -239,6 +239,9 @@ nav{
 .categories li{
     cursor: pointer;
 }
+.categories li.active{
+    text-decoration: underline;
+}
 
 .galleri-images{
     --columns: 4;
@@ -554,23 +557,4 @@ div.adresse-writer, div.adresse-writer2{
 }
 .adresse-writer input:nth-child(6), .adresse-writer2 input:nth-child(5){
     width: calc(50% - var(--adresse-writergap) / 2);
-}
-
-.admin-form{
-    display: flex;
-    justify-content: center;
-    gap: 24px 160px;
-    flex-wrap: wrap;
-}
-
-.admin-form .tabs{
-    display: flex;
-    justify-content: center;
-    gap: 64px;
-}
-.admin-form .tabs li{
-    font-size: 16px;
-}
-.admin-form .tabs li.active{
-    text-decoration: underline;
 }

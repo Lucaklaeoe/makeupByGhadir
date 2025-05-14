@@ -123,33 +123,43 @@ function serviceNameAndCounts(services) {
     return returnString;
 }
 
-function dateToString(date) {
+function dateToString(date, time = false) {
     date = new Date(date);
-    const day = date.getDate();
-    const month = date.toLocaleString('en', { month: 'short' });
-    const year = date.getFullYear();
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${day} ${month}, ${year} kl. ${hours}:${minutes}`;
+    if(!time){
+        const day = date.getDate();
+        const month = date.toLocaleString('en', { month: 'short' });
+        const year = date.getFullYear();
+        return `${day} ${month}, ${year}`;
+    }
+    else{
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        return `kl. ${hours}:${minutes}`
+    }
 }
 
 function insertBookingInfo(item, requested = true){
     const appendIn = requested ? document.getElementById('requested') : document.getElementById('accepteret');
     const id = requested ? "R" + item.id : "A" + item.id;
     const booking = `
-    <div>
-        <div>
+    <div class="booking-item">
+        <div class="booking-header">
             <span>
-                <p>ID${id}</p>
+                <p class="id">ID ${id}</p>
+                <p>${dateToString(item.start_time)}</p>
                 <p>${dateToString(item.start_time)}</p>
             </span>
-            <span>
-                <div></div>
-                <div></div>
+            <span class="reject-accept">
+                <div class="reject">    
+                    <img src="svg/Kryds.svg" alt="rejectBooking">
+                </div>
+                <div class="accept">
+                    <img src="svg/Tjeck.svg" alt="acceptBooking">
+                </div>
             </span>
         </div>
-        <div>
-            <div>
+        <div class="booking-body">
+            <span>
                 <div>
                     <p>${serviceNameAndCounts(item.services)}</p>
                     <p>${item.message}</p>
@@ -158,8 +168,8 @@ function insertBookingInfo(item, requested = true){
                     <p>Adresse:</p>
                     <p>${item.adress}</p>
                 </div>
-            </div>
-            <div>
+            </span>
+            <span>
                 <p>${item.name}</p>
                 <div>
                     <p>Udkørsel:</p>
@@ -170,7 +180,7 @@ function insertBookingInfo(item, requested = true){
                     <p>${item.tlf}</p>
                     <p>${item.email}</p>
                 </div>
-            </div>
+            </span>
         </div>
     </div>`
 
