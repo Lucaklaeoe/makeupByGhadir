@@ -185,7 +185,7 @@ function insertBookingInfo(item, requested = true){
             <div class="booking-info">
                 <div class="services">
                     <p class="service">${serviceNameAndCounts(item.services)}</p>
-                    <textarea class="message">${item.message}</textarea>
+                    <textarea readonly class="message">${item.message}</textarea>
                 </div>
                 <div>
                     <p>Adresse:</p>
