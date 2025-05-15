@@ -114,10 +114,17 @@
     width: 50%;
 }
 .booking-body .message{
+    font-family: var(--font-standard);
     margin-top: 8px;
     border: 1px solid var(--dark-noir);
     border-radius: var(--radius-normal-box);
-    padding: 12px
+    padding: 12px;
+    max-width: 215px;
+    min-width: 215px;
+    overflow-y: scroll;
+    height: 75px;
+    max-height: 160px;
+    min-height: 75px;
 }
 
 .booking-body .services{

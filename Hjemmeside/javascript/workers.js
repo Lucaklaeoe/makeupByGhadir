@@ -61,6 +61,7 @@ function stringToDateObject(dateStr) {
  * @param {boolean} [yourBokking=false] - Whether the time slot should be marked as your booking.
  * @param {string} [color=null] - Adds a color to the time slot, and ignores the the submit button, format: hex #RRGGBB.
  * @param {string} [id=null] - Adds id text to the timeslot.
+ *
  */
 function addTimeToKaldender(day, strattime, lenght, yourBokking = false, color = null, id = null){
     const column = document.querySelector('.' + day + ' .showen-time');

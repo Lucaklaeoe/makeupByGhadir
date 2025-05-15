@@ -151,31 +151,41 @@ function location_for_work(address){
     return address;
 }
 
+function acceptRejectButtons(requested){
+    if(requested){
+        return `
+        <span class="reject-accept">
+            <div class="reject">    
+                <img src="svg/kryds.svg" alt="rejectBooking">
+            </div>
+            <div class="accept">
+                <img src="svg/tjeck.svg" alt="acceptBooking">
+            </div>
+        </span>`;
+    }
+    else{
+        return ``;
+    }
+}
+
 function insertBookingInfo(item, requested = true){
     const appendIn = requested ? document.getElementById('requested') : document.getElementById('accepteret');
     const id = requested ? "R" + item.id : "A" + item.id;
     const booking = `
-    <div class="booking-item" id="${id}">
+    <div class="booking-item" id="ADMIN${id}">
         <div class="booking-header">
             <span>
                 <p class="id">ID ${id}</p>
                 <p class="make-bigger">${dateToString(item.start_time, false)}</p>
                 <p class="make-bigger">Kl. ${dateToString(item.start_time, true)} - ${toEndTime(dateToString(item.start_time, true), item.duration)}</p>
-            </span>
-            <span class="reject-accept">
-                <div class="reject">    
-                    <img src="svg/kryds.svg" alt="rejectBooking">
-                </div>
-                <div class="accept">
-                    <img src="svg/tjeck.svg" alt="acceptBooking">
-                </div>
-            </span>
+            </span> 
+            ${acceptRejectButtons(requested)}
         </div>
         <div class="booking-body">
             <div class="booking-info">
                 <div class="services">
                     <p class="service">${serviceNameAndCounts(item.services)}</p>
-                    <p class="message">${item.message}</p>
+                    <textarea class="message">${item.message}</textarea>
                 </div>
                 <div>
                     <p>Adresse:</p>
@@ -203,7 +213,7 @@ function insertBookingInfo(item, requested = true){
     appendIn.innerHTML += booking;
 
     function calculateheight(id){
-        const item = document.getElementById(id);
+        const item = document.getElementById("ADMIN"+id);
         const body = item.querySelector(".booking-body");
         const bodyHeight = body.getBoundingClientRect().height;
 
@@ -231,5 +241,77 @@ function insertBookingInfo(item, requested = true){
         })
         body.style.height = height + "px";
     }
-    calculateheight(id);
+    setTimeout(() => calculateheight(id), 0);
+    async function setChoiceButtons(id, bookingInfo){
+        const {access_token} = await adminLogin();
+        const bookingid = bookingInfo.id;
+        delete bookingInfo.id;
+        const item = document.getElementById("ADMIN"+id);
+        const reject = item.querySelector(".reject");
+        const accept = item.querySelector(".accept");
+
+        async function deleteBooking(id) {
+            const res = await fetch(`${supabaseUrl}/rest/v1/requestBooking?id=eq.${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': supabaseKey,
+                    'Authorization': `Bearer ${access_token}`,
+                    'Prefer': 'return=representation'
+                },
+            });
+
+            if (!res.ok) {
+                console.error('Error deleting booking:', res.status, res.statusText);
+            }
+
+            return res.ok;
+        }
+        
+        reject.addEventListener("click", async () => {
+            if(await deleteBooking(bookingid)){
+                item.remove();
+                document.getElementById("R"+bookingid).remove();
+                //SEND MAIL AT DEN IKKE ER BLEVET GODKENDT
+            }
+        });
+
+        accept.addEventListener("click", async () => {
+            const acceptedBookingResponse = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'apikey': supabaseKey,
+                  'Authorization': `Bearer ${access_token}`,
+                  'Prefer': 'return=representation'
+                },
+                body: JSON.stringify([bookingInfo])
+            });
+
+            if(acceptedBookingResponse.ok){
+                const insertedRow = (await acceptedBookingResponse.json())[0];
+                const day = new Date(insertedRow.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
+                const start_time = insertedRow.start_time.split('T')[1].slice(0, -3);
+
+                if(await deleteBooking(bookingid)){
+                    item.remove();
+                    document.getElementById("R"+bookingid).remove();
+                    addTimeToKaldender(day, start_time, insertedRow.duration, false, "#1a2663", "A" + insertedRow.id);
+                    //SEND MAIL AT DEN ER BLEVET GODKENDT
+                }
+                else{
+                    alert('Crital error, kontakt din administrator');
+                }
+            }
+            else{
+                alert('Noget gik galt, prøv igen eller genindlæs din browser');
+            }
+        });
+    }
+    setTimeout(() => setChoiceButtons(id, item), 0);
+}
+
+function validateBooking(giveMessage = false) {
+    if(giveMessage) alert('Booking auto valideret');
+    return true;
 }

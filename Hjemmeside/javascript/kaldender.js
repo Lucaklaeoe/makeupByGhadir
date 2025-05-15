@@ -160,7 +160,9 @@ function addYourTimeKaldender(time){
 
 function getSelectedServices(){
     const selectedServices = {};
-    selectedServices['datetime'] = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString();
+    console.log(datePicker.value + ' ' + timePicker.value);
+    const splitedDate = datePicker.value.split('-');
+    selectedServices['datetime'] = splitedDate[2] + splitedDate[1] + splitedDate[0] + 'T' + timePicker.value + ':00.000Z';
     var totalPrice = 0;
 
     selectedServices['services'] = [];
@@ -196,7 +198,8 @@ function validateBooking(giveMessage = true) {
     const selectedDate = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString().split('T')[0];
     const yourStartMinutes = timeToMinutes(timePicker.value);
     const yourEndMinutes = yourStartMinutes + TotalTimeOfYourBooking;
-    if(yourEndMinutes >= ((17 * 60) + 1)) {
+    //1050 is 17:00 --- if you log 'yourEndMinuts' and let it hit the end of the kaldender
+    if(yourEndMinutes >= 1050) {
         if(giveMessage) alert('Din tid er ude for kaldender');
         return false;
     }
@@ -218,7 +221,6 @@ function validateBooking(giveMessage = true) {
         if (doTimesOverlap(yourStartMinutes, yourEndMinutes, bookingStartMinutes, bookingEndMinutes)) {
             somethingIsBooked = true;
             if(giveMessage) alert('Denne tid eller noget af denne tid er allerede booket');
-            console.log("hi")
         }
     });
 
