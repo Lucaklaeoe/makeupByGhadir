@@ -85,7 +85,7 @@
       "price": 7600,
       "antal_personer": 1,
       "inkl": "makeup, håropsætning, prøvemakeup, prøvehårstyling",
-      "tag": "bridal"
+      "tag": "bridal featured"
     },
       {
       "label": "Brudepakke 2",
@@ -93,7 +93,7 @@
       "price": 7600,
       "antal_personer": 1,
       "inkl": "makeup, håropsætning",
-      "tag": "bridal"
+      "tag": "bridal featured"
     },
     {
       "label": "Udkørsel",

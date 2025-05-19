@@ -7,11 +7,13 @@ const order = [
 
 document.addEventListener('DOMContentLoaded', async () => {
     const prisliste = document.getElementById('prisliste');
+    const bridalPrisliste = document.getElementById('prisliste-bridal');
     const pakker = await fetch('pakker.json').then(response => response.json());
+    const bridalPakker = pakker.filter(pakke => pakke.tag.includes('bridal'));
 
     const categories = {};
     pakker.forEach(pakke => {
-        const tag = pakke.tag;
+        const tag = pakke.tag.replace('featured', '').trim();
         if (!categories[tag]) {
             categories[tag] = [];
         }
@@ -26,9 +28,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    const otherItems = [];
     Object.keys(categories).forEach(tag => {
-        orderedCategories.push(categories[tag]);
+        otherItems.push(...categories[tag]);
     });
+    if (otherItems.length > 0) {
+        orderedCategories.push(otherItems);
+    }
 
     orderedCategories.forEach((category, index) => {
         const categoryDiv = document.createElement('div');
@@ -37,14 +43,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         h3.textContent = order[index] || 'Andet';
         categoryDiv.appendChild(h3);
         
-        category.map(pakke => {
+        category.forEach(pakke => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('item');
 
             itemDiv.innerHTML = `
                 <div class="beskrivelse">
                     <p>${pakke.label}</p>
-                    <p>tid: ${pakke.duration} min</p>
+                    <p>Tid: ${pakke.duration} min</p>
                 </div>
                 <div class="streg"></div>
                 <div class="pris">
@@ -56,5 +62,58 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         prisliste.appendChild(categoryDiv);
+    });
+
+    const otherItemsDiv = document.createElement('div');
+    otherItemsDiv.classList.add('category');
+    bridalPakker.forEach(pakke => {
+        const itemDiv = document.createElement('div');
+        const isFeatured = pakke.tag.includes('featured');
+        itemDiv.classList = (isFeatured ? 'item featured' : 'item');
+
+        if(isFeatured) {
+            itemDiv.innerHTML = `<div>
+                <p>${pakke.label}</p>
+                <p>${pakke.price} Kr.</p>
+                <p>Denne pakke indeholder: <br> ${pakke.inkl}</p>
+            </div>`
+        }
+        else{
+            itemDiv.innerHTML = `
+                <div class="beskrivelse">
+                    <p>${pakke.label}</p>
+                    <p>Tid: ${pakke.duration} min</p>
+                </div>
+                <div class="streg"></div>
+                <div class="pris">
+                    <p>${pakke.price} Kr.</p>
+                </div>
+            `;
+        }
+
+        if(isFeatured) {
+            bridalPrisliste.appendChild(itemDiv)
+        } else {
+            otherItemsDiv.appendChild(itemDiv);
+        }
+    });
+    bridalPrisliste.appendChild(otherItemsDiv);
+
+    const tabAll = document.getElementById("alt");
+    const tabBridal = document.getElementById("Bridal");
+    tabAll.addEventListener("click", () => {
+        if(tabAll.classList.contains("active-tab")) return;
+        document.querySelector(".active-tab").classList.remove("active-tab");
+        tabAll.classList.add("active-tab");
+        prisliste.style.display = "flex";
+        bridalPrisliste.style.display = "none";
+    });
+
+    tabBridal.addEventListener("click", () => {
+        if(tabBridal.classList.contains("active-tab")) return;
+        document.querySelector(".active-tab").classList.remove("active-tab");
+        tabBridal.classList.add("active-tab");
+        prisliste.style.display = "none";
+        bridalPrisliste.style.display = "flex";
     });
 });
