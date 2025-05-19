@@ -18,10 +18,15 @@
     gap: 64px;
     margin-bottom: 16px;
 }
-.admin-tabs .tabs li{
+.admin-tabs .tabs li, .admin-tabs .tabs li a{
+    font-weight: 400;
     font-size: 16px;
+    cursor: pointer;
 }
-.admin-tabs .tabs li.active{
+.admin-tabs .tabs li a{
+    color: var(--dark-noir);
+}
+.admin-tabs .tabs li.active-tab{
     text-decoration: underline;
 }
 
@@ -30,6 +35,7 @@
 }
 
 .admin-liste{
+    display: flex;
     background: var(--snow-white);
     border-radius: var(--radius-normal-box);
     border: solid 1px var(--glitter-gold);
@@ -38,7 +44,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 690px;
 }
 .admin-liste p{
     word-wrap: break-word;

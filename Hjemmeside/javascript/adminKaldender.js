@@ -1,24 +1,47 @@
 function renderWeek(date) {
+
     if(document.getElementById('week').textContent.replace('Uge ', '') != getWeekNumber(date)) {
         document.querySelectorAll('.booking-time').forEach(time => {
             if(time.classList.contains('your-booking')) return;
             time.remove();
         })
+        document.querySelectorAll('.booking-item').forEach(item => {
+            item.remove();
+        })
+
         insertBookings(date);
     }
     document.getElementById('week').textContent = "Uge " + getWeekNumber(date);
     
     getWeekDates(date).forEach((day, index) => {
         document.getElementById('date' + index).textContent = day;
-    })
+    });
 }
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     const prevArrow = document.getElementById('prev_week');
     prevArrow.classList.add('arrow-disabled');
     const nextArrow = document.getElementById('next_week');
     let currentDate = new Date();
+    const anmodningerTab = document.getElementById('anmodninger'); 
+    const godkendteTab = document.getElementById('godkendte');
+
+    anmodningerTab.addEventListener('click', () => {
+        if(anmodningerTab.classList.contains('active-tab')) return;
+        anmodningerTab.classList.add('active-tab');
+        godkendteTab.classList.remove('active-tab');
+        document.getElementById('requested').style.display = 'flex';
+        document.getElementById('accepteret').style.display = 'none';
+        calcHeightOnChildItems(document.getElementById('requested'));
+    });
+    godkendteTab.addEventListener('click', () => {
+        if(godkendteTab.classList.contains('active-tab')) return;
+        godkendteTab.classList.add('active-tab');
+        anmodningerTab.classList.remove('active-tab');
+        document.getElementById('requested').style.display = 'none';
+        document.getElementById('accepteret').style.display = 'flex';
+        calcHeightOnChildItems(document.getElementById('accepteret'));
+    });
 
     nextArrow.addEventListener('click', () => {
         if(prevArrow.classList.contains('arrow-disabled')) prevArrow.classList.remove('arrow-disabled');
@@ -102,6 +125,7 @@ async function insertBookings(currentDate) {
             supabaseData.push(item);
             addTimeToKaldender(day, start_time, duration, false, "#1a2663", "A" + item.id);
             //ADD TO KALDENDER GODKENDTE LISTE
+            insertBookingInfo(item, false);
         })
     } else {
         console.error('Fetch failed:', acceptedBookingData);
@@ -168,6 +192,51 @@ function acceptRejectButtons(requested){
     }
 }
 
+function textArea(message){
+    if(message == null || message.trim() == "" || message == undefined) return "";
+    return `<textarea readonly class="message">${message}</textarea>`;
+} 
+
+function calcHeightOnChildItems(currentActiveTab){
+    const bookingItems = currentActiveTab.querySelectorAll(".booking-item");
+    bookingItems.forEach((item) => {
+        calculateheight(item.id.replace("ADMIN", ""));
+    })
+}
+
+function calculateheight(id){
+    const item = document.getElementById("ADMIN"+id);
+    if(item.classList.contains("calculated")) return;
+    console.log(id);
+    item.classList.add("calculated");
+    const body = item.querySelector(".booking-body");
+    const bodyHeight = body.getBoundingClientRect().height;
+
+    const services = item.querySelector(".service");
+    const servicesHeight = services.getBoundingClientRect().height;
+
+    const name = item.querySelector(".name");
+    const nameHeight = name.getBoundingClientRect().height;
+    const location = item.querySelector(".location");
+    const locationHeight = location.getBoundingClientRect().height;
+
+    const height = Math.round(servicesHeight > nameHeight + locationHeight + 16 ? servicesHeight : nameHeight + locationHeight + 16);
+
+    const arrow = item.querySelector(".arrow");
+
+    arrow.addEventListener("click", () => {
+        if(body.style.height == Math.round(height) + "px"){
+            body.style.height = bodyHeight + "px";
+            arrow.style.transform = "rotate(180deg)";
+        }
+        else{
+            body.style.height = height + "px";
+            arrow.style.transform = "rotate(0deg)";
+        }
+    })
+    body.style.height = height + "px";
+}
+
 function insertBookingInfo(item, requested = true){
     const appendIn = requested ? document.getElementById('requested') : document.getElementById('accepteret');
     const id = requested ? "R" + item.id : "A" + item.id;
@@ -185,7 +254,7 @@ function insertBookingInfo(item, requested = true){
             <div class="booking-info">
                 <div class="services">
                     <p class="service">${serviceNameAndCounts(item.services)}</p>
-                    <textarea readonly class="message">${item.message}</textarea>
+                    ${textArea(item.message)}
                 </div>
                 <div>
                     <p>Adresse:</p>
@@ -210,38 +279,9 @@ function insertBookingInfo(item, requested = true){
         </div>
     </div>`
 
-    appendIn.innerHTML += booking;
+    appendIn.insertAdjacentHTML('beforeend', booking);
 
-    function calculateheight(id){
-        const item = document.getElementById("ADMIN"+id);
-        const body = item.querySelector(".booking-body");
-        const bodyHeight = body.getBoundingClientRect().height;
-
-        const services = item.querySelector(".service");
-        const servicesHeight = services.getBoundingClientRect().height;
-
-        const name = item.querySelector(".name");
-        const nameHeight = name.getBoundingClientRect().height;
-        const location = item.querySelector(".location");
-        const locationHeight = location.getBoundingClientRect().height;
-
-        const height = Math.round(servicesHeight > nameHeight + locationHeight + 16 ? servicesHeight : nameHeight + locationHeight + 16);
-
-        const arrow = item.querySelector(".arrow");
-
-        arrow.addEventListener("click", () => {
-            if(body.style.height == Math.round(height) + "px"){
-                body.style.height = bodyHeight + "px";
-                arrow.style.transform = "rotate(180deg)";
-            }
-            else{
-                body.style.height = height + "px";
-                arrow.style.transform = "rotate(0deg)";
-            }
-        })
-        body.style.height = height + "px";
-    }
-    setTimeout(() => calculateheight(id), 0);
+    if(requested) setTimeout(() => calculateheight(id), 0);
     async function setChoiceButtons(id, bookingInfo){
         const {access_token} = await adminLogin();
         const bookingid = bookingInfo.id;
@@ -272,7 +312,7 @@ function insertBookingInfo(item, requested = true){
             if(await deleteBooking(bookingid)){
                 item.remove();
                 document.getElementById("R"+bookingid).remove();
-                //SEND MAIL AT DEN IKKE ER BLEVET GODKENDT
+                sendAfvidstMail(bookingInfo.fulde_navn, bookingInfo.email);
             }
         });
 
@@ -290,6 +330,7 @@ function insertBookingInfo(item, requested = true){
 
             if(acceptedBookingResponse.ok){
                 const insertedRow = (await acceptedBookingResponse.json())[0];
+                insertBookingInfo(insertedRow, false);
                 const day = new Date(insertedRow.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
                 const start_time = insertedRow.start_time.split('T')[1].slice(0, -3);
 
@@ -308,10 +349,24 @@ function insertBookingInfo(item, requested = true){
             }
         });
     }
-    setTimeout(() => setChoiceButtons(id, item), 0);
+    if(requested) setTimeout(() => setChoiceButtons(id, item), 0);
 }
 
 function validateBooking(giveMessage = false) {
     if(giveMessage) alert('Booking auto valideret');
     return true;
+}
+
+function sendAfvidstMail(name, email) {
+    emailjs.init("8on1XAeHXO55DA6Tp");
+    const email_info = {
+        name: name,
+        email: email
+    };
+    emailjs.send('service_kesfnw1', 'template_odhfxvo', email_info)
+        .then(() => {
+        console.log('SUCCESS!');
+        }, (error) => {
+        console.log('FAILED...', error);
+    });
 }

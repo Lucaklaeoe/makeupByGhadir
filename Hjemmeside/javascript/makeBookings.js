@@ -68,7 +68,6 @@ async function makeRequestBooking() {
 
     if (response.ok) {
         //console.log('Row inserted:', data);
-        window.location = 'bookingConfirmed.html';
         sendMail();
     } else {
         alert('Noget gik galt, prøv igen');
@@ -166,7 +165,8 @@ function sendMail(){
     emailjs.send('service_kesfnw1', 'template_h23bpoo', email_info)
         .then(() => {
         console.log('SUCCESS!');
-        }, (error) => {
+        window.location = 'bookingConfirmed.html';
+    }, (error) => {
         console.log('FAILED...', error);
     });
 }
