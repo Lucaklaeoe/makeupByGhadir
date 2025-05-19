@@ -1,13 +1,5 @@
 [
     {
-      "label": "TEST DELETE LATER",
-      "duration": 70,
-      "price": 1100,
-      "antal_personer": 1,
-      "inkl": "makeup",
-      "tag": "yesss"
-    },
-    {
       "label": "Aften makeup",
       "duration": 70,
       "price": 1100,
