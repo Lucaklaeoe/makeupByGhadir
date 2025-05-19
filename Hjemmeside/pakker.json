@@ -1,94 +1,115 @@
 [
     {
+      "label": "TEST DELETE LATER",
+      "duration": 70,
+      "price": 1100,
+      "antal_personer": 1,
+      "inkl": "makeup",
+      "tag": "yesss"
+    },
+    {
       "label": "Aften makeup",
       "duration": 70,
       "price": 1100,
       "antal_personer": 1,
-      "inkl": "makeup"
+      "inkl": "makeup",
+      "tag": "makeup"
     },
       {
       "label": "Konfirmations makeup",
       "duration": 70,
       "price": 1100,
       "antal_personer": 1,
-      "inkl": "makeup"
+      "inkl": "makeup",
+      "tag": "makeup"
     },
       {
       "label": "Event makeup",
       "duration": 90,
       "price": 1200,
       "antal_personer": 1,
-      "inkl": "makeup, prisen er vejledende"
+      "inkl": "makeup, prisen er vejledende",
+      "tag": "makeup"
     },
     {
       "label": "Halloween makeup",
       "duration": 90,
       "price": 1300,
       "antal_personer": 1,
-      "inkl": "makeup, prisen er vejledende"
+      "inkl": "makeup, prisen er vejledende",
+      "tag": "makeup"
     },
     {
       "label": "Håropsætning",
       "duration": 70,
       "price": 900,
       "antal_personer": 1,
-      "inkl": "håropsætning, prisen er vejledende"
+      "inkl": "håropsætning, prisen er vejledende",
+      "tag": "hårstyling"
     },
     {
       "label": "Påsætning af extentions",
       "duration": 15,
       "price": 100,
       "antal_personer": 1,
-      "inkl": ""
+      "inkl": "",
+      "tag": "hårstyling"
     },
       {
       "label": "Brudemakeup",
       "duration": 90,
       "price": 2000,
       "antal_personer": 1,
-      "inkl": "makeup"
+      "inkl": "makeup",
+      "tag": "bridal"
     },
       {
       "label": "Brudehårstyling",
       "duration": 90,
       "price": 2000,
       "antal_personer": 1,
-      "inkl": "håropsætning"
+      "inkl": "håropsætning",
+      "tag": "bridal"
     },
       {
       "label": "Prøvemakeup",
       "duration": 90,
       "price": 1800,
       "antal_personer": 1,
-      "inkl": "prøvemakeup"
+      "inkl": "prøvemakeup",
+      "tag": "bridal"
     },
       {
       "label": "Prøvehårstyling 1",
       "duration": 90,
       "price": 1800,
       "antal_personer": 1,
-      "inkl": "prøvehårstyling"
+      "inkl": "prøvehårstyling",
+      "tag": "bridal"
     },
       {
       "label": "Brudepakke 1",
       "duration": 90,
       "price": 7600,
       "antal_personer": 1,
-      "inkl": "makeup, håropsætning, prøvemakeup, prøvehårstyling"
+      "inkl": "makeup, håropsætning, prøvemakeup, prøvehårstyling",
+      "tag": "bridal"
     },
       {
       "label": "Brudepakke 2",
       "duration": 90,
       "price": 7600,
       "antal_personer": 1,
-      "inkl": "makeup, håropsætning"
+      "inkl": "makeup, håropsætning",
+      "tag": "bridal"
     },
     {
       "label": "Udkørsel",
       "duration": 90,
       "price": 700,
       "antal_personer": 1,
-      "inkl": "gælder hele Sjælland, prisen er vejledende"
+      "inkl": "gælder hele Sjælland, prisen er vejledende",
+      "tag": "udkørsel"
     }
   ]
   
