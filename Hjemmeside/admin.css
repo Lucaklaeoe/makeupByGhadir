@@ -25,9 +25,11 @@
 }
 .admin-tabs .tabs li a{
     color: var(--dark-noir);
+    font-size: 16px;
 }
 .admin-tabs .tabs li.active-tab{
-    text-decoration: underline;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--dark-noir);
 }
 
 #accepteret{

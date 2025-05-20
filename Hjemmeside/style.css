@@ -49,7 +49,7 @@ header{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 56px 32px;
+    padding: 24px 32px;
     gap: 16px;
 }
 header p{
@@ -100,6 +100,7 @@ button, .button{
     min-width: 200px;
     cursor: pointer;
     margin: 0 auto;
+    text-align: center;
 }
 .primary-button:hover{
     border: solid 3px var(--sand-storm);
@@ -119,6 +120,11 @@ button, .button{
     min-width: 200px;
     cursor: pointer;
     margin: 0 auto;
+    text-align: center;
+}
+.secundary-button:hover{
+    border: solid 3px var(--sand-storm);
+    /* background: #eeb57980; */
 }
 .max-height{
     height: calc(100vh - var(--header-height));
@@ -131,7 +137,7 @@ button, .button{
         padding: 0 24px;
     }
     header{
-        padding: 32px 24px;
+        padding: 16px 24px;
     }
     header h1, header p{
         text-align: left;
@@ -190,6 +196,7 @@ nav{
     position: fixed;
     width: 100vw;
     z-index: 10;
+    pointer-events: none;
 }
 .navbar{
     display: flex;
@@ -200,6 +207,7 @@ nav{
 }
 .navbar a, .navbar svg{
     z-index: 5;
+    pointer-events: all;
 }
 .navbar ul{
     display: flex;
@@ -210,6 +218,7 @@ nav{
     font-weight: 400;
     font-size: 20px;
     padding-bottom: 1px;
+    pointer-events: all;
 }
 .navbar ul li a.current-site{
     border-bottom: 2px solid var(--midnight-blue);
@@ -218,6 +227,7 @@ nav{
     display: none;
     width: 32px;
     height: 32px;
+    pointer-events: all;
 }
 @media screen and (max-width: 768px) {
     .burger-menu{
@@ -329,7 +339,24 @@ footer{
     }
 }
 
+/* CTA */
+.cta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    flex-wrap: wrap;
+}
+.cta a{
+    margin: 0;
+}
+
 /* Galleri */
+.galleri{
+    padding: 0 64px;
+}
 .categories{
     position: relative;
     display: flex;
@@ -340,9 +367,11 @@ footer{
 }
 .categories li{
     cursor: pointer;
+    font-size: 16px;
 }
 .categories li.active{
-    text-decoration: underline;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--dark-noir);
 }
 
 .galleri-images{
@@ -354,8 +383,6 @@ footer{
     max-height: 1500px;
     overflow-y: scroll;
     padding: 0 32px;
-
-    scrollbar-color: #888 transparent;
 }
 .galleri-images::-webkit-scrollbar {
   width: 8px;
@@ -363,10 +390,6 @@ footer{
 .galleri-images::-webkit-scrollbar-track {
   background: transparent;
 }
-.galleri-images::-webkit-scrollbar-button {
-  display: none;
-}
-
 .galleri-images div{
     width: calc(100% / var(--columns) - (var(--colum-gap-size) / var(--columns) * (var(--columns) - 1)));
     height: fit-content;
@@ -381,6 +404,21 @@ footer{
 }
 .galleri-images img:hover{
     cursor: pointer;
+}
+@media screen and (max-width: 1280px) {
+    .galleri-images{
+        --columns: 3;
+    }
+}
+@media screen and (max-width: 768px) {
+    .galleri-images{
+        --columns: 2;
+        --colum-gap-size: 16px;
+        padding: 0;
+    }
+    .galleri{
+        padding: 0 24px;
+    }
 }
 
 
@@ -691,10 +729,12 @@ div.adresse-writer, div.adresse-writer2{
     gap: 64px;
 }
 .tabs-prisliste .tabs li{
+    font-size: 16px;
     cursor: pointer;
 }
 .tabs-prisliste .tabs li.active-tab{
-    text-decoration: underline;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--dark-noir);
 }
 
 .prisliste{
