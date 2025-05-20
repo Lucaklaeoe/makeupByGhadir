@@ -347,11 +347,26 @@ footer{
 
 .galleri-images{
     --columns: 4;
-    --colum-gap-size: 20px;
+    --colum-gap-size: 24px;
 
     display: flex;
     gap: var(--colum-gap-size);
+    max-height: 1500px;
+    overflow-y: scroll;
+    padding: 0 32px;
+
+    scrollbar-color: #888 transparent;
 }
+.galleri-images::-webkit-scrollbar {
+  width: 8px;
+}
+.galleri-images::-webkit-scrollbar-track {
+  background: transparent;
+}
+.galleri-images::-webkit-scrollbar-button {
+  display: none;
+}
+
 .galleri-images div{
     width: calc(100% / var(--columns) - (var(--colum-gap-size) / var(--columns) * (var(--columns) - 1)));
     height: fit-content;
