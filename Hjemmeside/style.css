@@ -100,6 +100,7 @@ button, .button{
     min-width: 200px;
     cursor: pointer;
     margin: 0 auto;
+    text-align: center;
 }
 .primary-button:hover{
     border: solid 3px var(--sand-storm);
@@ -119,6 +120,11 @@ button, .button{
     min-width: 200px;
     cursor: pointer;
     margin: 0 auto;
+    text-align: center;
+}
+.secundary-button:hover{
+    border: solid 3px var(--sand-storm);
+    /* background: #eeb57980; */
 }
 .max-height{
     height: calc(100vh - var(--header-height));
@@ -197,6 +203,9 @@ nav{
     align-items: center;
     height: var(--header-height);
     background: linear-gradient(180deg, rgba(238, 235, 232, 0.8) 60%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+    pointer-events: all;
+
 }
 .navbar a, .navbar svg{
     z-index: 5;
@@ -329,7 +338,25 @@ footer{
     }
 }
 
+/* CTA */
+.cta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    padding-top: 128px;
+    padding-bottom: 128px;
+}
+.cta a{
+    margin: 0;
+}
+
+
+
 /* Galleri */
+.galleri{
+    padding: 0 64px;
+}
 .categories{
     position: relative;
     display: flex;
@@ -340,9 +367,11 @@ footer{
 }
 .categories li{
     cursor: pointer;
+    font-size: 16px;
 }
 .categories li.active{
-    text-decoration: underline;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--dark-noir);
 }
 
 .galleri-images{
@@ -354,17 +383,12 @@ footer{
     max-height: 1500px;
     overflow-y: scroll;
     padding: 0 32px;
-
-    scrollbar-color: #888 transparent;
 }
 .galleri-images::-webkit-scrollbar {
   width: 8px;
 }
 .galleri-images::-webkit-scrollbar-track {
   background: transparent;
-}
-.galleri-images::-webkit-scrollbar-button {
-  display: none;
 }
 
 .galleri-images div{
@@ -691,10 +715,12 @@ div.adresse-writer, div.adresse-writer2{
     gap: 64px;
 }
 .tabs-prisliste .tabs li{
+    font-size: 16px;
     cursor: pointer;
 }
 .tabs-prisliste .tabs li.active-tab{
-    text-decoration: underline;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--dark-noir);
 }
 
 .prisliste{
