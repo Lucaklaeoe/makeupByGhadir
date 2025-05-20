@@ -83,5 +83,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const loadTheMasonry = document.getElementById("LOAD");
         loadTheMasonry.click();
         loadTheMasonry.click();
+
+        setTimeout(() => {
+            if(localStorage.getItem('masonryCategory')){
+                const category = localStorage.getItem('masonryCategory');
+                const buttons = document.querySelectorAll('.categories li');
+                buttons.forEach(button => {
+                    if(button.textContent == category){
+                        button.click();
+                    }
+                });
+                localStorage.removeItem('masonryCategory');
+            } 
+        }, 10)
     }, 10);
 });
