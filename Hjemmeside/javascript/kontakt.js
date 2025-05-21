@@ -46,19 +46,26 @@ function formIsFilled() {
 }
 
 function sendMail(){
-    alert('Beskeden vil blive sendt');
-    /*
-    emailjs.init("8on1XAeHXO55DA6Tp");
-    const messageInfo = {
+    emailjs.init("fYZvwmd-aKguwbHcg");
+    const email_info = {
         name: document.getElementById("fullname").value,
         email: document.getElementById("email").value,
         message: document.getElementById("message").value
     };
-    emailjs.send('service_kesfnw1', 'template_h23bpoo', messageInfo)
+    emailjs.send('service_e039kf4', 'template_qba368l', email_info)
         .then(() => {
         console.log('SUCCESS!');
-    }, (error) => {
+        alert('Tak for din besked!');
+        resetFields();
+        }, (error) => {
         console.log('FAILED...', error);
+        alert('Noget gik galt, prøv igen!');
     });
-    */
+}
+
+function resetFields(){
+    document.getElementById("fullname").value = '';
+    document.getElementById("email").value = '';
+    document.getElementById("message").value = '';
+    document.getElementById("sammentygge").checked = false;
 }
