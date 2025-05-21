@@ -47,16 +47,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('item');
 
-            itemDiv.innerHTML = `
-                <div class="beskrivelse">
-                    <p>${pakke.label}</p>
-                    <p>Tid: ${pakke.duration} min</p>
-                </div>
-                <div class="streg"></div>
-                <div class="pris">
-                    <p>${pakke.price} Kr.</p>
-                </div>
-            `;
+            console.log(pakke);
+            if(pakke.tag.includes('udkørsel')){
+                itemDiv.innerHTML = `
+                    <div class="beskrivelse">
+                        <p>${pakke.label}</p>
+                    </div>
+                    <div class="streg"></div>
+                    <div class="pris">
+                        <p>Fra ${pakke.price} Kr.</p>
+                    </div>
+                `;
+            }else{
+                itemDiv.innerHTML = `
+                    <div class="beskrivelse">
+                        <p>${pakke.label}</p>
+                        <p>Tid: ${pakke.duration} min</p>
+                    </div>
+                    <div class="streg"></div>
+                    <div class="pris">
+                        <p>${pakke.price} Kr.</p>
+                    </div>
+                `;
+            }
 
             categoryDiv.appendChild(itemDiv);
         });
