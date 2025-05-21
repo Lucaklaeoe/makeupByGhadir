@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
     }
     requiredFields.forEach(field => {
-        field.addEventListener('blur', (event) => {
+        field.addEventListener('change', (event) => {
             event.preventDefault();
             activateSubmitButton()
         })

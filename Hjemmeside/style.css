@@ -576,7 +576,48 @@ footer{
         min-width: 200px;
     }
 }
-
+.kontakt-mailform{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 440px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+.kontakt-mailform div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.kontakt-mailform input, .kontakt-mailform textarea{
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    margin-bottom: 16px;
+}
+.kontakt-mailform textarea{
+    height: 125px;
+}
+.kontakt-mailform input:last-child, .kontakt-mailform textarea:last-child{
+    margin-bottom: 0px;
+}
+.kontakt-mailform .checkbox{
+    flex-direction: row;
+    gap: 16px;
+}
+.kontakt-mailform .checkbox input{
+    width: 16px;
+    min-width: 16px;
+    margin: 0;
+}
+.kontakt-mailform .checkbox label{
+    margin: 0;
+}
+#send-message{
+    width: 200px;
+    min-width: 200px;
+}
 /* Galleri */
 .galleri{
     padding: 0 64px;

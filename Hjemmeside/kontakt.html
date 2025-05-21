@@ -106,20 +106,16 @@
             </div>
         </section>
         <section>
-            <form class="booking-form-2">
+            <form class="kontakt-mailform">
                 <div>
-                    <label for="Fulde navn">Dit fulde navn</label>
+                    <label for="Fulde navn">Kontaktformular</label>
                     <input type="text" class="fields" id="fullname" name="Fulde navn" placeholder="Fulde navn *" autocomplete="name" required>
-                </div>
-
-                <div>
-                    <label for="email">Kontakt</label>
                     <input type="email" class="fields" id="email" name="email" placeholder="E-mail *" autocomplete="email" required>
                 </div>
 
                 <div>
-                    <label for="Kommentare">Kommentare</label>
-                    <textarea name="Kommentare" class="fields" id="message" placeholder="Har du allergier, en hårtype jeg skal tage hensyn til eller andet."></textarea>
+                    <label for="Kommentare">Besked</label>
+                    <textarea name="Kommentare" class="fields" id="message" placeholder="Skriv din besked her" required></textarea>
                 </div>
 
                 <div class="checkbox">
@@ -128,7 +124,7 @@
                 </div>
 
                 <div class="actions">
-                    <input type="submit" id="make_booking" class="fields primary-button disabled" value="Indsend">
+                    <input type="submit" id="send-message" class="fields primary-button disabled" value="Indsend">
                 </div>
 
             </form>
@@ -162,7 +158,9 @@
         </section>
     </footer>
     
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="javascript/min/faq.min.js"></script>
+    <script src="javascript/min/kontakt.min.js"></script>
     <script src="javascript/min/script.min.js"></script>
 </body>
 </html>
