@@ -338,7 +338,7 @@ function insertBookingInfo(item, requested = true){
                     item.remove();
                     document.getElementById("R"+bookingid).remove();
                     addTimeToKaldender(day, start_time, insertedRow.duration, false, "#1a2663", "A" + insertedRow.id);
-                    sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services));
+                    sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services).replaceAll("<br>", "| "), chooseAdress(insertedRow.location_for_work, insertedRow.adress));
                 }
                 else{
                     alert('Crital error, kontakt din administrator');
@@ -350,6 +350,13 @@ function insertBookingInfo(item, requested = true){
         });
     }
     if(requested) setTimeout(() => setChoiceButtons(id, item), 0);
+}
+
+function chooseAdress(adress1, adress2) {
+    if(adress1.replace(",", "").trim() != ""){
+        return adress1;
+    }
+    else return adress2;
 }
 
 function validateBooking(giveMessage = false) {
@@ -370,26 +377,20 @@ function sendAfvidstMail(name, email) {
         console.log('FAILED...', error);
     });
 }
-function sendGodkendtMail(name, email, dato, tid, ydelse) {
-    //alert('Beskeden vil blive sendt');
-    
-    emailjs.init("8on1XAeHXO55DA6Tp");
+function sendGodkendtMail(name, email, dato, tid, ydelse, location) {
+    emailjs.init("fYZvwmd-aKguwbHcg");
     const email_info = {
         name: name,
         email: email,
         dato: dato,
         tid: tid,
-        ydelse: ydelse
+        ydelse: ydelse,
+        location: location
     };
-
-    console.log(email_info);
-
-    /*
-    emailjs.send('service_kesfnw1', 'template_odhfxvo', email_info)
+    emailjs.send('service_e039kf4', 'template_h9iylsd', email_info)
         .then(() => {
         console.log('SUCCESS!');
         }, (error) => {
         console.log('FAILED...', error);
-    });*/
-    
+    });
 }
