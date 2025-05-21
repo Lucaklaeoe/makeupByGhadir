@@ -363,6 +363,7 @@ footer{
     padding: 0;
     width: 100%;
     height: fit-content;
+    max-width: 1920px;
 }
 .hero-header video{
     height: 100%;
@@ -484,6 +485,9 @@ footer{
     font-weight: 400;
     letter-spacing: 0;
 }
+.om-mig .text p{
+    width: 80%;
+}
 @media screen and (max-width: 1280px) {
     .om-mig div{
         width: 60%;
@@ -507,10 +511,9 @@ footer{
         top: 0;
         left: 0;
     }
-    .om-mig .text{
+    .om-mig .text, .om-mig .text p{
         width: 100%;
     }
-
 }
 
 /* Kontakt */
