@@ -197,7 +197,7 @@ function validateBooking(giveMessage = true) {
 
     const selectedDate = stringToDateObject(datePicker.value + ' ' + timePicker.value).toISOString().split('T')[0];
     const yourStartMinutes = timeToMinutes(timePicker.value);
-    const yourEndMinutes = yourStartMinutes + TotalTimeOfYourBooking;
+    const yourEndMinutes = yourStartMinutes + TotalTimeOfYourBooking + GhadirPause;
     //1050 is 17:00 --- if you log 'yourEndMinuts' and let it hit the end of the kaldender
     if(yourEndMinutes >= 1050) {
         if(giveMessage) alert('Din tid er ude for kaldender');
@@ -278,7 +278,6 @@ async function insertAllreadyBookedBookings(currentDate) {
             const day = new Date(item.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
             const start_time = item.start_time.split('T')[1].slice(0, -3);
             const duration = item.duration;
-            supabaseData
             supabaseData.push(item);
             addTimeToKaldender(day, start_time, duration);
         })

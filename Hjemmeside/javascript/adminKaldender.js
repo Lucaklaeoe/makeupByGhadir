@@ -338,7 +338,7 @@ function insertBookingInfo(item, requested = true){
                     item.remove();
                     document.getElementById("R"+bookingid).remove();
                     addTimeToKaldender(day, start_time, insertedRow.duration, false, "#1a2663", "A" + insertedRow.id);
-                    //SEND MAIL AT DEN ER BLEVET GODKENDT
+                    sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services));
                 }
                 else{
                     alert('Crital error, kontakt din administrator');
@@ -369,4 +369,27 @@ function sendAfvidstMail(name, email) {
         }, (error) => {
         console.log('FAILED...', error);
     });
+}
+function sendGodkendtMail(name, email, dato, tid, ydelse) {
+    //alert('Beskeden vil blive sendt');
+    
+    emailjs.init("8on1XAeHXO55DA6Tp");
+    const email_info = {
+        name: name,
+        email: email,
+        dato: dato,
+        tid: tid,
+        ydelse: ydelse
+    };
+
+    console.log(email_info);
+
+    /*
+    emailjs.send('service_kesfnw1', 'template_odhfxvo', email_info)
+        .then(() => {
+        console.log('SUCCESS!');
+        }, (error) => {
+        console.log('FAILED...', error);
+    });*/
+    
 }
