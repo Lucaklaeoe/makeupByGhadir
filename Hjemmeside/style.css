@@ -52,11 +52,8 @@ header{
     padding: 24px 32px;
     gap: 16px;
 }
-header p{
-    font-size: 16px;
-}
 p, div, li, a, textarea{
-    font-size: 14px;
+    font-size: 16px;
 }
 h1, h2, h3, h4, h5, h6, nav{
     font-family: var(--font-overskrift);
@@ -996,7 +993,6 @@ div.adresse-writer, div.adresse-writer2{
     gap: 64px;
 }
 .tabs-prisliste .tabs li{
-    font-size: 16px;
     cursor: pointer;
 }
 .tabs-prisliste .tabs li.active-tab{
@@ -1038,9 +1034,6 @@ div.adresse-writer, div.adresse-writer2{
     flex-direction: column;
     min-width: fit-content;
 }
-.prisliste .category .beskrivelse p:first-child, .prisliste-bridal .category .beskrivelse p:first-child{
-    font-size: 16px;
-}
 .prisliste .category .streg, .prisliste-bridal .category .streg{
     display: block;
     height: 0px;
@@ -1049,7 +1042,6 @@ div.adresse-writer, div.adresse-writer2{
     margin: 0 8px;
 }
 .prisliste .category .pris, .prisliste-bridal .category .pris{
-    font-size: 16px;
     font-weight: 600;
     min-width: fit-content;
 }
