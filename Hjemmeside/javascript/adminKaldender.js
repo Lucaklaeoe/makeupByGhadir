@@ -338,7 +338,7 @@ function insertBookingInfo(item, requested = true){
                     item.remove();
                     document.getElementById("R"+bookingid).remove();
                     addTimeToKaldender(day, start_time, insertedRow.duration, false, "#1a2663", "A" + insertedRow.id);
-                    sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services).replaceAll("<br>", "| "), chooseAdress(insertedRow.location_for_work, insertedRow.adress));
+                    sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services).replaceAll("<br>", "| "), chooseAdress(insertedRow.location_for_work, insertedRow.adress), "A" + insertedRow.id);
                 }
                 else{
                     alert('Crital error, kontakt din administrator');
@@ -377,9 +377,10 @@ function sendAfvidstMail(name, email) {
         console.log('FAILED...', error);
     });
 }
-function sendGodkendtMail(name, email, dato, tid, ydelse, location) {
+function sendGodkendtMail(name, email, dato, tid, ydelse, location, id) {
     emailjs.init("fYZvwmd-aKguwbHcg");
     const email_info = {
+        id: id,
         name: name,
         email: email,
         dato: dato,
