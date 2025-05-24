@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         activateSubmitButton()
     })
+
+    const make_booking = document.getElementById('make_booking');
+    make_booking.addEventListener('click', (event) => {
+        event.preventDefault();
+        makeRequestBooking();
+    })
 })
 
 async function makeRequestBooking() {
@@ -69,43 +75,38 @@ async function makeRequestBooking() {
     if (response.ok) {
         //console.log('Row inserted:', data);
         sendMail();
+        window.location = 'bookingConfirmed.html';
     } else {
         alert('Noget gik galt, prøv igen');
   }
 }
 
-function formIsFilled() {
+function formIsFilled(giveInfo = false) {
     const requiredFields = document.querySelectorAll('[required]');
     var return_this = true;
     requiredFields.forEach(field => {
         if(field.value.trim() == '' || field.value == null || field.value == undefined) {
             return_this = false;
+            if(!field.classList.contains('not-filled') && giveInfo){
+                field.classList.add('not-filled');
+                field.addEventListener('input', () => {
+                    field.classList.remove('not-filled');
+                })
+            };
         }
     });
     const sammentygge = document.getElementById("sammentygge");
-    if(!sammentygge.checked) return_this = false;
+    if(!sammentygge.checked){
+        return_this = false;
+        if(giveInfo) alert('Du skal godkende databeskyttelseslovgivning for at kunne booke');
+    } 
     return return_this;
 }
 
 function fillFormAndCheck(giveMessage = true) {
     BookingInfo = {};
-    const requiredFields = document.querySelectorAll('[required]');
-    requiredFields.forEach(field => {
-        if(field.value.trim() == '' || field.value == null || field.value == undefined) {
-            field.classList.add('not-filled');
-            field.addEventListener('input', () => {
-                field.classList.remove('not-filled');
-            })
-        }
-        else if(field.classList.contains('not-filled')) {
-            field.classList.remove('not-filled');
-        }
-    });
 
-    const sammentygge = document.getElementById("sammentygge");
-    if(!sammentygge.checked) return false;
-
-    if(document.querySelector('.not-filled')) return false;
+    if(!formIsFilled(giveMessage)) return false;
 
     const selectedServices = JSON.parse(localStorage.getItem('selectedservices'));
 
@@ -148,14 +149,6 @@ function fillFormAndCheck(giveMessage = true) {
     return true;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const make_booking = document.getElementById('make_booking');
-    make_booking.addEventListener('click', (event) => {
-        event.preventDefault();
-        makeRequestBooking();
-    })
-})
-
 function sendMail(){
     emailjs.init("8on1XAeHXO55DA6Tp");
     const email_info = {
@@ -165,7 +158,6 @@ function sendMail(){
     emailjs.send('service_kesfnw1', 'template_h23bpoo', email_info)
         .then(() => {
         console.log('SUCCESS!');
-        window.location = 'bookingConfirmed.html';
     }, (error) => {
         console.log('FAILED...', error);
     });
