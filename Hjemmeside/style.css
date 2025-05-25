@@ -52,6 +52,10 @@ header{
     padding: 24px 32px;
     gap: 16px;
 }
+.dumdum{
+    text-align: center;
+    line-height: 150%;
+}
 p, div, li, a, textarea{
     font-size: 16px;
 }
@@ -1089,3 +1093,4 @@ div.adresse-writer, div.adresse-writer2{
         width: 100%;
     }
 }
+
