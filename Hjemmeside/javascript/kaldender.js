@@ -1,8 +1,8 @@
+const GhadirPause = 30;
+//Can  change ---
+//Dont change ---
 const datePicker = document.getElementById('datepicker');
 const timePicker = document.getElementById('timepicker');
-const GhadirPause = 30;
-
-//Dont change ---
 var TotalTimeOfYourBooking = 0;
 var supabaseData = [];
 
@@ -160,7 +160,7 @@ function addYourTimeKaldender(time){
 
 function getSelectedServices(){
     const selectedServices = {};
-    console.log(datePicker.value + ' ' + timePicker.value);
+    //console.log(datePicker.value + ' ' + timePicker.value);
     const splitedDate = datePicker.value.split('-');
     selectedServices['datetime'] = splitedDate[2] + splitedDate[1] + splitedDate[0] + 'T' + timePicker.value + ':00.000Z';
     var totalPrice = 0;

@@ -2,7 +2,6 @@ function renderWeek(date) {
 
     if(document.getElementById('week').textContent.replace('Uge ', '') != getWeekNumber(date)) {
         document.querySelectorAll('.booking-time').forEach(time => {
-            if(time.classList.contains('your-booking')) return;
             time.remove();
         })
         document.querySelectorAll('.booking-item').forEach(item => {
@@ -98,7 +97,6 @@ async function insertBookings(currentDate) {
             supabaseData
             supabaseData.push(item);
             addTimeToKaldender(day, start_time, duration, false, "#eeb579", "R" + item.id);
-            //ADD TO KALDENDER GOKENDELSE LISTE
             insertBookingInfo(item);
         })
     } else {
@@ -124,7 +122,6 @@ async function insertBookings(currentDate) {
             const duration = item.duration;
             supabaseData.push(item);
             addTimeToKaldender(day, start_time, duration, false, "#1a2663", "A" + item.id);
-            //ADD TO KALDENDER GODKENDTE LISTE
             insertBookingInfo(item, false);
         })
     } else {
@@ -207,7 +204,7 @@ function calcHeightOnChildItems(currentActiveTab){
 function calculateheight(id){
     const item = document.getElementById("ADMIN"+id);
     if(item.classList.contains("calculated")) return;
-    console.log(id);
+    //console.log(id);
     item.classList.add("calculated");
     const body = item.querySelector(".booking-body");
     const bodyHeight = body.getBoundingClientRect().height;
@@ -341,7 +338,7 @@ function insertBookingInfo(item, requested = true){
                     sendGodkendtMail(insertedRow.fulde_navn, insertedRow.email, insertedRow.start_time.split('T')[0], start_time, serviceNameAndCounts(insertedRow.services).replaceAll("<br>", "| "), chooseAdress(insertedRow.location_for_work, insertedRow.adress), "A" + insertedRow.id);
                 }
                 else{
-                    alert('Crital error, kontakt din administrator');
+                    alert('Noget gik galt, prøv igen eller genindlæs din browser');
                 }
             }
             else{
