@@ -95,6 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 localStorage.removeItem('masonryCategory');
             } 
-        }, 10)
-    }, 10);
+        }, 1)
+    }, 1);
 });
