@@ -157,7 +157,7 @@ function sendMail(){
     };
     emailjs.send('service_kesfnw1', 'template_h23bpoo', email_info)
         .then(() => {
-        console.log('SUCCESS!');
+        //console.log('SUCCESS!');
     }, (error) => {
         console.log('FAILED...', error);
     });

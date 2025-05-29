@@ -11,7 +11,7 @@ input.addEventListener('input', async () => {
   const res = await fetch(url);
   const data = await res.json();
 
-  console.log(data);
+  //console.log(data);
   suggestionsList.innerHTML = '';
 
   data.results.forEach(place => {

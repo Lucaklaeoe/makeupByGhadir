@@ -54,7 +54,7 @@ function sendMail(){
     };
     emailjs.send('service_e039kf4', 'template_qba368l', email_info)
         .then(() => {
-        console.log('SUCCESS!');
+        //console.log('SUCCESS!');
         alert('Tak for din besked!');
         resetFields();
         }, (error) => {

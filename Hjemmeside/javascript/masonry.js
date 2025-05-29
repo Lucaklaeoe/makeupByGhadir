@@ -78,7 +78,7 @@ function appendimg(img, columns, mode = "append") {
 
 document.addEventListener("DOMContentLoaded", () => {
     makeMasonry();
-    console.log("masonry loaded");
+    //console.log("masonry loaded");
     setTimeout(() => {
         const loadTheMasonry = document.getElementById("LOAD");
         loadTheMasonry.click();

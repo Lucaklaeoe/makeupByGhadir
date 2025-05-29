@@ -1,3 +1,4 @@
+//Render the kaldender week with the given date
 function renderWeek(date) {
 
     if(document.getElementById('week').textContent.replace('Uge ', '') != getWeekNumber(date)) {
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderWeek(currentDate);
 })
 
+//Insert all the bookings into the kaldender
 var supabaseData = [];
 async function insertBookings(currentDate) {
     supabaseData = [];
@@ -129,6 +131,7 @@ async function insertBookings(currentDate) {
     }
 }
 
+//Inserts the booking info into the kaldender
 function serviceNameAndCounts(services) {
     const counts = {};
 
@@ -144,6 +147,7 @@ function serviceNameAndCounts(services) {
     return returnString;
 }
 
+//Converts a date to a string
 function dateToString(date, time = false) {
     date = new Date(date);
     if(!time){
@@ -159,6 +163,7 @@ function dateToString(date, time = false) {
     }
 }
 
+//Converts a time to an end time
 function toEndTime(time, duration){
     const timeSplit = time.split(':');
     const hours = Number(timeSplit[0]) + Math.floor(duration / 60);
@@ -167,11 +172,13 @@ function toEndTime(time, duration){
     return `${hours}:${minutes}`
 }
 
+//Returns the location for work
 function location_for_work(address){
     if(address == null || address.trim() == "," || address.trim() == "" || address == undefined) return "Ikke udfyldt";
     return address;
 }
 
+//Returns the accept and reject buttons
 function acceptRejectButtons(requested){
     if(requested){
         return `
@@ -189,11 +196,13 @@ function acceptRejectButtons(requested){
     }
 }
 
+//Returns the message
 function textArea(message){
     if(message == null || message.trim() == "" || message == undefined) return "";
     return `<textarea readonly class="message">${message}</textarea>`;
 } 
 
+//Calculates the height of the booking items
 function calcHeightOnChildItems(currentActiveTab){
     const bookingItems = currentActiveTab.querySelectorAll(".booking-item");
     bookingItems.forEach((item) => {
@@ -201,6 +210,7 @@ function calcHeightOnChildItems(currentActiveTab){
     })
 }
 
+//Calculates the height of the booking items
 function calculateheight(id){
     const item = document.getElementById("ADMIN"+id);
     if(item.classList.contains("calculated")) return;
@@ -234,6 +244,7 @@ function calculateheight(id){
     body.style.height = height + "px";
 }
 
+//Inserts the booking info
 function insertBookingInfo(item, requested = true){
     const appendIn = requested ? document.getElementById('requested') : document.getElementById('accepteret');
     const id = requested ? "R" + item.id : "A" + item.id;
@@ -349,6 +360,7 @@ function insertBookingInfo(item, requested = true){
     if(requested) setTimeout(() => setChoiceButtons(id, item), 0);
 }
 
+//Returns the location for work
 function chooseAdress(adress1, adress2) {
     if(adress1.replace(",", "").trim() != ""){
         return adress1;
@@ -356,11 +368,13 @@ function chooseAdress(adress1, adress2) {
     else return adress2;
 }
 
+//Return true for the worker
 function validateBooking(giveMessage = false) {
     if(giveMessage) alert('Booking auto valideret');
     return true;
 }
 
+//Send afvidst mail
 function sendAfvidstMail(name, email) {
     emailjs.init("8on1XAeHXO55DA6Tp");
     const email_info = {
@@ -369,11 +383,12 @@ function sendAfvidstMail(name, email) {
     };
     emailjs.send('service_kesfnw1', 'template_odhfxvo', email_info)
         .then(() => {
-        console.log('SUCCESS!');
+        //console.log('SUCCESS!');
         }, (error) => {
         console.log('FAILED...', error);
     });
 }
+//Send godkendt mail
 function sendGodkendtMail(name, email, dato, tid, ydelse, location, id) {
     emailjs.init("fYZvwmd-aKguwbHcg");
     const email_info = {
@@ -387,7 +402,7 @@ function sendGodkendtMail(name, email, dato, tid, ydelse, location, id) {
     };
     emailjs.send('service_e039kf4', 'template_h9iylsd', email_info)
         .then(() => {
-        console.log('SUCCESS!');
+        //console.log('SUCCESS!');
         }, (error) => {
         console.log('FAILED...', error);
     });

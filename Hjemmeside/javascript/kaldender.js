@@ -6,6 +6,7 @@ const timePicker = document.getElementById('timepicker');
 var TotalTimeOfYourBooking = 0;
 var supabaseData = [];
 
+//Render the kaldender week with the given date
 function renderWeek(date, setDatePicker = true) {
     if(setDatePicker) {
         const oneDayAhead = new Date(date) <= new Date() ? new Date() : new Date(date);
@@ -63,6 +64,7 @@ function renderWeek(date, setDatePicker = true) {
         });
     }
 }
+//Add a service to the choosen service list
 function addService(service) {
     const selectedServices = document.getElementById('selected_services_list');
     const newService = document.createElement('div');
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     });
 })
-
+//Adds time to kaldender
 function addYourTimeKaldender(time){
     TotalTimeOfYourBooking += time;
     const dateName = stringToDateObject(datePicker.value + " " + timePicker.value).toLocaleDateString("en-US", { weekday: "long" });
@@ -157,7 +159,7 @@ function addYourTimeKaldender(time){
         addTimeToKaldender(dateName.toLocaleLowerCase(), timePicker.value, TotalTimeOfYourBooking + GhadirPause, true);
     }
 }
-
+//Returns the selected services
 function getSelectedServices(){
     const selectedServices = {};
     //console.log(datePicker.value + ' ' + timePicker.value);
@@ -182,7 +184,7 @@ function getSelectedServices(){
     selectedServices['totalPrice'] = totalPrice;
     return selectedServices;
 }
-
+//Checks if the booking is valid
 function validateBooking(giveMessage = true) {
     if (!supabaseData) return true;
 
@@ -227,8 +229,7 @@ function validateBooking(giveMessage = true) {
     //return true if 
     return !somethingIsBooked;
 }
-
-
+//Renders the services
 function renderServiceOptions(){
     const selector = document.getElementById("add_services");
     const services = fetch('pakker.json').then(response => response.json());
@@ -242,7 +243,7 @@ function renderServiceOptions(){
         });
     });
 }
-
+//Renders the kaldender
 async function insertAllreadyBookedBookings(currentDate) {
     supabaseData = [];
     function getNextSunday(date = new Date()) {

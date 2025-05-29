@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('item');
 
-            console.log(pakke);
+            //console.log(pakke);
             if(pakke.tag.includes('udkørsel')){
                 itemDiv.innerHTML = `
                     <div class="beskrivelse">
