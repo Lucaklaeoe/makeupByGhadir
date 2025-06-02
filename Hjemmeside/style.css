@@ -678,6 +678,7 @@ footer{
     display: flex;
     gap: var(--colum-gap-size);
     max-height: 1500px;
+    height: 1500px;
     overflow-y: scroll;
     padding: 0 32px;
 }
