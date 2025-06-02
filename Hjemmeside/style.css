@@ -371,6 +371,7 @@ footer{
 }
 .hero-header video{
     height: 100%;
+    min-height: fit-content;
     width: 100%;
     object-fit: cover;
 }
@@ -383,11 +384,32 @@ footer{
     justify-content: flex-start;
     align-items: center;
 }
+.hero-video-overlay-tagline{
+    position: absolute;
+    padding: 0 24px;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    color: var(--snow-white);
+    text-shadow: #000000 1px 0 10px;
+}
+.hero-video-overlay-tagline h1{
+    text-align: center;
+}
 @media screen and (max-width: 768px) {
     .hero-video-overlay{
         flex-direction: column;
         left: 32px;
         bottom: 48px;
+        gap: 16px;
+    }
+    .hero-video-overlay-tagline{
+        top: 20%;
+    }
+    .hero-video-overlay-tagline h1{
+        font-size: 20px;
     }
 }
 /* Mini galleri */
