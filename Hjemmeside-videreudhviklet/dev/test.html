@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="dk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testpage for makeupByGhadir</title>
+    <link rel="stylesheet" href="../min/style.min.css">
+    <link rel="shortcut icon" href="../img/testimage.png" type="image/x-icon">
+
+    <!-- Font test styles -->
+    <style>
+        .font-test p{
+            font-size: 20px;
+            height: 30px;
+        }
+        .font-test p:nth-child(2){
+            font-weight: 100;
+        }
+        .font-test p:nth-child(3){
+            font-weight: 200;
+        }
+        .font-test p:nth-child(4){
+            font-weight: 300;
+        }
+        .font-test p:nth-child(5){
+            font-weight: 400;
+        }
+        .font-test p:nth-child(6){
+            font-weight: 500;
+        }
+        .font-test p:nth-child(7){
+            font-weight: 600;
+        }
+        .font-test p:nth-child(8){
+            font-weight: 700;
+        }
+        .font-test p:nth-child(9){
+            font-weight: 800;
+        }
+        .font-test p:nth-child(10){
+            font-weight: 900;
+        }
+        .font-test p:nth-child(11){
+            font-weight: 1000;
+        }
+        .font-test p:nth-child(12){
+            font-style: italic;
+        }
+    </style>
+    <!-- button styles -->
+    <style>
+        .button{
+            padding: 0 20px;
+            border: 3px solid var(--color);
+            border-radius: 5px;
+            min-height: 44px;
+            min-width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: fit-content;
+            box-shadow: 1px 2px 5px 2px rgba(0, 0, 0, 0.15);
+            color: black;
+        }
+        .solid{
+            background-color: var(--color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <button onclick="testrequest()">test superbase requestbooking</button>
+
+    <br><br>
+
+    <form id="contact-form">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+      
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required>
+      
+        <input type="submit" value="Send">
+    </form>
+
+    <br><br>
+
+    <div>Font test:</div>
+    <div style="display: flex; gap: 64px;">
+        <div class="font-test" style="font-family: 'Open Sans', sans-serif;">
+            <p>Open Sans standard</p>
+            <p>Open Sans 100</p>
+            <p>Open Sans 200</p>
+            <p>Open Sans 300</p>
+            <p>Open Sans 400 </p>
+            <p>Open Sans 500 </p>
+            <p>Open Sans 600</p>
+            <p>Open Sans 700</p>
+            <p>Open Sans 800</p>
+            <p>Open Sans 900</p>
+            <p>Open Sans 1000</p>
+            <p>Open Sans Italic</p>
+        </div>
+        <div class="font-test" style="font-family: 'Playfair', serif;">
+            <p>playfair standard</p>
+            <p>playfair 100</p>
+            <p>playfair 200</p>
+            <p>playfair 300</p>
+            <p>playfair 400 </p>
+            <p>playfair 500 </p>
+            <p>playfair 600</p>
+            <p>playfair 700</p>
+            <p>playfair 800</p>
+            <p>playfair 900</p>
+            <p>playfair 1000</p>
+            <p>playfair Italic</p>
+        </div>
+        <div class="font-test" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+            <p>system ui standard</p>
+            <p>system ui 100</p>
+            <p>system ui 200</p>
+            <p>system ui 300</p>
+            <p>system ui 400 </p>
+            <p>system ui 500 </p>
+            <p>system ui 600</p>
+            <p>system ui 700</p>
+            <p>system ui 800</p>
+            <p>system ui 900</p>
+            <p>system ui 1000</p>
+            <p>system ui Italic</p>
+        </div>
+        <div class="font-test" style="font-family: 'Belleza', sans-serif;">
+            <p>Belleza standard</p>
+            <p>Belleza 100</p>
+            <p>Belleza 200</p>
+            <p>Belleza 300</p>
+            <p>Belleza 400 </p>
+            <p>Belleza 500 </p>
+            <p>Belleza 600</p>
+            <p>Belleza 700</p>
+            <p>Belleza 800</p>
+            <p>Belleza 900</p>
+            <p>Belleza 1000</p>
+            <p>Belleza Italic</p>
+        </div>
+        <div class="font-test" style="font-family: 'Raleway', sans-serif;">
+            <p>railway standard</p>
+            <p>railway 100</p>
+            <p>railway 200</p>
+            <p>railway 300</p>
+            <p>railway 400 </p>
+            <p>railway 500 </p>
+            <p>railway 600</p>
+            <p>railway 700</p>
+            <p>railway 800</p>
+            <p>railway 900</p>
+            <p>railway 1000</p>
+            <p>railway Italic</p>
+        </div>
+        <div class="font-test" style="font-family: 'Tenor Sans', sans-serif;">
+            <p>Tenor Sans standard</p>
+            <p>Tenor Sans 100</p>
+            <p>Tenor Sans 200</p>
+            <p>Tenor Sans 300</p>
+            <p>Tenor Sans 400 </p>
+            <p>Tenor Sans 500 </p>
+            <p>Tenor Sans 600</p>
+            <p>Tenor Sans 700</p>
+            <p>Tenor Sans 800</p>
+            <p>Tenor Sans 900</p>
+            <p>Tenor Sans 1000</p>
+            <p>Tenor Sans Italic</p>
+        </div>
+    </div>
+
+    <br>
+
+    <div>
+        <p style="font-family: 'Open Sans', sans-serif; font-size: 20px;">This is a paragraph, with a crazy text font famaly</p>
+        <p style="font-family: 'Tenor Sans', sans-serif; font-size: 20px;">This is a paragraph, with a crazy text font famaly</p>
+    </div>
+
+    <br>
+
+    <svg data-name="Ghadir logo" alt="Makeup by Ghadir" class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.31 40.04"><g data-name="01"><path class="logo-bg" d="M49.95,26.23c.24.14,1.74.6,2.19.74,1.68.52,3.08.77,4.81.77.34,0,.67,0,1.01,0,.03.23-.21.42-.4.45-1.38.23-3.76-.15-5.12-.58-.42-.13-.81-.36-1.25-.48s-.96-.13-1.38-.28c-.25-.09-.53-.32-.77-.41-.89-.32-1.58-.31-2.45-.89-.18-.12-.43-.41-.53-.47-.17-.09-.44-.06-.62-.12-.2-.06-1.36-.86-1.45-.75.14.3-.05.55-.05.74-.02.53.05,1.12,0,1.68-.15,1.58-1.14,3.87-2.13,5.03-.88,1.02-1.54,1.78-2.81,2.25-.12.04-.4.13-.52.17-1.11.33-2.13.51-3.29.3-2.4-.44-3.98-1.64-5.86-3.14-1.06-.85-1.87-2.06-2.79-3.06-.07-.08-.13-.18-.24-.16l-1.12,2.85c-.72,1.69-1.54,3.32-2.25,5.03-.45,1.09-1.08,3.3-2.07,3.93-.28.18-.5.29-.83.18-.13-.04-.77-.41-.8-.51-.07-.25-.03-.59.21-.72.17-.09.3-.05.45-.1.08-.03.14-.12.23-.15.18-.06.51-.02.65-.15.09-.08.15-.3.21-.4.82-1.17.95-1.87,1.51-3.12.91-2.01,1.81-3.8,2.67-5.88.15-.37.66-1.21.7-1.52.06-.47-.6-1.26-.84-1.68-2.17-3.86-5.47-9.74-1.09-13.26.51-.41,1.23-.51,1.85-.58,1.76-.18,3.21.22,4.76,1.12.2.12,1.05.83,1.18.72.02-.02.05-.38.08-.46.15-.46.29-.92.46-1.32.92-2.11,1.53-4.86,2.52-6.87.66-1.34,1.16-3.09,2.01-4.38.06-.1.59-.72.64-.74.32-.1.79.24,1.02.44.29.25,1.31,1.65,1.41,1.99.12.45.13.4.3.78,1.12,2.54,1.64,4.91,2.14,7.65.41,2.22.9,4.67,1.13,6.92.03.28.04,1.04.07,1.15.1.49.35,1.14.41,1.69.09.81-.01,1.79.08,2.62.17.13.32.34.49.45,1.6,1.15,3.83,1.58,5.46,2.51ZM38.12,1.31c-.3-.18-.81.33-.99.57-.63.86-.87,1.76-1.32,2.72-.28.6-.96,1.66-1.12,2.23-.51,1.72-1.19,3.43-1.78,5.14-.2.58-.56,1.34-.71,1.89-.04.16-.07.28.04.42.98.78,1.86,1.67,2.82,2.47.48.4.89.63,1.37,1,1.61,1.23,3.1,2.57,4.74,3.75.48.35,1.44,1.1,1.93,1.31s.23-.61.22-.88c-.03-.99-.05-1.67-.19-2.64-.21-1.53-.51-3.06-.78-4.59-.58-3.37-1.06-6.74-2.3-9.94-.48-1.24-.99-2.54-1.93-3.46ZM29.27,19.62c.08-.13.05-.35.11-.49.48-1.18.94-2.38,1.46-3.54.13-.3.55-.75.37-1.09-.03-.06-.89-.66-1.01-.73-2.2-1.31-5.49-1.84-7.06.71s-.08,6.37,1.23,8.79c.37.68.79,1.33,1.12,2.03.2.41.16.36.41.73.07.1.25.62.4.51.02-.01.07-.34.11-.43.62-1.44,1.37-2.86,1.92-4.28.31-.81.46-1.46.94-2.19ZM43.44,23.83c-.29-.07-.52-.35-.76-.51-2.26-1.54-4.39-3.19-6.55-4.87-.49-.38-1.03-.71-1.51-1.11-.81-.67-1.8-1.86-2.71-2.29-.06-.03-.18-.08-.23-.05-.03.02-.18.56-.24.69-1.07,2.24-2.05,4.76-2.99,7.08-.1.24-.44.69-.46.74-.03.09.02.24-.04.4-.31.96-.94,1.88-1.18,2.87-.12.49.05.67.32,1.05.22.3.56.61.79.9.07.09.2.42.27.49.08.07.25.09.37.19.21.16.52.59.76.81.63.56,1.31.99,1.92,1.51.23.19.52.64.74.76,1.23.71,3.22,1.11,4.63,1.17,2.84.11,5.12-2.46,6.16-5.02.63-1.56.72-3.13.69-4.82Z"/><g><path d="M6.98,27.32c-.35.16-.73.28-1.15.38-.42.1-.8.15-1.15.15-.94,0-1.76-.18-2.47-.55-.71-.36-1.25-.87-1.64-1.51-.38-.64-.58-1.38-.58-2.2,0-1.03.2-1.91.61-2.62.41-.72.96-1.25,1.64-1.61s1.45-.53,2.28-.53c.54,0,1.04.06,1.51.18s.89.28,1.25.47l-.56,1.62c-.23-.13-.55-.25-.95-.35-.4-.11-.74-.16-1.01-.16-.96,0-1.69.24-2.2.72-.51.48-.76,1.19-.76,2.14,0,.54.12,1.02.37,1.42s.59.71,1.04.93c.44.22.95.32,1.52.32s.95-.08,1.21-.23v-1.07h-1.52v-1.68h3.29v3.73c-.14.14-.38.29-.73.45Z"/><path d="M22.77,27.76h-1.74v-3.59h-3.95v3.59h-1.74v-8.83h1.74v3.56h3.95v-3.56h1.74v8.83Z"/><path d="M35.78,26.03h-2.93l-.72,1.73h-1.72l3.98-9.18h.1l3.98,9.18h-2.02l-.68-1.73ZM35.2,24.57l-.85-2.15-.89,2.15h1.74Z"/><path d="M46.11,18.93h2.64c1.13,0,2.06.22,2.78.65.73.44,1.26,1,1.59,1.69s.5,1.43.5,2.23c0,.85-.2,1.6-.6,2.24-.4.65-.94,1.15-1.61,1.49-.68.35-1.42.52-2.23.52h-3.07v-8.83ZM48.89,26.08c.9,0,1.62-.23,2.15-.7.53-.46.79-1.13.79-2,0-.7-.15-1.26-.44-1.68s-.63-.7-1.02-.86c-.39-.16-.75-.24-1.1-.24h-1.42v5.48h1.03Z"/><path d="M63.01,18.92v8.83h-1.74v-8.83h1.74Z"/><path d="M75.29,27.76l-1.86-2.81h-1.16v2.81h-1.74v-8.83h2.68c1.1,0,1.95.27,2.55.8.6.53.91,1.26.91,2.18,0,.54-.11,1.05-.34,1.53-.23.48-.58.85-1.05,1.12l2.05,3.2h-2.03ZM72.26,23.27h1.24c.47,0,.82-.14,1.03-.41.22-.28.32-.57.32-.89s-.09-.63-.28-.92c-.18-.29-.54-.44-1.07-.44h-1.25v2.66Z"/></g></g></svg>
+
+    <br>
+    <br>
+
+    <div style="display: flex; align-items: center; flex-direction: column;">
+        <div style="--color: #33B4A6; display: flex; gap: 10px;">
+            <a href="" class="button">Grøn outline</a>
+            <a href="" class="button solid">Grøn inner</a>
+        </div>
+        <br>
+        <div style="--color: #AA86C5; display: flex; gap: 10px;">
+            <a href="" class="button">lilla outline</a>
+            <a href="" class="button solid">lilla inner</a>
+        </div>
+        <br>
+        <div style="--color: #FBB9C4; display: flex; gap: 10px;">
+            <a href="" class="button">pink outline</a>
+            <a href="" class="button solid">pink inner</a>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div style="display: flex; align-items: center; flex-direction: column;">
+        <input type="datetime-local" name="date" id="date" class="fields" required>
+    </div>
+
+    <br>
+    <br>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="test.js" async></script>
+</body>
+</html>
