@@ -52,7 +52,6 @@ function makeMasonry() {
                 });
             });
         });
-
     }
 }
 
@@ -74,6 +73,14 @@ function appendimg(img, columns, mode = "append") {
     else{
         document.querySelector("." + lowest_key).appendChild(img);
     }
+
+    const lightbox = document.getElementById("lightBox");
+    img.addEventListener("click", (event) => {
+        event.stopPropagation();
+        lightbox.src = img.getAttribute('src');
+        lightbox.classList.add("active");
+        window.addEventListener('click', removeLightBox);
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -97,4 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
             } 
         }, 1)
     }, 1);
+
 });
+const removeLightBox = () => {
+    console.log('click');
+    const lightbox = document.getElementById("lightBox");
+    lightbox.classList.remove("active");
+    window.removeEventListener('click', removeLightBox);
+};

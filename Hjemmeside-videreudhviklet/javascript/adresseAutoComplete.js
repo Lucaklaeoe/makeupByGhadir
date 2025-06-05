@@ -25,7 +25,10 @@ input.addEventListener('input', async () => {
     });
     suggestionsList.appendChild(li);
   });
-  window.addEventListener('click', () => {
+  const handleClick = () => {
     suggestionsList.innerHTML = '';
-  });
+    console.log('click');
+    window.removeEventListener('click', handleClick);
+  };
+  window.addEventListener('click', handleClick);
 });
