@@ -6,6 +6,7 @@
     <title>ByGhadir - Booking - Find en ledig tid</title>
     <meta name="author" content="By Ghadir">
     <meta name="description" content="Book din makeup artist hos By Ghadir nemt og hurtigt online. Få professionel makeup til bryllup, fest og events i København. Reserver din tid i dag.">
+    <meta name="keywords" content="makeup, bryllup, fest, events, hårstyling, ghadir, byghadir">
     <link rel="stylesheet" href="min/style.min.css">
     <link rel="shortcut icon" href="svg/favicon.svg" type="image/x-icon">
     <!-- DateTime pickers css -->
@@ -21,23 +22,23 @@
             <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="By Ghadir - Menu" data-name="Ghadir logo" aria-label="Åbn menu" aria-expanded="false" aria-controls="menu-list">
                 <path d="M3.10352 6H21.1035M3.10352 12H21.1035M3.10352 18H21.1035" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <ul id="menu-list" title="Menu">
-                <li><a href="index.html" title="Forside">Forside</a></li>
-                <li><a href="galleri.html" title="Galleri">Galleri</a></li>
-                <li><a href="pristelist.html" title="Pris liste">Pris liste</a></li>
-                <li><a href="kontakt.html" title="Kontakt og FAQ">Kontakt</a></li>
-                <li><a href="booking.html" class="current-site" aria-current="page" title="Booking">Booking</a></li>
+            <ul id="menu-list" title="Menu" aria-label="Menu">
+                <li><a href="index.html" role="button" title="Forside">Forside</a></li>
+                <li><a href="galleri.html" role="button" title="Galleri">Galleri</a></li>
+                <li><a href="pristelist.html" role="button" title="Pris liste">Pris liste</a></li>
+                <li><a href="kontakt.html" role="button" title="Kontakt og FAQ">Kontakt</a></li>
+                <li><a href="booking.html" role="button" class="current-site" aria-current="page" title="Booking">Booking</a></li>
             </ul>
         </section>
     </nav>
 
     <main role="main" aria-label="Booking Main content">
-        <header>
+        <header role="banner" aria-label="Booking Header">
             <h1>Find en ledig tid</h1>
             <p>Find en tid der passer dig.</p>
         </header>
 
-        <section class="booking-form1">
+        <section class="booking-form1" aria-label="Booking Form" role="form">
             <div class="first-form">
                 <div class="date-picker">
                     <div>
@@ -62,14 +63,14 @@
 
                 <input type="submit" value="Book tid" class="fields go_to_booking disabled primary-button desktop-only">
             </div>
-            <div class="kaldender">
-                <div class="week-selector">
-                    <button class="prev-week arrow" id="prev_week">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.7068 5.29279C12.8943 5.48031 12.9996 5.73462 12.9996 5.99979C12.9996 6.26495 12.8943 6.51926 12.7068 6.70679L9.41379 9.99979L12.7068 13.2928C12.8889 13.4814 12.9897 13.734 12.9875 13.9962C12.9852 14.2584 12.88 14.5092 12.6946 14.6946C12.5092 14.88 12.2584 14.9852 11.9962 14.9875C11.734 14.9897 11.4814 14.8889 11.2928 14.7068L7.29279 10.7068C7.10532 10.5193 7 10.265 7 9.99979C7 9.73462 7.10532 9.48031 7.29279 9.29279L11.2928 5.29279C11.4803 5.10532 11.7346 5 11.9998 5C12.265 5 12.5193 5.10532 12.7068 5.29279Z"/></svg>
+            <div class="kaldender" aria-label="Kaldender" role="region">
+                <div class="week-selector" aria-label="Week selector">
+                    <button class="prev-week arrow" id="prev_week" aria-label="Previous week" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" title="Previous week"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.7068 5.29279C12.8943 5.48031 12.9996 5.73462 12.9996 5.99979C12.9996 6.26495 12.8943 6.51926 12.7068 6.70679L9.41379 9.99979L12.7068 13.2928C12.8889 13.4814 12.9897 13.734 12.9875 13.9962C12.9852 14.2584 12.88 14.5092 12.6946 14.6946C12.5092 14.88 12.2584 14.9852 11.9962 14.9875C11.734 14.9897 11.4814 14.8889 11.2928 14.7068L7.29279 10.7068C7.10532 10.5193 7 10.265 7 9.99979C7 9.73462 7.10532 9.48031 7.29279 9.29279L11.2928 5.29279C11.4803 5.10532 11.7346 5 11.9998 5C12.265 5 12.5193 5.10532 12.7068 5.29279Z"/></svg>
                     </button>
                     <div class="week" id="week">Uge 1</div>
-                    <button class="next-week arrow" id="next_week">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.79279 14.7069C7.60532 14.5194 7.5 14.2651 7.5 13.9999C7.5 13.7348 7.60532 13.4804 7.79279 13.2929L11.0858 9.99992L7.79279 6.70692C7.61063 6.51832 7.50983 6.26571 7.51211 6.00352C7.51439 5.74132 7.61956 5.49051 7.80497 5.3051C7.99038 5.11969 8.24119 5.01452 8.50339 5.01224C8.76558 5.00997 9.01818 5.11076 9.20679 5.29292L13.2068 9.29292C13.3943 9.48045 13.4996 9.73475 13.4996 9.99992C13.4996 10.2651 13.3943 10.5194 13.2068 10.7069L9.20679 14.7069C9.01926 14.8944 8.76495 14.9997 8.49979 14.9997C8.23462 14.9997 7.98031 14.8944 7.79279 14.7069Z"/></svg>
+                    <button class="next-week arrow" id="next_week" aria-label="Next week" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" title="Next week"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.79279 14.7069C7.60532 14.5194 7.5 14.2651 7.5 13.9999C7.5 13.7348 7.60532 13.4804 7.79279 13.2929L11.0858 9.99992L7.79279 6.70692C7.61063 6.51832 7.50983 6.26571 7.51211 6.00352C7.51439 5.74132 7.61956 5.49051 7.80497 5.3051C7.99038 5.11969 8.24119 5.01452 8.50339 5.01224C8.76558 5.00997 9.01818 5.11076 9.20679 5.29292L13.2068 9.29292C13.3943 9.48045 13.4996 9.73475 13.4996 9.99992C13.4996 10.2651 13.3943 10.5194 13.2068 10.7069L9.20679 14.7069C9.01926 14.8944 8.76495 14.9997 8.49979 14.9997C8.23462 14.9997 7.98031 14.8944 7.79279 14.7069Z"/></svg>
                     </button>
                 </div>
 
@@ -264,11 +265,10 @@
                     </div>
                 </div>
             </div>
-            <div class="first-form">
-                <input type="submit" value="Book tid" class="fields go_to_booking disabled primary-button mobile-only">
+            <div class="first-form" aria-label="Booking Form" role="form">
+                <input type="submit" value="Book tid"  class="fields go_to_booking disabled primary-button mobile-only">
             </div>
         </section>
-
     </main>
 
     <footer id="footer" aria-label="Footer">

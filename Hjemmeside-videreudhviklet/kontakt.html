@@ -6,6 +6,7 @@
     <title>ByGhadir - Kontakt</title>
     <meta name="author" content="By Ghadir">
     <meta name="description" content="Kontakt By Ghadir for spørgsmål, booking og mere information om makeup services i København. Vi står klar til at hjælpe dig med dit look.">
+    <meta name="keywords" content="makeup, bryllup, fest, events, hårstyling, ghadir, byghadir">
     <link rel="stylesheet" href="min/style.min.css">
     <link rel="shortcut icon" href="svg/favicon.svg" type="image/x-icon">
     <script type="application/ld+json">
@@ -60,66 +61,66 @@
             <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="By Ghadir - Menu" data-name="Ghadir logo" aria-label="Åbn menu" aria-expanded="false" aria-controls="menu-list">
                 <path d="M3.10352 6H21.1035M3.10352 12H21.1035M3.10352 18H21.1035" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <ul id="menu-list" title="Menu">
-                <li><a href="index.html" title="Forside">Forside</a></li>
-                <li><a href="galleri.html" title="Galleri">Galleri</a></li>
-                <li><a href="pristelist.html" title="Pris liste">Pris liste</a></li>
-                <li><a href="kontakt.html" class="current-site" aria-current="page" title="Kontakt og FAQ">Kontakt</a></li>
-                <li><a href="booking.html" title="Booking">Booking</a></li>
+            <ul id="menu-list" title="Menu" aria-label="Menu">
+                <li><a href="index.html" role="button" title="Forside">Forside</a></li>
+                <li><a href="galleri.html" role="button" title="Galleri">Galleri</a></li>
+                <li><a href="pristelist.html" role="button" title="Pris liste">Pris liste</a></li>
+                <li><a href="kontakt.html" role="button" class="current-site" aria-current="page" title="Kontakt og FAQ">Kontakt</a></li>
+                <li><a href="booking.html" role="button" title="Booking">Booking</a></li>
             </ul>
         </section>
     </nav>
 
     <main role="main" aria-label="Kontakt Main content">
-        <header>
+        <header role="banner" aria-label="FAQ Header">
             <h1>FAQ</h1>
             <p>Find spørgsmål og svar her</p>
         </header>
-        <section class="faq">
-            <div class="faq-item">
-                <div>
+        <section class="faq" role="region" aria-label="FAQ" >
+            <div class="faq-item" id="faq-item-1" data-question="Hvordan booker jeg?" data-answer-id="faq-item-answer-1">
+                <div role="button" aria-expanded="false" aria-controls="faq-item-1">
                     <h2 class="Question">Hvordan booker jeg?</h2>
                     <div class="streg"></div>
-                    <img src="svg/arrow-down-black.svg" alt="">
+                    <img src="svg/arrow-down-black.svg" alt="Vis svar" aria-label="Vis svar" title="Vis svar" loading="lazy">
                 </div>
-                <p class="Answer">Bare rolig - jeg har lavet en lille guide, der viser dig hele processen trin for trin. Du finder den lige <a href="vidoe/manual til booking.pdf" target="_blank">her.</a></p>
+                <p class="Answer" id="faq-item-answer-1" data-answer="Bare rolig - jeg har lavet en lille guide, der viser dig hele processen trin for trin. Du finder den lige her: booking.html">Bare rolig - jeg har lavet en lille guide, der viser dig hele processen trin for trin. Du finder den lige <a href="vidoe/manual til booking.pdf" target="_blank">her.</a></p>
             </div>
-            <div class="faq-item">
-                <div>
+            <div class="faq-item" id="faq-item-2" data-question="Er datoen ledig?" data-answer-id="faq-item-answer-2">
+                <div role="button" aria-expanded="false" aria-controls="faq-item-2">
                     <h2 class="Question">Er datoen ledig?</h2>
                     <div class="streg"></div>
-                    <img src="svg/arrow-down-black.svg" alt="">
+                    <img src="svg/arrow-down-black.svg" alt="Vis svar" aria-label="Vis svar" title="Vis svar" loading="lazy">
                 </div>
-                <p class="Answer">Du vil se en kalender enten i højre side eller længere nede - det afhænger lidt af, hvilken enhed du bruger. I kalenderen kan du nemt bladre mellem ugerne og se, hvornår der allerede er bookinger hos By Ghadir.</p>
+                <p class="Answer" id="faq-item-answer-2" data-answer="Du vil se en kalender enten i højre side eller længere nede - det afhænger lidt af, hvilken enhed du bruger. I kalenderen kan du nemt bladre mellem ugerne og se, hvornår der allerede er bookinger hos By Ghadir.">Du vil se en kalender enten i højre side eller længere nede - det afhænger lidt af, hvilken enhed du bruger. I kalenderen kan du nemt bladre mellem ugerne og se, hvornår der allerede er bookinger hos By Ghadir.</p>
             </div>
-            <div class="faq-item">
-                <div>
+            <div class="faq-item" id="faq-item-3" data-question="Kører du ud til arrangementer?" data-answer-id="faq-item-answer-3">
+                <div role="button" aria-expanded="false" aria-controls="faq-item-3">
                     <h2 class="Question">Kører du ud til arrangementer?</h2>
                     <div class="streg"></div>
-                    <img src="svg/arrow-down-black.svg" alt="">
+                    <img src="svg/arrow-down-black.svg" alt="Vis svar" aria-label="Vis svar" title="Vis svar" loading="lazy">
                 </div>
-                <p class="Answer">Du kan finde prisen for udkørsel i min prisliste. Når du booker, skal du bare huske at vælge servicen “udkørsel”. I kontaktformularen bagefter er der også et felt, hvor du kan skrive den adresse, jeg skal komme til.</p>
+                <p class="Answer" id="faq-item-answer-3" data-answer="Du kan finde prisen for udkørsel i min prisliste. Når du booker, skal du bare huske at vælge servicen “udkørsel”. I kontaktformularen bagefter er der også et felt, hvor du kan skrive den adresse, jeg skal komme til.">Du kan finde prisen for udkørsel i min prisliste. Når du booker, skal du bare huske at vælge servicen “udkørsel”. I kontaktformularen bagefter er der også et felt, hvor du kan skrive den adresse, jeg skal komme til.</p>
             </div>
-            <div class="faq-item">
-                <div>
+            <div class="faq-item" id="faq-item-4">
+                <div role="button" aria-expanded="false" aria-controls="faq-item-4" data-question="Har du erfaring med naturlige krøller?" data-answer-id="faq-item-answer-4">
                     <h2 class="Question">Har du erfaring med naturlige krøller?</h2>
                     <div class="streg"></div>
-                    <img src="svg/arrow-down-black.svg" alt="">
+                    <img src="svg/arrow-down-black.svg" alt="Vis svar" aria-label="Vis svar" title="Vis svar" loading="lazy">
                 </div>
-                <p class="Answer">Ja, det har jeg! Fortæl mig gerne om det i en kommentar når du booker så er jeg forberedt, og vi kan bedre finde den frisure du ønsker.</p>
+                <p class="Answer" id="faq-item-answer-4" data-answer="Ja, det har jeg! Fortæl mig gerne om det i en kommentar når du booker så er jeg forberedt, og vi kan bedre finde den frisure du ønsker.">Ja, det har jeg! Fortæl mig gerne om det i en kommentar når du booker så er jeg forberedt, og vi kan bedre finde den frisure du ønsker.</p>
             </div>
         </section>
-        <section>
+        <section role="form" aria-label="Kontakt Mail">
             <form class="kontakt-mailform">
-                <div>
-                    <label for="Fulde navn">Kontaktformular</label>
-                    <input type="text" class="fields" id="fullname" name="Fulde navn" placeholder="Fulde navn *" autocomplete="name" required>
+                <div">
+                    <label for="fullname">Kontaktformular</label>
+                    <input type="text" class="fields" id="fullname" name="fullname" placeholder="Fulde navn *" autocomplete="name" required>
                     <input type="email" class="fields" id="email" name="email" placeholder="E-mail *" autocomplete="email" required>
                 </div>
 
                 <div>
-                    <label for="Kommentare">Besked</label>
-                    <textarea name="Kommentare" class="fields" id="message" placeholder="Skriv din besked her" required></textarea>
+                    <label for="message">Besked</label>
+                    <textarea name="message" class="fields" id="message" placeholder="Skriv din besked her" required></textarea>
                 </div>
 
                 <div class="checkbox">
@@ -130,7 +131,6 @@
                 <div class="actions">
                     <input type="submit" id="send-message" class="fields primary-button disabled" value="Indsend">
                 </div>
-
             </form>
         </section>
     </main>

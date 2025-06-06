@@ -6,8 +6,124 @@
     <title>ByGhadir - Galleri</title>
     <meta name="author" content="By Ghadir">
     <meta name="description" content="Se eksempler på professionel makeup udført af By Ghadir. Inspirerende billeder fra bryllup, fest, event og special effects makeup i København.">
+    <meta name="keywords" content="makeup, bryllup, fest, events, hårstyling, ghadir, byghadir">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="svg/favicon.svg" type="image/x-icon">
+    <!-- Schemas -->
+    <!-- Bridal -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Brude Looks Galleri",
+    "description": "Et udvalg af brudemakeup og hårstyling fra forskellige fotoshoots.",
+    "image": [
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/bridal/tinified/40.webp",
+        "caption": "Brudeopsætning med bølgede krøller",
+        "creator": {
+            "@type": "Organization",
+            "name": "FH Productions"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/bridal/tinified/83.webp",
+        "caption": "Brudepar - styling af makeup og hår",
+        "creator": {
+            "@type": "Organization",
+            "name": "Capturing Moments"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/bridal/tinified/66.webp",
+        "caption": "Brud efter styling - close-up",
+        "creator": {
+            "@type": "Person",
+            "name": "Yaltykova Ekaterina"
+        }
+        }
+    ]
+    }
+    </script>
+    <!-- Halloween -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Halloween Makeup Galleri",
+    "description": "Forskellige kreative og skræmmende Halloween-looks.",
+    "image": [
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/halloweenlooks/tinified/9.webp",
+        "caption": "Halloween Joker look",
+        "creator": {
+            "@type": "Person",
+            "name": "Privat billede"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/halloweenlooks/tinified/13.webp",
+        "caption": "Joker og Harlequin Halloween look",
+        "creator": {
+            "@type": "Person",
+            "name": "Privat billede"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/halloweenlooks/tinified/18.webp",
+        "caption": "Halloween leopard look",
+        "creator": {
+            "@type": "Person",
+            "name": "Privat billede"
+        }
+        }
+    ]
+    }
+    </script>
+    <!-- Event -->
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Event og Aftenmakeup Galleri",
+    "description": "Glamourøse aftenlooks til fest og særlige begivenheder.",
+    "image": [
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/festlooks/tinified/22.webp",
+        "caption": "Aftenmakeup med smokey eyes",
+        "creator": {
+            "@type": "Organization",
+            "name": "Hammerstad Photography"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/festlooks/tinified/64.webp",
+        "caption": "Aftenmakeup med glød og naturlige toner",
+        "creator": {
+            "@type": "Organization",
+            "name": "FH Productions"
+        }
+        },
+        {
+        "@type": "ImageObject",
+        "contentUrl": "https://ditdomæne.dk/img/festlooks/tinified/81.webp",
+        "caption": "Aftenmakeup til galla eller bryllup",
+        "creator": {
+            "@type": "Person",
+            "name": "Privat billede"
+        }
+        }
+    ]
+    }
+    </script>
 </head>
 <body>
     <nav aria-label="Hovednavigation" role="navigation">
@@ -19,40 +135,40 @@
             <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="By Ghadir - Menu" data-name="Ghadir logo" aria-label="Åbn menu" aria-expanded="false" aria-controls="menu-list">
                 <path d="M3.10352 6H21.1035M3.10352 12H21.1035M3.10352 18H21.1035" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <ul id="menu-list" title="Menu">
-                <li><a href="index.html" title="Forside">Forside</a></li>
-                <li><a href="galleri.html" class="current-site" aria-current="page" title="Galleri">Galleri</a></li>
-                <li><a href="pristelist.html" title="Pris liste">Pris liste</a></li>
-                <li><a href="kontakt.html" title="Kontakt og FAQ">Kontakt</a></li>
-                <li><a href="booking.html" title="Booking">Booking</a></li>
+            <ul id="menu-list" title="Menu" aria-label="Menu">
+                <li><a href="index.html" role="button" title="Forside">Forside</a></li>
+                <li><a href="galleri.html" role="button" class="current-site" aria-current="page" title="Galleri">Galleri</a></li>
+                <li><a href="pristelist.html" role="button" title="Pris liste">Pris liste</a></li>
+                <li><a href="kontakt.html" role="button" title="Kontakt og FAQ">Kontakt</a></li>
+                <li><a href="booking.html" role="button" title="Booking">Booking</a></li>
             </ul>
         </section>
     </nav>
 
     <main role="main" aria-label="Galleri Main content">
-        <header>
+        <header role="banner" aria-label="Galleri Header">
             <h1>Galleri</h1>
             <p>Galleri med professionelle makeup looks til hverdag, fest og særlige lejelighedder</p>
         </header>
 
-        <section class="light-box" role="dialog">
-            <img src="" alt="" id="lightBox">
+        <section class="light-box" role="dialog" aria-labelledby="lightBox" aria-modal="true">
+            <img src="" alt="lightBox billede" id="lightBox" title="lightbox billede" loading="lazy">
         </section>
 
-        <section class="galleri">
-            <ul class="categories">
-                <li>Bridal</li>
-                <li id="LOAD">Events</li>
-                <li>Halloween</li>
-                <li>Hårstylinger</li>
+        <section class="galleri" aria-label="Galleri">
+            <ul class="categories" role="tablist" aria-label="Galleri kategorier">
+                <li role="button">Bridal</li>
+                <li id="LOAD" role="button">Events</li>
+                <li role="button">Halloween</li>
+                <li role="button">Hårstylinger</li>
             </ul>
         
-            <div class="galleri-images">
+            <div class="galleri-images" id="galleri-images" aria-live="polite" aria-busy="true">
                 <!-- brudebilleder -->
-                <img src="img/bridal/tinified/40.webp" class="bridal" alt="Bridal Photoshoot billede 1" title="Taget af FH productions" loading="lazy">
+                <img src="img/bridal/tinified/40.webp" class="bridal" alt="Brudeopsætning med bølgede krøller" title="Taget af FH productions" loading="lazy">
                 <img src="img/bridal/tinified/82.webp" class="bridal" alt="Brud på mark i solskin" title="Taget af unknown " loading="lazy">
                 <img src="img/bridal/tinified/28.webp" class="bridal" alt="Bridal photoshoot 2" title="Taget af FH Productions" loading="lazy">
-                <img src="img/bridal/tinified/83.webp" class="bridal" alt="Brudepar" title="Taget af Capturing Moments " loading="lazy">
+                <img src="img/bridal/tinified/83.webp" class="bridal" alt="Brudepar - styling af makeup og hår" title="Taget af Capturing Moments " loading="lazy">
                 <img src="img/bridal/tinified/84.webp" class="bridal" alt="Brud lige efter styling" title="Taget af Capturing Moments " loading="lazy">
                 <img src="img/bridal/tinified/85.webp" class="bridal" alt="Brud med makeup" title="Taget af Capturing Moments " loading="lazy">
                 <img src="img/bridal/tinified/35.webp" class="bridal" alt="Bridal Photoshoot billede 3" title="Taget af FH productions" loading="lazy">
@@ -67,7 +183,7 @@
                 <img src="img/bridal/tinified/59.webp" class="bridal" alt="Bridal Photoshoot 2 billede 1" title="Taget af FH productions" loading="lazy">
                 <img src="img/bridal/tinified/60.webp" class="bridal" alt="Bridal Photoshoot billede 12 i stolen" title="Taget af FH productions" loading="lazy">
                 <img src="img/bridal/tinified/65.webp" class="bridal" alt="Bridal Photoshoot 2 billede 2" title="Taget af Photo by Yaltykova Ekaterina Yaltykova" loading="lazy">
-                <img src="img/bridal/tinified/66.webp" class="bridal" alt="Bridal Photoshoot 2 billede 3" title="Taget af Photo by Yaltykova Ekaterina Yaltykova " loading="lazy">
+                <img src="img/bridal/tinified/66.webp" class="bridal" alt="Brud efter styling - close-up" title="Taget af Photo by Yaltykova Ekaterina Yaltykova " loading="lazy">
                 <img src="img/bridal/tinified/67.webp" class="bridal" alt="Bridal Photoshoot 2 billede 4" title="Taget af Photo by Yaltykova Ekaterina Yaltykova" loading="lazy">
                 <img src="img/bridal/tinified/72.webp" class="bridal" alt="Bridal Photoshoot 2 billede 5" title="Taget af Photo by Yaltykova Ekaterina Yaltykova " loading="lazy">
                 <img src="img/bridal/tinified/74.webp" class="bridal" alt="Bridal Photoshoot billede 13" title="Taget af FH productions" loading="lazy">
@@ -88,13 +204,13 @@
                 <img src="img/halloweenlooks/tinified/15.webp" class="halloween" alt="Halloween look blodig Vampyr" title="Privat billede" loading="lazy">
                 <img src="img/halloweenlooks/tinified/16.webp" class="halloween" alt="Forskellige halloween looks" title="Privat billede" loading="lazy">
                 <img src="img/halloweenlooks/tinified/17.webp" class="halloween" alt="Halloween look Vampyr" title="Privat billede" loading="lazy">
-                <img src="img/halloweenlooks/tinified/18.webp" class="halloween" alt="Halloween look leopard" title="Privat billede" loading="lazy">
+                <img src="img/halloweenlooks/tinified/18.webp" class="halloween" alt="Halloween leopard look" title="Privat billede" loading="lazy">
                 <img src="img/halloweenlooks/tinified/19.webp" class="halloween" alt="Halloween look pumpkin" title="Privat billede" loading="lazy">
                 
                 <!-- fest/aften/event billeder -->
                 <img src="img/festlooks/tinified/24.webp" class="events" alt="Aftenmakeup 1" title="Privat billede" loading="lazy">
                 <img src="img/festlooks/tinified/21.webp" class="events" alt="Aftenmakeup 2" title="Privat billede" loading="lazy">
-                <img src="img/festlooks/tinified/22.webp" class="events" alt="Aftenmakeup 3" title="Taget afHammerstad Photography
+                <img src="img/festlooks/tinified/22.webp" class="events" alt="Aftenmakeup med smokey eyes" title="Taget afHammerstad Photography
                 Jan Hammerstad 
                 " loading="lazy">
                 <img src="img/festlooks/tinified/23.webp" class="events" alt="Aftenmakeup 4" title="Privat billede" loading="lazy">
@@ -105,9 +221,9 @@
                 <img src="img/festlooks/tinified/43.webp" class="events" alt="Aftenmakeup 7" title="Privat billede" loading="lazy">
                 <img src="img/festlooks/tinified/56.webp" class="events" alt="aftenmakeup 7" title="Privat billede" loading="lazy">
                 <img src="img/festlooks/tinified/57.webp" class="events" alt="Aftenmakeup 8" title="Privat billede" loading="lazy">
-                <img src="img/festlooks/tinified/64.webp" class="events" alt="Aftenmakeup 9" title="Taget af FH productions" loading="lazy">
+                <img src="img/festlooks/tinified/64.webp" class="events" alt="Aftenmakeup med glød og naturlige toner" title="Taget af FH productions" loading="lazy">
                 <img src="img/festlooks/tinified/80.webp" class="events" alt="Aftenmakeup 10" title="Privat billede" loading="lazy">
-                <img src="img/festlooks/tinified/81.webp" class="events" alt="Aftenmakeup 11" title="Privat billede" loading="lazy">
+                <img src="img/festlooks/tinified/81.webp" class="events" alt="Aftenmakeup til galla eller bryllup" title="Privat billede" loading="lazy">
                 <img src="img/festlooks/tinified/82.webp" class="events" alt="Aftenmakeup 12" title="Privat billede" loading="lazy">
                 <img src="img/festlooks/tinified/83.webp" class="events" alt="Aftenmakeup 13" title="Privat billede" loading="lazy">
                
@@ -123,7 +239,7 @@
             </div>
         </section>
 
-        <section class="cta" id="cta">
+        <section class="cta" id="cta" aria-label="Call to action">
             <a href="booking.html" class="primary-button" title="Book en tid hos By Ghadir" aria-label="Book en tid hos By Ghadir" role="button">Book</a>
             <a href="kontakt.html" class="secundary-button" title="Kontakt By Ghadir" aria-label="Kontakt By Ghadir" role="button">FAQ</a>
         </section>

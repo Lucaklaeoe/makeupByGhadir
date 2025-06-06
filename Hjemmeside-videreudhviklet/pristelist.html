@@ -6,6 +6,7 @@
     <title>ByGhadir - Pristelist</title>
     <meta name="author" content="By Ghadir">
     <meta name="description" content="Find priser på makeup-services hos By Ghadir. Professionel bryllupsmakeup, festmakeup, event makeup og meget mere til konkurrencedygtige priser i København.">
+    <meta name="keywords" content="makeup, bryllup, fest, events, hårstyling, ghadir, byghadir">
     <link rel="stylesheet" href="min/style.min.css">
     <link rel="shortcut icon" href="svg/favicon.svg" type="image/x-icon">
 </head>
@@ -19,32 +20,32 @@
             <svg class="burger-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" title="By Ghadir - Menu" data-name="Ghadir logo" aria-label="Åbn menu" aria-expanded="false" aria-controls="menu-list">
                 <path d="M3.10352 6H21.1035M3.10352 12H21.1035M3.10352 18H21.1035" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <ul id="menu-list" title="Menu">
-                <li><a href="index.html" title="Forside">Forside</a></li>
-                <li><a href="galleri.html" title="Galleri">Galleri</a></li>
-                <li><a href="pristelist.html" class="current-site" aria-current="page" title="Pris liste">Pris liste</a></li>
-                <li><a href="kontakt.html" title="Kontakt og FAQ">Kontakt</a></li>
-                <li><a href="booking.html" title="Booking">Booking</a></li>
+            <ul id="menu-list" title="Menu" aria-label="Menu">
+                <li><a href="index.html" role="button" title="Forside">Forside</a></li>
+                <li><a href="galleri.html" role="button" title="Galleri">Galleri</a></li>
+                <li><a href="pristelist.html" role="button" class="current-site" aria-current="page" title="Pris liste">Pris liste</a></li>
+                <li><a href="kontakt.html" role="button" title="Kontakt og FAQ">Kontakt</a></li>
+                <li><a href="booking.html" role="button" title="Booking">Booking</a></li>
             </ul>
         </section>
     </nav>
 
     <main role="main" aria-label="Prisliste Main content">
-        <header>
+        <header role="banner" aria-label="Prisliste Header">
             <h1>Priser</h1>
             <p>Alle priser er vejledende</p>
         </header>
-        <section class="tabs-prisliste">
-            <ul class="tabs">
+        <section class="tabs-prisliste" role="tablist" aria-label="Prisliste Tabs">
+            <ul class="tabs" role="tablist" aria-label="Prisliste Tabs">
                 <li id="alt" class="active-tab">Alt</li>
                 <li id="Bridal">Bridal</li>
             </ul>
         </section>
-        <section>
-            <div class="prisliste" id="prisliste">
+        <section class="prisliste-container" role="region" aria-label="Prisliste Container">
+            <div class="prisliste" id="prisliste" aria-busy="true">
 
             </div>
-            <div class="prisliste-bridal" id="prisliste-bridal">
+            <div class="prisliste-bridal" id="prisliste-bridal" aria-busy="true">
 
             </div>
         </section>

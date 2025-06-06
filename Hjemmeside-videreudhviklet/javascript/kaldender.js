@@ -72,10 +72,10 @@ function addService(service) {
     selectedServices.appendChild(newService);
  
     const service_label = service.split('%')[0];
-    const service_duration = Number(service.split('%')[1]);
-    const service_price = service.split('%')[2];
-    const service_price_formated = Number(service_price).toLocaleString('de-DE');
-    const service_andtal_personer = Number(service.split('%')[3]);
+    const service_duration = Number(service.split('%')[1]) || 0;
+    const service_price = service.split('%')[2] || 1000;
+    const service_price_formated = Number(service_price).toLocaleString('dk-DK');
+    const service_andtal_personer = Number(service.split('%')[3]) || 1;
     const service_andtal_personer_formated = service_andtal_personer <= 1 ? service_andtal_personer + ' person' : service_andtal_personer + ' personer';
     const service_inkl = service.split('%')[4];
 
