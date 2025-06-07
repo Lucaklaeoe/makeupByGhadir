@@ -42,6 +42,9 @@ function formIsFilled() {
     const sammentygge = document.getElementById("sammentygge");
     if(!sammentygge.checked) return_this = false;
 
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (recaptchaResponse.length === 0) return_this = false;
+
     return return_this;
 }
 

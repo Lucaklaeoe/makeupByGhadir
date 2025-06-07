@@ -50,6 +50,7 @@
             ]
         }
     </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <nav aria-label="Hovednavigation" role="navigation">
@@ -111,7 +112,7 @@
             </div>
         </section>
         <section role="form" aria-label="Kontakt Mail">
-            <form class="kontakt-mailform">
+            <form class="kontakt-mailform" id="kontakt-mailform">
                 <div">
                     <label for="fullname">Kontaktformular</label>
                     <input type="text" class="fields" id="fullname" name="fullname" placeholder="Fulde navn *" autocomplete="name" required>
@@ -127,6 +128,8 @@
                     <input type="checkbox" name="sammentygge" id="sammentygge" required>
                     <label for="sammentygge">Jeg giver samtykke til, at mine indtastede oplysninger må behandles og gemmes i overensstemmelse med gældende databeskyttelseslovgivning *</label>
                 </div>
+
+                <div class="g-recaptcha" data-sitekey="6LfLpVgrAAAAAEFSmVEaqQh66-IJFPqdTh5ZNnU5"></div>
 
                 <div class="actions">
                     <input type="submit" id="send-message" class="fields primary-button disabled" value="Indsend">

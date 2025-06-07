@@ -13,9 +13,11 @@ function makeMasonry() {
             column_heights["column" + i] = i;
         }
 
-        images.forEach(img => {
+        images.forEach((img, index) => {
             img.onload = () => {
+                //console.log(img);
                 appendimg(img, columns);
+                animateImgs(img ,index);
             }
         });
 
@@ -105,6 +107,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1)
     }, 1);
 
+    window.addEventListener('resize', () => {
+        window.location.reload();
+    });
+
 });
 const removeLightBox = () => {
     console.log('click');
@@ -112,3 +118,11 @@ const removeLightBox = () => {
     lightbox.classList.remove("active");
     window.removeEventListener('click', removeLightBox);
 };
+
+function animateImgs(img, index = 0) {
+    if(index >= 20) index = 20;
+    setTimeout(() => {
+        //console.log(img);
+        img.classList.add("loaded");
+    }, 10 + (index * 50));
+}

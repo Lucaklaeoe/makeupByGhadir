@@ -648,6 +648,7 @@ footer{
 .kontakt-mailform .checkbox{
     flex-direction: row;
     gap: 16px;
+    margin: 16px 0;
 }
 .kontakt-mailform .checkbox input{
     width: 16px;
@@ -656,6 +657,12 @@ footer{
 }
 .kontakt-mailform .checkbox label{
     margin: 0;
+}
+.g-recaptcha{
+    margin-bottom: 16px;
+}
+.g-recaptcha div{
+    margin: 0 auto;
 }
 #send-message{
     width: 200px;
@@ -707,6 +714,13 @@ footer{
     margin-bottom: var(--colum-gap-size);
     width: 100%;
     object-fit: cover;
+    opacity: 0;
+    transform: translatey(30px);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.galleri-images img.loaded{
+    opacity: 1;
+    transform: translatey(0px);
 }
 .galleri-images img:last-child{
     margin-bottom: 0;
