@@ -1,5 +1,5 @@
-const supabaseUrl = 'https://ijhfidvohtkcmpdhgzwz.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqaGZpZHZvaHRrY21wZGhnend6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUzMDY4NjUsImV4cCI6MjA2MDg4Mjg2NX0.4-DicPttGvOJ30UFwvOONrkybrvCxP5dgqn5oEXo-Dk';
+const supabaseUrl = 'https://yuhqmzemazuzjkloasnr.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1aHFtemVtYXp1emprbG9hc25yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzODk2OTYsImV4cCI6MjA2NDk2NTY5Nn0.HLlyHfiUTpwpCwiTsH-gfJgveMxpaKve5cyixuaALfc';
 const DataFromSupaBase = {access_token: null, expires: null, logged_in_via: null};
 async function signIn(email = "anonymous@example.com", password = "Guest1234") {
 
