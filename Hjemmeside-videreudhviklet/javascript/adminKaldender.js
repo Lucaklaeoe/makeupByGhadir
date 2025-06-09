@@ -288,9 +288,9 @@ function insertBookingInfo(item, requested = true){
     </div>`
 
     appendIn.insertAdjacentHTML('beforeend', booking);
-
-    if(requested) setTimeout(() => calculateheight(id), 0);
+    if(requested) setTimeout(() => calculateheight(id), 1);
     async function setChoiceButtons(id, bookingInfo){
+
         const {access_token} = await adminLogin();
         const bookingid = bookingInfo.id;
         delete bookingInfo.id;
@@ -298,8 +298,18 @@ function insertBookingInfo(item, requested = true){
         const reject = item.querySelector(".reject");
         const accept = item.querySelector(".accept");
 
-        async function deleteBooking(id) {
+        async function deleteBooking(id, bookingid) {
             const res = await fetch(`${supabaseUrl}/rest/v1/requestBooking?id=eq.${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': supabaseKey,
+                    'Authorization': `Bearer ${access_token}`,
+                    'Prefer': 'return=representation'
+                },
+            });
+
+            const publicRes = await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings?id=eq.${bookingid}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -311,13 +321,18 @@ function insertBookingInfo(item, requested = true){
 
             if (!res.ok) {
                 console.error('Error deleting booking:', res.status, res.statusText);
+                return false;
+            }
+            if(!publicRes.ok) {
+                console.error('Error deleting public booking:', publicRes.status, publicRes.statusText);
+                return false;
             }
 
             return res.ok;
         }
         
         reject.addEventListener("click", async () => {
-            if(await deleteBooking(bookingid)){
+            if(await deleteBooking(bookingid, bookingInfo.bookingID.split("R")[1])){
                 item.remove();
                 document.getElementById("R"+bookingid).remove();
                 sendAfvidstMail(bookingInfo.fulde_navn, bookingInfo.email);
@@ -325,6 +340,7 @@ function insertBookingInfo(item, requested = true){
         });
 
         accept.addEventListener("click", async () => {
+            const { bookingID, ...bookingInfoWithoutBookingID } = bookingInfo;
             const acceptedBookingResponse = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking`, {
                 method: 'POST',
                 headers: {
@@ -333,7 +349,7 @@ function insertBookingInfo(item, requested = true){
                   'Authorization': `Bearer ${access_token}`,
                   'Prefer': 'return=representation'
                 },
-                body: JSON.stringify([bookingInfo])
+                body: JSON.stringify([bookingInfoWithoutBookingID])
             });
 
             if(acceptedBookingResponse.ok){
@@ -342,7 +358,23 @@ function insertBookingInfo(item, requested = true){
                 const day = new Date(insertedRow.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
                 const start_time = insertedRow.start_time.split('T')[1].slice(0, -3);
 
-                if(await deleteBooking(bookingid)){
+                const minimalBookingInfo = {
+                    start_time: bookingInfo.start_time,
+                    duration: bookingInfo.duration,
+                    bookingID: "A" + insertedRow.id
+                };
+                const currentPublicBookings = await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings`, {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': supabaseKey,
+                    'Authorization': `Bearer ${access_token}`,
+                    'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify([minimalBookingInfo])
+                });
+
+                if(await deleteBooking(bookingid, bookingInfo.bookingID.split("R")[1])){
                     item.remove();
                     document.getElementById("R"+bookingid).remove();
                     addTimeToKaldender(day, start_time, insertedRow.duration, false, "#1a2663", "A" + insertedRow.id);

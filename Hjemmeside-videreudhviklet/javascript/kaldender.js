@@ -262,7 +262,8 @@ async function insertAllreadyBookedBookings(currentDate) {
     }
 
     const {access_token} = await signIn();    
-    const requestBookingResponse = await fetch(`${supabaseUrl}/rest/v1/requestBooking?start_time=gte.${getPreviousMonday(currentDate)}&start_time=lte.${getNextSunday(currentDate)}&select=start_time,duration`, {
+
+    const publicBookings = await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings?start_time=gte.${getPreviousMonday(currentDate)}&start_time=lte.${getNextSunday(currentDate)}&select=start_time,duration`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -270,43 +271,20 @@ async function insertAllreadyBookedBookings(currentDate) {
           'Authorization': `Bearer ${access_token}`,
           'Prefer': 'return=representation'
         },
-    });
+    })
 
-    const requestBookingData = await requestBookingResponse.json();
+    const publicBookingsData = await publicBookings.json();
 
-    if (requestBookingResponse.ok) {
-        requestBookingData.forEach((item) => {
+    if(publicBookings.ok) {
+        publicBookingsData.forEach((item) => {
             const day = new Date(item.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
             const start_time = item.start_time.split('T')[1].slice(0, -3);
             const duration = item.duration;
             supabaseData.push(item);
             addTimeToKaldender(day, start_time, duration);
         })
-    } else {
-        console.error('Fetch failed:', requestBookingData);
     }
-
-    const acceptedBookingResponse = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking?start_time=gte.${getPreviousMonday(currentDate)}&start_time=lte.${getNextSunday(currentDate)}&select=start_time,duration`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'apikey': supabaseKey,
-          'Authorization': `Bearer ${access_token}`,
-          'Prefer': 'return=representation'
-        },
-    });
-
-    const acceptedBookingData = await acceptedBookingResponse.json();
-
-    if (acceptedBookingResponse.ok) {
-        acceptedBookingData.forEach((item) => {
-            const day = new Date(item.start_time).toLocaleString('en', { weekday: 'long' }).toLowerCase();
-            const start_time = item.start_time.split('T')[1].slice(0, -3);
-            const duration = item.duration;
-            supabaseData.push(item);
-            addTimeToKaldender(day, start_time, duration);
-        })
-    } else {
-        console.error('Fetch failed:', acceptedBookingData);
+    else{
+        console.error('Fetch failed:', publicBookingsData);
     }
 }

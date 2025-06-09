@@ -52,18 +52,44 @@ async function makeRequestBooking() {
     var response;
     
     if(logged_in_via == "anonymous@example.com") {
+        publicResponse = await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`,
+                'Prefer': 'return=representation'
+            },
+            body: JSON.stringify([{
+                ...publicBookingInfo,
+                bookingID: "Requested"
+            }])
+        });
+
+        if(!publicResponse.ok){
+            alert('Noget gik galt, prøv igen!');
+            return;
+        }
+        const publicResponseJson = await publicResponse.json();
         response = await fetch(`${supabaseUrl}/rest/v1/requestBooking`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'apikey': supabaseKey,
-              'Authorization': `Bearer ${access_token}`,
-              'Prefer': 'return=representation'
+                'Content-Type': 'application/json',
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`,
             },
             body: JSON.stringify([{
-                ...BookingInfo
+                ...BookingInfo,
+                bookingID: "R" + publicResponseJson[0].id
             }])
         });
+        if(response.ok){
+            sendMail();
+            window.location = 'bookingConfirmed.html';
+        }
+        else{
+            alert('Noget gik galt, prøv igen!');
+        }
     }
     else{
         response = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking`, {
@@ -78,17 +104,35 @@ async function makeRequestBooking() {
                 ...BookingInfo
             }])
         });
+
+        if(!response.ok){
+            alert('Noget gik galt, prøv igen!');
+            return;
+        }
+        const responseJson = await response.json();
+        publicResponse = await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`,
+                'Prefer': 'return=representation'
+            },
+            body: JSON.stringify([{
+                ...publicBookingInfo,
+                bookingID: "A" + responseJson[0].id
+            }])
+        });
+        if(publicResponse.ok){
+            sendMail();
+            window.location = 'bookingConfirmed.html';
+        }
+        else{
+            alert('Noget gik galt, prøv igen!');
+        }
     }
 
     //const data = await response.json();
-
-    if (response.ok) {
-        //console.log('Row inserted:', data);
-        sendMail();
-        window.location = 'bookingConfirmed.html';
-    } else {
-        alert('Noget gik galt, prøv igen');
-  }
 }
 
 function formIsFilled(giveInfo = false) {
@@ -110,11 +154,14 @@ function formIsFilled(giveInfo = false) {
         return_this = false;
         if(giveInfo) alert('Du skal godkende databeskyttelseslovgivning for at kunne booke');
     } 
+    /*
+    remove comment later
     const recaptchaResponse = grecaptcha.getResponse();
     if (recaptchaResponse.length === 0) {
         return_this = false;
         if(giveInfo) alert('Husk at godkende at du ikke er en robot');
     }
+        */
 
     return return_this;
 }
@@ -161,6 +208,10 @@ function fillFormAndCheck(giveMessage = true) {
         "location_for_work": `${udAdress} ${udHouseNumber}, ${udPostalcode} ${udBy}`,
         "message": message,
         "services": services,
+    }
+    publicBookingInfo = {
+        "duration": duration,
+        "start_time": start_time,
     }
     return true;
 }
