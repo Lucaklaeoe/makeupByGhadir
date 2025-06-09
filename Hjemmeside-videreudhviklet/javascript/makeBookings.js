@@ -2,17 +2,6 @@ var BookingInfo = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     const requiredFields = document.querySelectorAll('[required]');
-    function activateSubmitButton(){
-        if(formIsFilled()){
-                const submitButton = document.getElementById("make_booking");
-                submitButton.classList.remove('disabled');
-            }
-            else {
-                const submitButton = document.getElementById("make_booking");
-                if(submitButton.classList.contains('disabled')) return;
-                submitButton.classList.add('disabled');
-            }
-    }
     requiredFields.forEach(field => {
         field.addEventListener('change', (event) => {
             event.preventDefault();
@@ -32,6 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
         makeRequestBooking();
     })
 })
+
+function activateSubmitButton(){
+        const submitButton = document.getElementById("make_booking");
+        if(formIsFilled()){
+            submitButton.classList.remove('disabled');
+        }
+        else {
+            if(submitButton.classList.contains('disabled')) return;
+            submitButton.classList.add('disabled');
+        }
+    }
+
+function onRecaptchaSuccess() {
+    if (formIsFilled()) {
+        activateSubmitButton();
+    }
+}
+
+function onRecaptchaExpired() {
+    activateSubmitButton();
+}
 
 async function makeRequestBooking() {
     const {access_token, logged_in_via} = await signIn();

@@ -6,15 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         sendMail();
     })
 
-    function activateSubmitButton() {
-        if(formIsFilled()) {
-            submitButton.classList.remove('disabled');
-        }
-        else {
-            if(submitButton.classList.contains('disabled')) return;
-            submitButton.classList.add('disabled');
-        }
-    }
     const requiredFields = document.querySelectorAll('[required]');
     requiredFields.forEach(field => {
         field.addEventListener('change', (event) => {
@@ -23,12 +14,32 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
 
+
     // const sammentygge = document.getElementById("send-message");
     // sammentygge.addEventListener('change', (event) => {
     //     event.preventDefault();
     //     activateSubmitButton();
     // })
 });
+function activateSubmitButton() {
+    const submitButton = document.getElementById("send-message");
+    if(formIsFilled()) {
+        submitButton.classList.remove('disabled');
+    }
+    else {
+        if(submitButton.classList.contains('disabled')) return;
+        submitButton.classList.add('disabled');
+    }
+}
+function onRecaptchaSuccess() {
+    if (formIsFilled()) {
+        activateSubmitButton();
+    }
+}
+
+function onRecaptchaExpired() {
+    activateSubmitButton();
+}
 
 function formIsFilled() {
     const requiredFields = document.querySelectorAll('[required]');
@@ -49,6 +60,8 @@ function formIsFilled() {
 }
 
 function sendMail(){
+    const submitButton = document.getElementById("send-message");
+    submitButton.classList.add('disabled');
     emailjs.init("fYZvwmd-aKguwbHcg");
     const email_info = {
         name: document.getElementById("fullname").value,
@@ -62,6 +75,7 @@ function sendMail(){
         resetFields();
         }, (error) => {
         console.log('FAILED...', error);
+        submitButton.classList.remove('disabled');
         alert('Noget gik galt, prøv igen!');
     });
 }
