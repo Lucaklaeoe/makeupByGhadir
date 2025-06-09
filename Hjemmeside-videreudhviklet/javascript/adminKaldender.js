@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderWeek(currentDate);
     });
     renderWeek(currentDate);
+    autoRemoveOldBookings();
 })
 
 //Insert all the bookings into the kaldender
@@ -75,7 +76,7 @@ async function insertBookings(currentDate) {
         const daysSinceMonday = (day + 6) % 7;
         date.setDate(date.getDate() - daysSinceMonday + 1);
         date.setHours(0, 0, 0, 0);
-        return date.toISOString();
+        return date.toISOString();7
     }
 
     const {access_token} = await adminLogin();
@@ -437,5 +438,72 @@ function sendGodkendtMail(name, email, dato, tid, ydelse, location, id) {
         //console.log('SUCCESS!');
         }, (error) => {
         console.log('FAILED...', error);
+    });
+}
+
+async function autoRemoveOldBookings() {
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+    twoWeeksAgo.setHours(0, 0, 0, 0);
+    const twoWeeksAgoISO = twoWeeksAgo.toISOString();
+    const {access_token} = await adminLogin();
+
+    const response = await fetch(`${supabaseUrl}/rest/v1/acceptedBooking?start_time=lte.${twoWeeksAgoISO}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${access_token}`
+        }
+    });
+
+    const oldBookings = await response.json();
+    for (const booking of oldBookings) {
+        const { id, ...bookingWithoutID } = booking;
+        const response = await fetch(`${supabaseUrl}/rest/v1/oldBookings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`,
+                'Prefer': 'return=representation'
+            },
+            body: JSON.stringify([bookingWithoutID])
+        });
+
+        if(!response.ok) {
+            console.error('Error moving booking to oldBookings:', response.status, response.statusText);
+            return false;
+        }
+
+        await fetch(`${supabaseUrl}/rest/v1/acceptedBooking?id=eq.${booking.id}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`
+            }
+        });
+
+        await fetch(`${supabaseUrl}/rest/v1/currentPublicBookings?bookingID=eq.A${booking.id}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': supabaseKey,
+                'Authorization': `Bearer ${access_token}`
+            }
+        });
+    }
+
+    const twoMonthsAgo = new Date();
+    twoMonthsAgo.setDate(twoMonthsAgo.getDate() - (30 * 6));
+    twoMonthsAgo.setHours(0, 0, 0, 0);
+    const twoMonthsAgoISO = twoMonthsAgo.toISOString();
+    await fetch(`${supabaseUrl}/rest/v1/oldBookings?start_time=lte.${twoMonthsAgoISO}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${access_token}`,
+            'Prefer': 'return=representation'
+        },
     });
 }

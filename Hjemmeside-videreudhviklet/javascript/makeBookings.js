@@ -154,14 +154,11 @@ function formIsFilled(giveInfo = false) {
         return_this = false;
         if(giveInfo) alert('Du skal godkende databeskyttelseslovgivning for at kunne booke');
     } 
-    /*
-    remove comment later
     const recaptchaResponse = grecaptcha.getResponse();
     if (recaptchaResponse.length === 0) {
         return_this = false;
         if(giveInfo) alert('Husk at godkende at du ikke er en robot');
     }
-        */
 
     return return_this;
 }
