@@ -17,7 +17,7 @@ function makeMasonry() {
             img.onload = () => {
                 //console.log(img);
                 appendimg(img, columns);
-                animateImgs(img ,index);
+                animateImgs(img, index);
             }
         });
 
@@ -120,9 +120,11 @@ const removeLightBox = () => {
 };
 
 function animateImgs(img, index = 0) {
-    if(index >= 20) index = 20;
     setTimeout(() => {
-        //console.log(img);
-        img.classList.add("loaded");
-    }, 10 + (index * 50));
+        if(index >= 20) index = 20;
+        setTimeout(() => {
+            //console.log(img);
+            img.classList.add("loaded");
+        }, 10 + (index * 40));
+    }, 10);
 }
